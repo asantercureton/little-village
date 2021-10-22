@@ -11,7 +11,7 @@ const tradeSchema = new Schema({
     amount: Number,
     resource: String
   },
-  times: Number,//how many times are they willing to make this trade before it deletes itself? Leave blank for infinite
+  amount: Number,//how many times are they willing to make this trade before it deletes itself? Leave blank for infinite
   village: {
     type: Schema.Types.ObjectId,
     ref: "Village" //The village offering this trade

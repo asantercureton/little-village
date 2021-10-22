@@ -6,6 +6,36 @@ const typeDefs = gql`
     username: String
     email: String
     password: String
+    village: Village
+  }
+
+  type Village {
+    _id: ID
+    abundanceOfResources: ResourceObject
+    amountOfResources: ResourceObject
+    unitAllocation: ResourceObject
+    user: User
+    trades: [Trade]
+  }
+
+  type Trade {
+    _id: ID
+    selling: tradeObject
+    buying: tradeObject
+    amount: Int
+    village: Village
+  }
+
+  type tradeObject { #an object containing the amount and resource. used for buying / selling in trades
+    amount: Int
+    resource: String
+  }
+
+  type ResourceObject { #an object containg the 4 resources as floats
+    fruit: Float
+    meat: Float
+    gold: Float
+    wood: Float
   }
 
   type Auth {
@@ -17,6 +47,8 @@ const typeDefs = gql`
     users: [User]
     user(id: ID!): User
     me: User
+    villages: [Village]
+    trades: [Trade]
   }
 
   type Mutation {

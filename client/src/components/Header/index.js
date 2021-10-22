@@ -7,11 +7,11 @@ const Header = () => {
     <header>
       <div>
         <Link to="/">
-          <h1>User List</h1>
+          <h1>Welcome to Little Village!</h1>
         </Link>
       </div>
       <div>
-        <p>Simple App to View Users.</p>
+        <p>Your New World Awaits...</p>
         <Navbar />
       </div>
     </header>

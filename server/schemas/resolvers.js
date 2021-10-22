@@ -2,7 +2,8 @@ const { AuthenticationError } = require('apollo-server-express');
 const { User, Village, Trade } = require('../models');
 
 const { signToken } = require('../utils/auth');
-const { createVillage } = require('../utils/villageMethods')
+const { createVillage } = require('../utils/villageMethods');
+const { createTrade } = require('../utils/tradeMethods');
 
 const resolvers = {
   Query: {
@@ -52,6 +53,11 @@ const resolvers = {
       const token = signToken(user);
 
       return { token, user };
+    },
+    createTrade: async (_, args) => {
+      const user = await User.findById(args.userId)
+      const newTrade = await Trade.create(createTrade(user, args));
+      return
     }
   }
 };

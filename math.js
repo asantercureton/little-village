@@ -22,6 +22,21 @@ const gold = {
     abundance: 0.8
 }
 
+// function to set abundance values
+function getAbundance() {
+    const max = 4.0;
+    const min = 0.5;
+    // midpoint between all mins (2) and all maxs (12)
+    const limit = 7.0;
+
+    const resource1 = Math.round((Math.random() * (max - min) + min) * 10) / 10;
+    const resource2 = 1;
+
+}
+
+
+
+// this function will work together with a mutation to update the stored data
 function getResource(resource) {
     const harvest = (rate * resource.workers) * resource.abundance;
     resource.amount = Math.round((resource.amount + harvest) * 10) / 10;

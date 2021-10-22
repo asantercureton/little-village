@@ -12,6 +12,8 @@ import Home from './pages/Home';
 import Signup from './pages/Signup';
 import Login from './pages/Login';
 import Profile from './pages/Profile';
+import Leaderboard from './pages/Leaderboard';
+import Tradeboard from './pages/Tradeboard';
 import Header from './components/Header';
 import Footer from './components/Footer';
 
@@ -60,6 +62,12 @@ function App() {
             </Route>
             <Route exact path="/users/:id">
               <Profile />
+            </Route>
+            <Route exact path="/leaderboard">
+              <Leaderboard />
+            </Route>
+            <Route exact path="/tradeboard">
+              <Tradeboard />
             </Route>
           </div>
           <Footer />

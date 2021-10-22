@@ -8,12 +8,18 @@ function Navbar() {
     event.preventDefault();
     Auth.logout();
   };
-  
+
   if (Auth.loggedIn()) {
     return (
       <>
         <Link to="/me">
           {Auth.getProfile().data.username}'s profile
+        </Link>
+        <Link to="/leaderboard">
+        Leaderboard
+        </Link>
+        <Link to="/tradeboard">
+        Tradeboard
         </Link>
         <button onClick={logout}>
           Logout
@@ -27,8 +33,13 @@ function Navbar() {
       <Link to="/login">
         Login
       </Link>
+
       <Link to="/signup">
         Signup
+      </Link>
+
+      <Link to="/leaderboard">
+        Leaderboard
       </Link>
     </>
   )

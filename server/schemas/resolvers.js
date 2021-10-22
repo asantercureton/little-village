@@ -2,7 +2,7 @@ const { AuthenticationError } = require('apollo-server-express');
 const { User, Village, Trade } = require('../models');
 
 const { signToken } = require('../utils/auth');
-
+const { createVillage } = require('../utils/villageMethods')
 
 const resolvers = {
   Query: {
@@ -28,7 +28,11 @@ const resolvers = {
 
   Mutation: {
     addUser: async (_, args) => {
+      //every user must given a starter village with stats set
       const user = await User.create(args);
+      const newVillage = await Village.create(createVillage(user));
+      user.village = newVillage;
+      await user.save();
       const token = signToken(user);
       return { token, user };
     },

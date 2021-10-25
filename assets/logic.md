@@ -21,7 +21,7 @@ Laying out how the game works. Not finalized. Questions and potential ideas are 
 - prompted to create village:
     - village name
     - *if we have king/queen titles, they would need to choose which one, or we can use a neutral title*
-    - *ability to choose resource to be more abundant in*
+    - *ability to choose resource to be more abundant in?*
 
 <hr/>
 
@@ -32,7 +32,7 @@ Laying out how the game works. Not finalized. Questions and potential ideas are 
 - village name
 - user/ruler's name
 - resources: fruit, meat, lumber, gold
-    - ? resources set to 0 to start
+    - *resources set to 0 to start?*
 - abundance values for each resource
 - starting population = ? (less than 10)
 
@@ -49,7 +49,7 @@ Laying out how the game works. Not finalized. Questions and potential ideas are 
 - max population
 - image/map
 - resources required to level up to next state
-- *new multiplier for efficiency (better level = better efficiency)*
+- *new multiplier for efficiency/rate (better level = better efficiency/rate)?*
 
 
 <hr/>
@@ -69,6 +69,8 @@ Laying out how the game works. Not finalized. Questions and potential ideas are 
 - Lumber:
     - increase by gathering wood
     - decrease when you spend it to buy upgrades (increase efficiency)
+- *which resource is required for leveling up your village?*
+
 
 ### Population:
 - number of population
@@ -98,7 +100,7 @@ Laying out how the game works. Not finalized. Questions and potential ideas are 
 - users can post trades to the board
 - form where users must choose how much of a resource to offer, and how much to request
 - when trade is accepted, each user loses/receives the traded resources
-- *users can edit/cancel the trade after posting it*
+- *users can edit/cancel the trade after posting it?*
 
 ### Trade Requirements:
 - date/time posted
@@ -108,8 +110,8 @@ Laying out how the game works. Not finalized. Questions and potential ideas are 
 - accepting user
 
 ### Questions About Trading?
-- *the chosen amount is put on hold until the trade is either accepted or canceled (so they can't spend resources they've put up for trade and cause an error)*
-- *when user2 accept a trade offer from user1's post, does user1 need to confirm the trade before the trade goes through, or is it assumed they agree with the trade since they set the terms*
+- *the chosen amount is put on hold until the trade is either accepted or canceled (so they can't spend resources they've put up for trade and cause an error)?*
+- *when user2 accept a trade offer from user1's post, does user1 need to confirm the trade before the trade goes through, or is it assumed they agree with the trade since they set the terms?*
     
 
 <hr/>
@@ -118,8 +120,7 @@ Laying out how the game works. Not finalized. Questions and potential ideas are 
 
 ### Streamline Food Resource
 - potentially combine fruit/meat into one spendable food resource
-- hunting vs farming could both contribute to food resource
-    but with different yields over time
+- hunting vs farming could both contribute to food resource but with different yields over time
 - for example:
     - fruit can take longer but yields more food
     - hunting requires less assigned villagers but yields less food

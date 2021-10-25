@@ -4,12 +4,6 @@ const { roundNum } = require('../utils/helpers');
 
 const rate = 1;
 
-// TODO: find # of seconds between now and last updated timestamp
-// use timestamp info from model
-function getTimePassed(update, lastUpdate) {
-    return update - lastUpdate;
-}
-
 // TODO: needs to specifically reference This Village
 function getResource(resource) {
     if (Village.unitAllocation[resource] > 0) {

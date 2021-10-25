@@ -11,6 +11,7 @@ const typeDefs = gql`
 
   type Village {
     _id: ID
+    population: Int
     abundanceOfResources: ResourceObject
     amountOfResources: ResourceObject
     unitAllocation: ResourceObject
@@ -54,6 +55,8 @@ const typeDefs = gql`
   type Mutation {
     addUser(email:String!, username:String!, password:String!): Auth
     login(email:String!, password:String!): Auth
+    createTrade(userId:ID!, resourceSold: String!, amountSold: Int!, resourceBought: String!, amountBought: Int!, tradeAmount: Int!): Trade
+    executeTrade(userId:ID!, tradeId: ID!): Trade
   }
 `;
 

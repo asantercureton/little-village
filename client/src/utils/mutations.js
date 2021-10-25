@@ -24,17 +24,10 @@ export const ADD_USER = gql`
   }
 `;
 
-export const ADD_THOUGHT = gql`
-  mutation addThought($thoughtText: String!) {
-    addThought(thoughtText: $thoughtText) {
+export const CREATE_TRADE = gql`
+  mutation createTrade($userId: ID!, $resourceSold: String!, $amountSold: Int!, $resourceBought: String!, $amountBought: Int!, $tradeAmount: Int!) {
+    createTrade(userId: $userId, resourceSold: $resourceSold, amountSold: $amountSold, resourceBought: $resourceBought, amountBought: $amountBought, tradeAmount: $tradeAmount) {
       _id
-      thoughtText
-      thoughtAuthor
-      createdAt
-      comments {
-        _id
-        commentText
-      }
     }
   }
 `;

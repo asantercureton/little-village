@@ -14,7 +14,7 @@ function getTimePassed(update, lastUpdate) {
 function getResource(resource) {
     if (Village.unitAllocation[resource] > 0) {
         const harvest = (rate * Village.unitAllocation[resource]) * Village.abundanceOfResources[resource];
-        const timePassed = getTimePassed(5, 1);
+        const timePassed = getTimePassed(5, 1); // temp variables
         const production = roundNum(harvest * timePassed);
 
         Village.amountOfResources[resource] += production;

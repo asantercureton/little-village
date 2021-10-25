@@ -47,7 +47,7 @@ const Login = () => {
           <Link to="/">back to the homepage.</Link>
         </p>
       )
-    } 
+    }
     return (
       <form onSubmit={handleFormSubmit}>
         <input
@@ -73,10 +73,23 @@ const Login = () => {
 
   return (
     <main>
-      <h4>Login</h4>
-      <div>
-        {renderForm()}
-        {error && <div>{error.message}</div>}
+      <div className="container justify-content-center text-center">
+        <div className="card">
+          <div className="card-header">
+            <h2 className="card-title" id="login">Login</h2>
+          </div>
+          <form id="login-form" className="card-body">
+            <div>
+              <label for="username-input-login">Username</label>
+              <input type="text" id="username-input-login" />
+            </div>
+            <div>
+              <label for="password-input-login" className="form-label">Password</label>
+              <input type="password" id="password-input-login" />
+            </div>
+            <button type="submit" className="btn login-btn" id="login-btn">Login</button>
+          </form>
+        </div>
       </div>
     </main>
   );

@@ -11,7 +11,6 @@ const Header = () => {
         </Link>
       </div>
       <div>
-        <p>Your New World Awaits...</p>
         <Navbar />
       </div>
     </header>

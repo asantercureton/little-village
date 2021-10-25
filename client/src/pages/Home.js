@@ -17,7 +17,7 @@ const Home = () => {
     } else {
       return <UserList users={users} title="List of Users" />
     }
-  } 
+  }
 
   const renderUsername = () => {
     if (!Auth.loggedIn()) return null;
@@ -26,11 +26,19 @@ const Home = () => {
 
   return (
     <main>
-      <div>
-        {renderUsername()}
-      </div>
-      <div>
-        {renderUserList()}
+      <div className="jumbotron align-items-center">
+        <div className="justify-content-center">
+          <h1 className="display-4">TUTORIAL</h1>
+          <h2 className="lead">BELOW ARE INSTRUCTIONS ON HOW TO PLAY LITTLE VILLAGE...</h2>
+          <ol>
+            <li>.......</li>
+            <li>.......</li>
+            <li>.......</li>
+            <li>.......</li>
+          </ol>
+          <a href="/" className="play-btn"><span>PLAY!</span></a>
+
+        </div>
       </div>
     </main>
   );

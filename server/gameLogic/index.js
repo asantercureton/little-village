@@ -1,4 +1,6 @@
 //THIS FILE IS RESPONSIBLE FOR RUNNING LOGIC EVERY SECOND BASED ON THE PRODUCTION RATES OF EVERY VILLAGE
+const { Village } = require('../models');
+
 // test variables - hard-coded temporarily
 const rate = 1;
 const fruit = {
@@ -29,8 +31,9 @@ function getResource(resource) {
     return resource.amount;
 }
 
-// adapt version to use Village model
-function getResources(Village, resource) {
+// adapted version to use Village model
+// apply to user's specific village when calling function
+function getResources(resource) {
     if (Village.unitAllocation[resource] > 0) {
         const harvest = (rate * Village.unitAllocation[resource]) * Village.abundanceOfResources[resource];
         Village.amountOfResources[resource] = roundNum(Village.amountOfResources[resource] + harvest);
@@ -53,4 +56,4 @@ const addResources = setInterval(function () {
     console.log('wood:', getResource(wood));
     console.log('gold:', getResource(gold));
     console.log('=============');
-}, 2000);
+}, 1000);

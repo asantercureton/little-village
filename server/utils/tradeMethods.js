@@ -1,29 +1,37 @@
-const createTrade = (user, { resourceSold, amountSold, resourceBought, amountBought, tradeAmount }) => { //this is run with every new user to create their starter village
+const { User, Village, Trade } = require('../models');
+
+const createTrade = (village, { resourceSold, amountSold, resourceBought, amountBought, tradeAmount }) => { //this is run with every new user to create their starter village
     return {
-        population: 2,
-        abundanceOfResources: {
-            fruit: 1,
-            meat: 1,
-            gold: 1,
-            wood: 1
+        selling: {
+            amount: amountSold,
+            resource: resourceSold
         },
-        amountOfResources: {
-            fruit: 0,
-            meat: 0,
-            gold: 0,
-            wood: 0
-        },
-        unitAllocation: {
-            fruit: 0,
-            meat: 0,
-            gold: 0,
-            wood: 0
-        },
-        user
+        buying: {
+            amount: amountBought,
+            resource: resourceBought
+          },
+        amount: tradeAmount,
+        village
     }
+}
+
+const executeTrade = (village1, village2, trade) => {
+    let vsr = village1.amountOfResources[trade.selling.resource] //villages sold resource
+    let vbr = village2.amountOfResources[trade.buying.resource] //villages bought resource
+    if (vsr > trade.selling.amount && vbr > trade.buying.amount) { //does each village have enough for the trade?
+        village1.amountOfResources[trade.selling.resource] -= trade.selling.amount;
+        village1.amountOfResources[trade.buying.resource] += trade.buying.amount;
+        village2.amountOfResources[trade.selling.resource] += trade.selling.amount;
+        village2.amountOfResources[trade.buying.resource] -= trade.buying.amount;
+        village1.save();
+        village2.save();
+        return true
+    }
+    return false 
 }
 
 
 module.exports = {
-    createTrade
+    createTrade,
+    executeTrade
 }

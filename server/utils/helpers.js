@@ -19,29 +19,16 @@ const shuffleArray = (array) => {
     return array;
 };
 
-const getAbundance = () => {
-    const max = 4.0;
-    const min = 0.5;
-    const limit = 7.0;
-
-    const r1 = getRandom(max, min);
-    const r2 = getRandom(getLimit(limit, max, r1 + (min * 2)), min);
-    const r3 = getRandom(getLimit(limit, max, r1 + r2 + min), min);
-    const r4 = roundNum(limit - r1 - r2 - r3);
-
-    // checks that numbers are correctly balanced, reruns function if not
-    if (roundNum(r1 + r2 + r3 + r4) == limit && r4 < max) {
-        const arr = shuffleArray([r1, r2, r3, r4]);
-        return { fruit: arr[0], meat: arr[1], gold: arr[2], wood: arr[3] };
-    } else {
-        return getAbundance();
-    }
-};
-
-console.log(getAbundance());
+// TODO: find # of seconds between now and last updated timestamp
+// use timestamp info from model
+function getTimePassed(update, lastUpdate) {
+    return update - lastUpdate;
+}
 
 module.exports = {
-    getAbundance,
     roundNum,
-    shuffleArray
+    getRandom,
+    getLimit,
+    shuffleArray,
+    getTimePassed
 };

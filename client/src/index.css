@@ -9,7 +9,7 @@
 
 :root {
   --lightGreen: #d6f8d6;
-  --midGreen: #7fc6a4a9;
+  --midGreen: #faf33e;
   --darkGreen: #5d737e;
   --mutedPurple: #55505c;
   --grey: #ffffff9c;
@@ -82,8 +82,9 @@ header h1:hover {
 }
 
 .leaderboard {
-  background-color: rgba(250, 250, 250, 0.836);
+  background-color: rgba(243, 171, 16, 0.911);
   color: var(--brown);
+  background-image: url("../src/img/leaderboard.jpg");
 }
 
 .play-btn {
@@ -121,7 +122,8 @@ header h1:hover {
 }
 
 .card {
-  background-color: rgba(47, 48, 48, 0.644);
+  
+  background-image: url("../src/img/backtest.jpg");
   color: whitesmoke;
 }
 

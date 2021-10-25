@@ -1,5 +1,160 @@
-html, * {
-  margin: 0;
-  padding: 0;
+* {
+  margin: 20;
+  padding: 20;
   box-sizing: border-box;
+  font-family: 'Cabin Sketch', cursive;
+  font-family: 'Rye', cursive;
+}
+
+
+:root {
+  --lightGreen: #d6f8d6;
+  --midGreen: #7fc6a4a9;
+  --darkGreen: #5d737e;
+  --mutedPurple: #55505c;
+  --grey: #ffffff9c;
+  --yellow: #faf33e;
+  --lightBlue: #69a8db;
+  --darkBlue: #002d52;
+
+}
+
+.lead {
+  font-size: 110%;
+  margin-bottom: 10px;
+}
+
+main {
+   background: url("../src/img/gold.jpg");
+   min-height: 100vh;
+   background-attachment: fixed;
+   background-position: center;
+   background-repeat: no-repeat;
+   background-size: cover;
+}
+
+.display-4 {
+  text-align: center;
+  padding: 10px;
+  margin-bottom: 50px;
+  font-size: 300%;
+}
+
+header {
+  background-color: rgb(98 98 98);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+header a {
+  color: rgb(243, 240, 255);
+  text-decoration: none;
+  padding: 1.27rem;
+}
+
+header a:hover {
+  color: rgb(253, 172, 66);
+  text-decoration: none;
+  cursor: pointer;
+  transition: .5s ease;
+  font-size: larger;
+}
+
+header h1:hover {
+  color: rgb(253, 172, 66);
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.nav {
+  display: flex;
+  justify-content: space-between;
+}
+
+.jumbotron {
+  background-color: var(--grey);
+  color: rgb(10, 34, 85);
+  font-size: 175%;
+  display: flex;
+  justify-content: center;
+  margin-bottom: 50px;
+}
+
+.leaderboard {
+  background-color: rgba(250, 250, 250, 0.836);
+  color: var(--brown);
+}
+
+.play-btn {
+  color: var(--midGreen);
+  background: rgba(1, 35, 97, 0.897);
+  border-color: var(--purple) 2px solid;
+  border-radius: 10px;
+  font-size: 35px;
+  padding: 5px 8px;
+  font-weight: normal;
+  margin: 3px 0;
+  margin-right: 8px;
+  display: flex;
+  text-decoration: none;
+  font-family: 'Butcherman', cursive;
+  min-width: 150px;
+  justify-content: center;
+  width: 150px;
+
+}
+
+/* Active-Button */
+.play-btn:hover, #play-btn:active {
+  color:var(--yellow);
+  background: var(--darkGreen);
+  cursor: pointer;
+  box-shadow: 0px 0px 8px 1px var(--yellow);
+  transition: .5s ease;
+  transform: scale(1.25);
+  text-decoration: none;
+};
+
+.container {
+  background-color: var(--midGreen);
+}
+
+.card {
+  background-color: rgba(47, 48, 48, 0.644);
+  color: whitesmoke;
+}
+
+#signup-btn {
+  color: whitesmoke;
+  background-color: rgb(192, 192, 28);
+  font-size: 150%;
+  border-radius: 10px;
+}
+
+#signup-btn:hover {
+  color: whitesmoke;
+  background-color: rgb(28, 85, 192);
+  cursor: pointer;
+  box-shadow: 0px 0px 8px 1px var(--yellow);
+  transition: .5s ease;
+  transform: scale(1.05);
+  text-decoration: none;
+}
+
+#login-btn {
+  color: whitesmoke;
+  background-color: rgb(165, 28, 192);
+  font-size: 150%;
+  border-radius: 10px;
+}
+
+#login-btn:hover {
+  color: whitesmoke;
+  background-color: rgb(5, 163, 137);
+  cursor: pointer;
+  box-shadow: 0px 0px 8px 1px var(--yellow);
+  transition: .5s ease;
+  transform: scale(1.05);
+  text-decoration: none;
 }

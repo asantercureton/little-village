@@ -40,12 +40,12 @@ const Signup = () => {
   const renderForm = () => {
     if (data) {
       return (
-      <p>
-        Success! You may now head{' '}
-        <Link to="/">back to the homepage.</Link>
-      </p>
+        <p>
+          Success! You may now head{' '}
+          <Link to="/">back to the homepage.</Link>
+        </p>
       )
-    } 
+    }
     return (
       <form onSubmit={handleFormSubmit}>
         <input
@@ -78,10 +78,27 @@ const Signup = () => {
 
   return (
     <main>
-      <h4>Sign Up</h4>
-      <div>
-        {renderForm()}
-        {error && <div>{error.message}</div>}
+      <div className="container justify-content-center text-center">
+        <div className="card">
+          <div className="card-header">
+            <h2 className="card-title">SignUp!</h2>
+          </div>
+          <form id="login-form" className="card-body">
+            <div>
+              <label for="username-input-login">Username</label>
+              <input type="text" id="username-input-login" />
+            </div>
+            <div>
+              <label for="email-input-login">Email</label>
+              <input type="text" id="email-input-login" />
+            </div>
+            <div>
+              <label for="password-input-login" className="form-label">Password</label>
+              <input type="password" id="password-input-login" />
+            </div>
+            <button type="submit" className="btn" id="signup-btn">SignUp</button>
+          </form>
+        </div>
       </div>
     </main>
   );

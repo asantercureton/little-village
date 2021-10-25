@@ -33,7 +33,7 @@ const Leaderboard = () => {
   return (
     <main>
       <div>
-        <table className="table table-hover">
+        <table className="table table-hover leaderboard">
           <thead>
             <tr>
               <th scope="col">#</th>

@@ -12,35 +12,40 @@ function Navbar() {
   if (Auth.loggedIn()) {
     return (
       <>
-        <Link to="/me">
+      <Link to="/me">
           {Auth.getProfile().data.username}'s profile
         </Link>
-        <Link to="/leaderboard">
-        Leaderboard
+     
+      <Link to="/leaderboard">
+          Leaderboard
         </Link>
-        <Link to="/tradeboard">
-        Tradeboard
+     
+      <Link to="/tradeboard">
+          Tradeboard
         </Link>
-        <button onClick={logout}>
+      
+      <button onClick={logout}>
           Logout
-        </button>
+        </button>   
       </>
     );
   }
   // If logged out show login controls
   return (
     <>
-      <Link to="/login">
-        Login
-      </Link>
 
-      <Link to="/signup">
-        Signup
-      </Link>
-
-      <Link to="/leaderboard">
-        Leaderboard
-      </Link>
+    <Link to="/login">
+          Login
+        </Link>
+    
+    <Link to="/signup">
+          Signup
+        </Link>
+   
+    <Link to="/leaderboard">
+          Leaderboard
+        </Link>
+       
     </>
   )
 }

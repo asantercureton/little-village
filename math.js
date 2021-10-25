@@ -1,44 +1,41 @@
-// test variables
-const rate = 1;
-const population = 10;
-const fruit = {
-    amount: 5,
-    workers: 3,
-    abundance: 1.5
-}
-const meat = {
-    amount: 3,
-    workers: 2,
-    abundance: 1.0
-}
-const lumber = {
-    amount: 2,
-    workers: 1,
-    abundance: 1.0
-}
-const gold = {
-    amount: 6,
-    workers: 4,
-    abundance: 0.8
-}
+// helper functions
+const roundNum = (num) => { return Math.round(num * 10) / 10 };
 
-function getResource(resource) {
-    const harvest = (rate * resource.workers) * resource.abundance;
-    resource.amount = Math.round((resource.amount + harvest) * 10) / 10;
-    return resource.amount;
-}
+const getRandom = (max, min) => {
+    return roundNum(Math.random() * (max - min) + min);
+};
 
-// initial values
-console.log('fruit:', fruit.amount);
-console.log('meat:', meat.amount);
-console.log('lumber:', lumber.amount);
-console.log('gold:', gold.amount);
-console.log('=============');
+const getLimit = (limit, max, saved) => {
+    return ((limit - saved) < max) ? (limit - saved) : max;
+};
 
-const timer = setInterval(function () {
-    console.log('fruit:', getResource(fruit));
-    console.log('meat:', getResource(meat));
-    console.log('lumber:', getResource(lumber));
-    console.log('gold:', getResource(gold));
-    console.log('=============');
-}, 2000);
+const shuffleArray = (array) => {
+    for (let i = array.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        const temp = array[i];
+        array[i] = array[j];
+        array[j] = temp;
+    }
+    return array;
+};
+
+const getAbundance = () => {
+    const max = 4.0;
+    const min = 0.5;
+    const limit = 7.0;
+
+    const r1 = getRandom(max, min);
+    const r2 = getRandom(getLimit(limit, max, r1 + (min * 2)), min);
+    const r3 = getRandom(getLimit(limit, max, r1 + r2 + min), min);
+    const r4 = roundNum(limit - r1 - r2 - r3);
+
+    // checks that numbers are correctly balanced, reruns function if not
+    if (roundNum(r1 + r2 + r3 + r4) == limit && r4 < max) {
+        const arr = shuffleArray([r1, r2, r3, r4]);
+        return { fruit: arr[0], meat: arr[1], gold: arr[2], wood: arr[3] };
+    } else {
+        return getAbundance();
+    }
+};
+
+console.log(getAbundance());

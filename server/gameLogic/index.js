@@ -11,7 +11,7 @@ const meat = {
     workers: 2,
     abundance: 1.0
 }
-const lumber = {
+const wood = {
     amount: 2,
     workers: 1,
     abundance: 1.0
@@ -25,32 +25,32 @@ const gold = {
 // this function will work together with a mutation to update the stored data
 function getResource(resource) {
     const harvest = (rate * resource.workers) * resource.abundance;
-    resource.amount = Math.round((resource.amount + harvest) * 10) / 10;
+    resource.amount = roundNum(resource.amount + harvest);
     return resource.amount;
 }
 
 // adapt version to use Village model
-
-function getResources(Village) {
-    if (Village.unitAllocation.fruit > 0) {
-        const harvest = (rate * Village.unitAllocation.fruit) * Village.abundanceOfResources.fruit;
-        Village.amountOfResources.fruit = roundNum(Village.amountOfResources.fruit + harvest);
+function getResources(Village, resource) {
+    if (Village.unitAllocation[resource] > 0) {
+        const harvest = (rate * Village.unitAllocation[resource]) * Village.abundanceOfResources[resource];
+        Village.amountOfResources[resource] = roundNum(Village.amountOfResources[resource] + harvest);
     }
     // mutate the database info with updated data
+    return Village.amountOfResources[resource];
 }
 
 
 // initial values
 console.log('fruit:', fruit.amount);
 console.log('meat:', meat.amount);
-console.log('lumber:', lumber.amount);
+console.log('wood:', wood.amount);
 console.log('gold:', gold.amount);
 console.log('=============');
 
 const addResources = setInterval(function () {
     console.log('fruit:', getResource(fruit));
     console.log('meat:', getResource(meat));
-    console.log('lumber:', getResource(lumber));
+    console.log('wood:', getResource(wood));
     console.log('gold:', getResource(gold));
     console.log('=============');
 }, 2000);

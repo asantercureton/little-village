@@ -22,7 +22,7 @@ function getAbundance() {
 
     // checks that numbers are correctly balanced, reruns function if not
     if(roundNum(r1 + r2 + r3 + r4) == limit && r4 <= max) {
-        return [r1, r2, r3, r4];
+        return {fruit: r1, meat: r2, gold: r3, wood: r4};
     } else {
         return getAbundance();
     }

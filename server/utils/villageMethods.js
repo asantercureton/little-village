@@ -1,4 +1,4 @@
-const { getAbundance } = require('./math');
+const { getAbundance } = require('./helpers');
 
 const createVillage = (user) => { //this is run with every new user to create their starter village
     return {

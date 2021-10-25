@@ -1,17 +1,15 @@
 // helper functions
-function roundNum(num) {
-    return Math.round(num * 10) / 10;
-}
+const roundNum = (num) => { return Math.round(num * 10) / 10 };
 
-function getRandom(max, min) {
+const getRandom = (max, min) => {
     return roundNum(Math.random() * (max - min) + min);
-}
+};
 
-function getLimit(limit, max, saved) {
-    return (limit - saved < max) ? limit - saved : max;
-}
+const getLimit = (limit, max, saved) => {
+    return ((limit - saved) < max) ? (limit - saved) : max;
+};
 
-function shuffleArray(array) {
+const shuffleArray = (array) => {
     for (let i = array.length - 1; i > 0; i--) {
         const j = Math.floor(Math.random() * (i + 1));
         const temp = array[i];
@@ -19,9 +17,9 @@ function shuffleArray(array) {
         array[j] = temp;
     }
     return array;
-}
+};
 
-function getAbundance() {
+const getAbundance = () => {
     const max = 4.0;
     const min = 0.5;
     const limit = 7.0;
@@ -33,11 +31,11 @@ function getAbundance() {
 
     // checks that numbers are correctly balanced, reruns function if not
     if (roundNum(r1 + r2 + r3 + r4) == limit && r4 < max) {
-        const shuffle = shuffleArray([r1, r2, r3, r4]);
-        return { fruit: shuffle[0], meat: shuffle[1], gold: shuffle[2], wood: shuffle[3] };
+        const arr = shuffleArray([r1, r2, r3, r4]);
+        return { fruit: arr[0], meat: arr[1], gold: arr[2], wood: arr[3] };
     } else {
         return getAbundance();
     }
-}
+};
 
 console.log(getAbundance());

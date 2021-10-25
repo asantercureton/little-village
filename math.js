@@ -10,12 +10,9 @@ function getLimit(limit, max, saved) {
     return (limit - saved < max) ? limit - saved : max;
 }
 
-// function to set abundance values
 function getAbundance() {
-    // abundance value range
     const max = 4.0;
     const min = 0.5;
-    // the sum of all abundances, to balance villages
     const limit = 7.0;
 
     const r1 = getRandom(max, min);

@@ -1,7 +1,6 @@
 //THIS FILE IS RESPONSIBLE FOR RUNNING LOGIC EVERY SECOND BASED ON THE PRODUCTION RATES OF EVERY VILLAGE
 // test variables - hard-coded temporarily
 const rate = 1;
-const population = 10;
 const fruit = {
     amount: 5,
     workers: 3,
@@ -29,6 +28,17 @@ function getResource(resource) {
     resource.amount = Math.round((resource.amount + harvest) * 10) / 10;
     return resource.amount;
 }
+
+// adapt version to use Village model
+
+function getResources(Village) {
+    if (Village.unitAllocation.fruit > 0) {
+        const harvest = (rate * Village.unitAllocation.fruit) * Village.abundanceOfResources.fruit;
+        Village.amountOfResources.fruit = roundNum(Village.amountOfResources.fruit + harvest);
+    }
+    // mutate the database info with updated data
+}
+
 
 // initial values
 console.log('fruit:', fruit.amount);

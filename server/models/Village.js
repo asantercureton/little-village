@@ -35,7 +35,14 @@ const villageSchema = new Schema({
       ref: "Trade"
     }
   ]
+},
+{ timestamps: true }
+);
 
+villageSchema.pre('save', function (next) {
+  let now = new Date();
+  console.log(Math.abs(now - this.updatedAt) / 1000);
+  next();
 });
 
 const Village = model('Village', villageSchema);

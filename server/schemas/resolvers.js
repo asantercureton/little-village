@@ -57,10 +57,12 @@ const resolvers = {
     createTrade: async (_, args) => {
       const user = await User.findById(args.userId);
       const newTrade = await Trade.create(createTrade(user.village, args));
+      const village = await Village.findById(user.village);
       await Village.updateOne(
         { _id: user.village }, 
         { $push: { trades: newTrade } }
       );
+      village.save();
       return newTrade
     },
     executeTrade: async (_, args) => {

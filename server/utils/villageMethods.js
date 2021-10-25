@@ -1,12 +1,9 @@
+const { getAbundance } = require('./math');
+
 const createVillage = (user) => { //this is run with every new user to create their starter village
     return {
         population: 2,
-        abundanceOfResources: {
-            fruit: 1,
-            meat: 1,
-            gold: 1,
-            wood: 1
-        },
+        abundanceOfResources: getAbundance(),
         amountOfResources: {
             fruit: 0,
             meat: 0,

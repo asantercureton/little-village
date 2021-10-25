@@ -39,3 +39,9 @@ const getAbundance = () => {
 };
 
 console.log(getAbundance());
+
+module.exports = {
+    getAbundance,
+    roundNum,
+    shuffleArray
+};

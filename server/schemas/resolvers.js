@@ -8,7 +8,7 @@ const { createTrade, executeTrade } = require('../utils/tradeMethods');
 const resolvers = {
   Query: {
     users: async () => {
-      return User.find();
+      return User.find().populate('villages');
     },
     user: async (_, args) => {
       return User.findOne({ _id: args.id });
@@ -20,10 +20,10 @@ const resolvers = {
       throw new AuthenticationError('You need to be logged in!');
     },
     villages: async () => {
-      return Village.find();
+      return Village.find().populate('trades').populate('users');
     },
     trades: async () => {
-      return Trade.find();
+      return await Trade.find().populate('villages');
     }
   },
 

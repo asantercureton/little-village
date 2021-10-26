@@ -78,7 +78,7 @@ const typeDefs = gql`
     villages: [Village]
     trades: [Trade]
     levels: [Level]
-    upgrades: Upgrade
+    upgrades: [Upgrade]
   }
 
   type Mutation {

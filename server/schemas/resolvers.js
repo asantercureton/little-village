@@ -89,7 +89,6 @@ const resolvers = {
   }
 };
 
-currentR
-currentPr
+
 
 module.exports = resolvers;

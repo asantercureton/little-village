@@ -16,6 +16,14 @@ export const QUERY_USER = gql`
       _id
       username
       email
+      village {
+        amountOfResources {
+          fruit
+          meat
+          gold
+          wood
+        }
+      }
     }
   }
 `;
@@ -26,6 +34,14 @@ export const QUERY_ME = gql`
       _id
       username
       email
+      village {
+        amountOfResources {
+          fruit
+          meat
+          gold
+          wood
+        }
+      }
     }
   }
 `;

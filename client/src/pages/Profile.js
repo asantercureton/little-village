@@ -1,6 +1,6 @@
 
 // Node Modules
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { Redirect, useParams } from 'react-router-dom';
 import { useQuery } from '@apollo/client';
 // Utilities
@@ -9,8 +9,52 @@ import { QUERY_USERS, QUERY_USER, QUERY_ME } from '../utils/queries';
 // Components
 import UserList from '../components/UserList';
 
+
+
 const Profile = () => {
   const { id } = useParams();
+  
+  const gameLoop = () => {
+    let loopResources = resources; 
+    loopResources.wood += 1;
+
+    setResources({
+      fruit: 0,
+      meat: 0,
+      gold: 0,
+      wood: loopResources.wood
+    })
+    console.log(resources)
+  }
+
+  useEffect(() => { 
+
+    if(!loading){
+      if (!gameLoopInit) { //set resources to correct amount 
+        let {amountOfResources: resourceCount} = user.village;
+        setResources({
+          fruit: resourceCount.fruit,
+          meat: resourceCount.meat,
+          gold: resourceCount.gold,
+          wood: resourceCount.wood
+        })
+        setGameLoopInit(true);
+        var gameLoopTimer = setInterval(gameLoop, 500);
+      }
+
+
+
+    }
+  });
+  
+  const [resources, setResources] = useState({
+    fruit: 0,
+    meat: 0,
+    gold: 0,
+    wood: 0
+  }); //set up the resources state, which will be used to get the resources from the server and update them. will be an object with keys for each resource
+
+  const [gameLoopInit, setGameLoopInit] = useState(false); //have we set up the game loop? 
 
   // Get current user
   const { loading, data, error } = useQuery(id ? QUERY_USER : QUERY_ME, {
@@ -79,19 +123,19 @@ const Profile = () => {
               </tr>
               <tr className="cell">
                 <th scope="row">FRUITS:</th>
-                <td>10</td>
+                <td>{resources.fruit}</td>
               </tr>
               <tr className="cell">
                 <th scope="row">GOLD:</th>
-                <td>0.4</td>
+                <td>{resources.gold}</td>
               </tr>
               <tr className="cell">
                 <th scope="row">MEAT:</th>
-                <td>2.5</td>
+                <td>{resources.meat}</td>
               </tr>
               <tr className="cell">
                 <th scope="row">WOOD:</th>
-                <td>3.1</td>
+                <td>{resources.wood}</td>
               </tr>
               <tr className="cell">
                 <th scope="row"># of TRADES:</th>

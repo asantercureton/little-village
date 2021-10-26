@@ -16,6 +16,26 @@ export const QUERY_USER = gql`
       _id
       username
       email
+      village {
+        amountOfResources {
+          fruit
+          meat
+          gold
+          wood
+        }
+        unitAllocation {
+          fruit
+          meat
+          gold
+          wood
+        }
+        abundanceOfResources {
+          fruit
+          meat
+          gold
+          wood
+        }
+      }
     }
   }
 `;
@@ -26,6 +46,27 @@ export const QUERY_ME = gql`
       _id
       username
       email
+      village {
+        population
+        amountOfResources {
+          fruit
+          meat
+          gold
+          wood
+        }
+        unitAllocation {
+          fruit
+          meat
+          gold
+          wood
+        }
+        abundanceOfResources {
+          fruit
+          meat
+          gold
+          wood
+        }
+      }
     }
   }
 `;

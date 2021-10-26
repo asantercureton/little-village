@@ -11,11 +11,11 @@ const resolvers = {
       return User.find().populate('village');
     },
     user: async (_, args) => {
-      return User.findOne({ _id: args.id });
+      return User.findOne({ _id: args.id }).populate('village');
     },
     me: async (_, args, context) => {
       if (context.user) {
-        return User.findOne({ _id: context.user._id });
+        return User.findOne({ _id: context.user._id }).populate('village');
       }
       throw new AuthenticationError('You need to be logged in!');
     },

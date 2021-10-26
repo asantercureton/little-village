@@ -3,22 +3,23 @@ import { useQuery } from '@apollo/client';
 import Auth from '../utils/auth';
 
 
-import { QUERY_USERS } from '../utils/queries';
+
+import { QUERY_TRADES } from '../utils/queries'; 
 
 import UserList from '../components/UserList';
 
 
 const Tradeboard = () => {
-  const { loading, data } = useQuery(QUERY_USERS);
-  const users = data?.users || [];
+  const { loading, data } = useQuery(QUERY_TRADES);
+  const trades = data?.trades || [];
 
-  const renderUserList = () => {
-    if (loading) {
-      return <h2>Loading...</h2>
-    } else {
-      return <UserList users={users} title="List of Users" />
-    }
-  }
+  // const renderUserList = () => {
+  //   if (loading) {
+  //     return <h2>Loading...</h2>
+  //   } else {
+  //     return <UserList users={users} title="List of Users" />
+  //   }
+  // }
 
   const renderUsername = () => {
     if (!Auth.loggedIn()) return null;
@@ -30,15 +31,16 @@ const Tradeboard = () => {
     return Auth.getProfile().data.username;
   }
 
+  console.log('trade', trades);
+
   return (
     <main>
       <div>
-        <table className="table table-hover">
+        <table className="table table-hover leaderboard">
           <thead>
             <tr>
               <th scope="col">#</th>
               <th scope="col">Username</th>
-              <th scope="col">Village</th>
               <th scope="col">Resource Offered</th>
               <th scope="col">Amount Offered</th>
               <th scope="col">Resource Requested</th>

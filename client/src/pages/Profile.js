@@ -1,3 +1,4 @@
+
 // Node Modules
 import React from 'react';
 import { Redirect, useParams } from 'react-router-dom';
@@ -53,20 +54,65 @@ const Profile = () => {
     if (id) return null;
     return (
       <ul>
-        <li>username: {user.username}</li>
-        <li>email: {user.email}</li>
+        <p><strong>username:</strong> {user.username}</p>
+        <p><strong>email:</strong> {user.email}</p>
       </ul>
     );
   }
 
   return (
-    <div>
-      <div>
-        <h2>
-          Viewing {id ? `${user.username}'s` : 'your'} profile.
-        </h2>
-        {renderCurrentUserInfo()}
-        {renderUserList()}
+    <div className="wrapper">
+      <div className="jumbotron jumbotron-fluid">
+        <div className="container">
+          <h1 className="display-4 tableTitle">My Village.</h1>
+
+          <table className="table table-hover">
+
+            <tbody className="rows">
+              <tr className="cell">
+                <th scope="row">STATUS:</th>
+                <td>TRIBE</td>
+              </tr>
+              <tr className="cell">
+                <th scope="row">POPULATION:</th>
+                <td>18</td>
+              </tr>
+              <tr className="cell">
+                <th scope="row">FRUITS:</th>
+                <td>10</td>
+              </tr>
+              <tr className="cell">
+                <th scope="row">GOLD:</th>
+                <td>0.4</td>
+              </tr>
+              <tr className="cell">
+                <th scope="row">MEAT:</th>
+                <td>2.5</td>
+              </tr>
+              <tr className="cell">
+                <th scope="row">WOOD:</th>
+                <td>3.1</td>
+              </tr>
+              <tr className="cell">
+                <th scope="row"># of TRADES:</th>
+                <td>3</td>
+              </tr>
+            </tbody>
+          </table>
+          <div>
+                <button type="submit" className="btn trade-btn" id="trade-btn">REQUEST A TRADE!</button>
+              </div>
+        </div>
+
+        <div className="sidePanel">
+          <div className="card2">
+            <div className="card-body2">
+              <h5 className="card-title"><strong>Village Name</strong></h5>
+              <p className="card-text">{renderCurrentUserInfo()}</p>
+              
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   );

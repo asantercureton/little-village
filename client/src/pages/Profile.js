@@ -119,7 +119,7 @@ const Profile = () => {
               </tr>
               <tr className="cell">
                 <th scope="row">POPULATION:</th>
-                <td>18</td>
+                <td>{user.village.population}</td>
               </tr>
               <tr className="cell">
                 <th scope="row">FRUITS:</th>

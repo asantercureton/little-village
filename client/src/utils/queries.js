@@ -35,7 +35,10 @@ export const QUERY_ME = gql`
       username
       email
       village {
+<<<<<<< HEAD
         population
+=======
+>>>>>>> 219a5fb7534a9d7b2a47f722a46699cbc8196e3d
         amountOfResources {
           fruit
           meat

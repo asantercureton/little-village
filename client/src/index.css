@@ -40,7 +40,7 @@ main {
   font-size: 300%;
 }
 header {
-  background-color: rgb(98 98 98);
+  background-image: linear-gradient(to bottom right,rgb(156, 94, 0), rgb(36, 19, 0));
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -141,6 +141,25 @@ header h1:hover {
   margin: 5px;
 
 }
+.card-body3 {
+  /* background-image: url("../src/img/city.jpg"); */
+  background-color: rgba(100, 39, 3, 0.644);
+  color: rgba(245, 245, 245, 0.836);
+  border-radius: 18px;
+  padding: 50px;
+  margin: 15px;
+
+}
+.card-body4 {
+  /* background-image: url("../src/img/city.jpg"); */
+  background-color: rgba(243, 195, 36, 0.644);
+  color: #000e1ace;
+  border-radius: 18px;
+  padding: 50px;
+  margin: 15px;
+
+}
+
 
 .cell {
   background-color: rgba(245, 245, 245, 0.315);
@@ -167,6 +186,9 @@ header h1:hover {
 
 .sidePanel {
   font-size: 130%;
+  text-align: center;
+  display: flex;
+  justify-content: center;
 }
 
 .card-title {
@@ -230,3 +252,23 @@ header h1:hover {
   transform: scale(1.05);
   text-decoration: none;
 }
+.confirm-btn {
+  color: whitesmoke;
+  background-color: rgb(0, 114, 34);
+  font-size: 100%;
+  border-radius: 10px;
+  /* padding: 10px; */
+  margin: 10px;
+  width: auto;
+}
+
+.confirm-btn:hover {
+  color: whitesmoke;
+  background-color: rgb(163, 108, 5);
+  cursor: pointer;
+  box-shadow: 0px 0px 8px 1px var(--yellow);
+  transition: .5s ease;
+  transform: scale(1.05);
+  text-decoration: none;
+}
+

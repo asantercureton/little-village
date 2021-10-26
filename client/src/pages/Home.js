@@ -28,14 +28,17 @@ const Home = () => {
     <main>
       <div className="jumbotron align-items-center">
         <div className="justify-content-center">
-          <h1 className="display-4">TUTORIAL</h1>
-          <h2 className="lead">BELOW ARE INSTRUCTIONS ON HOW TO PLAY LITTLE VILLAGE...</h2>
+          <h1 className="lead">An online game where users create their own village, gather resources to grow and expand their village, while trading with others for resources they don't have.</h1>
+         
+          <h1 className="display-4">GAME PLAY</h1>
           <ol>
-            <li>.......</li>
-            <li>.......</li>
-            <li>.......</li>
-            <li>.......</li>
+            <li>Gather resources (fruits, meat, gold, wood) according to how abundant your territory is in each type of resource.</li>
+            <li>Trade with other villages for resources you don’t have.</li>
+            <li>Spend those resources to improve your village.</li>
           </ol>
+         
+          <p>Your new world awaits...</p>
+         
           <a href="/" className="play-btn"><span>PLAY!</span></a>
 
         </div>

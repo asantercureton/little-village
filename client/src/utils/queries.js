@@ -57,6 +57,7 @@ export const QUERY_VILLAGES = gql`
       population
       user {
         _id
+        username
       }
       trades {
         _id

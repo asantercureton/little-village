@@ -7,7 +7,7 @@ const levelSchema = new Schema({
   name: {
     type: String
   },
-  populationMax: {
+  maxPopulation: {
     type: Number
   },
   productionRate: {

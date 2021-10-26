@@ -4,7 +4,7 @@ import Auth from '../utils/auth';
 
 
 
-import { QUERY_TRADES } from '../utils/queries'; 
+import { QUERY_TRADES } from '../utils/queries';
 
 import UserList from '../components/UserList';
 
@@ -30,6 +30,10 @@ const Tradeboard = () => {
     if (!Auth.loggedIn()) return null;
     return Auth.getProfile().data.username;
   }
+  const renderResources = () => {
+    if (!Auth.loggedIn()) return null;
+    return Auth.getTrade().data.trades;
+  }
 
   console.log('trade', trades);
 
@@ -39,17 +43,19 @@ const Tradeboard = () => {
         <table className="table table-hover leaderboard">
           <thead>
             <tr>
-              <th scope="col">#</th>
-              <th scope="col">Username</th>
-              <th scope="col">Resource Offered</th>
-              <th scope="col">Amount Offered</th>
-              <th scope="col">Resource Requested</th>
-              <th scope="col">Amount Requested</th>
+
+            <th scope="col">#</th>
+            <th scope="col">Username</th>
+            <th scope="col">Resource Offered</th>
+            <th scope="col">Amount Offered</th>
+            <th scope="col">Resource Requested</th>
+            <th scope="col">Amount Requested</th>
             </tr>
           </thead>
           <tbody>
             <tr>
               <th scope="row">1</th>
+
               <td>Username</td>
               <td>Village</td>
               <td>Resource Offered</td>
@@ -57,24 +63,31 @@ const Tradeboard = () => {
               <td>Resource Requested</td>
               <td>Amount Requested</td>
             </tr>
+            {trades.map((trade) => (
             <tr>
               <th scope="row">2</th>
-              <td>Username</td>
-              <td>Village</td>
-              <td>Resource Offered</td>
-              <td>Amount Offered</td>
-              <td>Resource Requested</td>
-              <td>Amount Requested</td>
+
+            <td>User {trade._id} </td>
+            <td>Kingdom of Bethlehem {trade.village} </td>
+            <td>Offered {trade.selling.resource } </td>
+            <td> {trade.selling.amount} Stack</td>
+            <td>{trade.buying.resource}</td>
+            <td> {trade.amount } Chest</td>
             </tr>
+          ))}
+
+{trades.map((trade) => (
             <tr>
               <th scope="row">3</th>
-              <td>Username</td>
-              <td>Village</td>
-              <td>Resource Offered</td>
-              <td>Amount Offered</td>
-              <td>Resource Requested</td>
-              <td>Amount Requested</td>
+
+            <td>User {trade._id} </td>
+            <td>Kingdom of Solomon {trade.village} </td>
+            <td>Offered {trade.selling.resource } </td>
+            <td> {trade.selling.amount} Stack</td>
+            <td>{trade.buying.resource}</td>
+            <td> {trade.amount } Chest</td>
             </tr>
+          ))}
           </tbody>
         </table>
       </div>

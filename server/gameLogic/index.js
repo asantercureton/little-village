@@ -20,6 +20,7 @@ function getResource(resource) {
 }
 
 
+
 // TODO: needs to specifically reference This Village
 // used to get each resources up to date info, should mutate db
 function updateResources() {

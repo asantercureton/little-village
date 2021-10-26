@@ -3,22 +3,22 @@ import { useQuery } from '@apollo/client';
 import Auth from '../utils/auth';
 
 
-import { QUERY_USERS } from '../utils/queries';
+import { QUERY_VILLAGES } from '../utils/queries';
 
 import UserList from '../components/UserList';
 
 
 const Leaderboard = () => {
-  const { loading, data } = useQuery(QUERY_USERS);
-  const users = data?.users || [];
+  const { loading, data } = useQuery(QUERY_VILLAGES);
+  const villages = data?.villages || [];
 
-  const renderUserList = () => {
-    if (loading) {
-      return <h2>Loading...</h2>
-    } else {
-      return <UserList users={users} title="List of Users" />
-    }
-  }
+  // const renderUserList = () => {
+  //   if (loading) {
+  //     return <h2>Loading...</h2>
+  //   } else {
+  //     return <UserList users={users} title="List of Users" />
+  //   }
+  // }
 
   const renderUsername = () => {
     if (!Auth.loggedIn()) return null;
@@ -29,6 +29,8 @@ const Leaderboard = () => {
     if (!Auth.loggedIn()) return null;
     return Auth.getProfile().data.username;
   }
+
+  console.log('village', villages);
 
   return (
     <main>

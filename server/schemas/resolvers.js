@@ -9,7 +9,7 @@ const resolvers = {
   Query: {
     users: async () => {
       return User.find().populate('village').populate({
-        path: 'villages',
+        path: 'village',
         populate: 'level' //look at plural levels instead maybe add a query for this, if it does not work
       });
     },
@@ -89,7 +89,5 @@ const resolvers = {
   }
 };
 
-currentR
-currentPr
 
 module.exports = resolvers;

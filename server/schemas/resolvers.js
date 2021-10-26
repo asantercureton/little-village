@@ -27,9 +27,6 @@ const resolvers = {
     },
     levels: async () => {
       return await Level.find();
-    },
-    level: async () => {
-      return await Level.findOne({ level: 1 });
     }
   },
 

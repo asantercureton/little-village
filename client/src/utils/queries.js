@@ -29,6 +29,12 @@ export const QUERY_USER = gql`
           gold
           wood
         }
+        abundanceOfResources {
+          fruit
+          meat
+          gold
+          wood
+        }
       }
     }
   }
@@ -49,6 +55,12 @@ export const QUERY_ME = gql`
           wood
         }
         unitAllocation {
+          fruit
+          meat
+          gold
+          wood
+        }
+        abundanceOfResources {
           fruit
           meat
           gold

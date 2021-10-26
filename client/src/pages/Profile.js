@@ -18,39 +18,43 @@ const Profile = () => {
     let loopResources = resources; 
     let now = new Date();
     let deltaTime = Math.abs(now - lastUpdate) / 1000;
-    console.log(deltaTime)
-    loopResources.wood += 1 * deltaTime;
+    let { abundanceOfResources } = user.village;
+    for (let resource in loopResources) {
+      loopResources[resource] += workers[resource] * abundanceOfResources[resource] * deltaTime;
+    }
 
     setResources({
-      fruit: 0,
-      meat: 0,
-      gold: 0,
+      fruit: Math.round(loopResources.fruit*10)/10,
+      meat: Math.round(loopResources.meat*10)/10,
+      gold: Math.round(loopResources.gold*10)/10,
       wood: Math.round(loopResources.wood*10)/10
     })
     lastUpdate = new Date();
   }
 
-  useEffect(() => { 
+  useEffect(async () => { 
 
     if(!loading){
       if (!gameLoopInit) { //set resources to correct amount 
-        let {amountOfResources: resourceCount, unitAllocation} = user.village;
-        console.log(unitAllocation)
-        setResources({
+        var {amountOfResources: resourceCount, unitAllocation, abundanceOfResources} = user.village;
+        
+        await setResources({
           fruit: resourceCount.fruit,
           meat: resourceCount.meat,
           gold: resourceCount.gold,
           wood: resourceCount.wood
         });
-        setWorkers({
-          fruit: resourceCount.fruit,
-          meat: resourceCount.meat,
-          gold: resourceCount.gold,
-          wood: resourceCount.wood
-        })
+        await setWorkers({
+          fruit: unitAllocation.fruit,
+          meat: unitAllocation.meat,
+          gold: unitAllocation.gold,
+          wood: unitAllocation.wood
+        });
+        console.log(unitAllocation.wood)
+        console.log(workers)
         setGameLoopInit(true);
         lastUpdate = new Date();
-        var gameLoopTimer = setInterval(gameLoop, 500);
+        var gameLoopTimer = setInterval(gameLoop, 250);
       }
 
 

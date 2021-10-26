@@ -1,5 +1,5 @@
 const { Schema, model } = require('mongoose');
-
+const {updateResources} = require('../gameLogic');
 
 
 const villageSchema = new Schema({
@@ -36,8 +36,7 @@ const villageSchema = new Schema({
     }
   ],
   level: { // the state/level of the village
-    type: Schema.Types.ObjectId,
-    ref: "Level"
+    type: Number
   },
   upgrades: {
     fruit: [
@@ -71,15 +70,15 @@ const villageSchema = new Schema({
 
 villageSchema.pre('save', function (next) {
   let now = new Date();
-  console.log(Math.abs(now - this.updatedAt) / 1000);
-  //Call updateresources
+  const deltaTime = Math.abs(now - this.updatedAt) / 1000;
+  updateResources(this, deltaTime);
   next();
 });
 
 villageSchema.pre('find', function (next) {
   let now = new Date();
-  console.log(Math.abs(now - this.updatedAt) / 1000);
-  //Call updateresources
+  const deltaTime = Math.abs(now - this.updatedAt) / 1000;
+  updateResources(this, deltaTime);
   next();
 });
 

@@ -17,7 +17,7 @@ const typeDefs = gql`
     unitAllocation: ResourceObject
     user: User
     trades: [Trade]
-    level: Level
+    level: Int
     upgrades: UpgradeObject
   }
 

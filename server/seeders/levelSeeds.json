@@ -1,0 +1,68 @@
+[
+    {
+        "level": 1,
+        "name": "Tribe",
+        "maxPopulation": 10,
+        "productionRate": 1,
+        "image": "../src/img/levels/tribe.jpg",
+        "levelUpCost": {
+            "gold": 10,
+            "wood": 10
+        }
+    },
+    {
+        "level": 2,
+        "name": "Hamlet",
+        "maxPopulation": 25,
+        "productionRate": 1.5,
+        "image": "../src/img/levels/hamlet.jpg",
+        "levelUpCost": {
+            "gold": 50,
+            "wood": 50
+        }
+    },
+    {
+        "level": 3,
+        "name": "Village",
+        "maxPopulation": 50,
+        "productionRate": 2,
+        "image": "../src/img/levels/village.jpg",
+        "levelUpCost": {
+            "gold": 100,
+            "wood": 100
+        }
+    },
+    {
+        "level": 4,
+        "name": "Town",
+        "maxPopulation": 100,
+        "productionRate": 2.5,
+        "image": "../src/img/levels/town.jpg",
+        "levelUpCost": {
+            "gold": 250,
+            "wood": 250
+        }
+    },
+    {
+        "level": 5,
+        "name": "Citystate",
+        "maxPopulation": 175,
+        "productionRate": 3,
+        "image": "../src/img/levels/citystate.jpg",
+        "levelUpCost": {
+            "gold": 500,
+            "wood": 500
+        }
+    },
+    {
+        "level": 6,
+        "name": "Kingdom",
+        "maxPopulation": 250,
+        "productionRate": 3.5,
+        "image": "../src/img/levels/kingdom.jpg",
+        "levelUpCost": {
+            "gold": 0,
+            "wood": 0
+        }
+    }
+]

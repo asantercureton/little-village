@@ -1,5 +1,5 @@
 const { AuthenticationError } = require('apollo-server-express');
-const { User, Village, Trade } = require('../models');
+const { User, Village, Trade, Level, Upgrade } = require('../models');
 
 const { signToken } = require('../utils/auth');
 const { createVillage } = require('../utils/villageMethods');
@@ -8,7 +8,7 @@ const { createTrade, executeTrade } = require('../utils/tradeMethods');
 const resolvers = {
   Query: {
     users: async () => {
-      return User.find().populate('villages');
+      return User.find().populate('village');
     },
     user: async (_, args) => {
       return User.findOne({ _id: args.id });
@@ -20,10 +20,16 @@ const resolvers = {
       throw new AuthenticationError('You need to be logged in!');
     },
     villages: async () => {
-      return Village.find().populate('trades').populate('users');
+      return Village.find().populate('trades').populate('user').populate('level').populate('upgrades');
     },
     trades: async () => {
       return await Trade.find().populate('villages');
+    },
+    levels: async () => {
+      return await Level.find();
+    },
+    upgrades: async () => {
+      return await Upgrade.find();
     }
   },
 
@@ -31,7 +37,8 @@ const resolvers = {
     addUser: async (_, args) => {
       //every user must given a starter village with stats set
       const user = await User.create(args);
-      const newVillage = await Village.create(createVillage(user));
+      const level = await Level.findOne({ level: 1 });
+      const newVillage = await Village.create(createVillage(user, level));
       user.village = newVillage;
       await user.save();
       const token = signToken(user);

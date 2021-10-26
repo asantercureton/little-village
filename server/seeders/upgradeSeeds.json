@@ -1,0 +1,27 @@
+[
+    {
+        "name": "Better Pickaxes",
+        "resource": "gold",
+        "summary": "Your miners will be more efficient if you give them better tools.",
+        "cost": {
+            "wood": 10
+        }
+    },
+    {
+        "name": "Minecarts",
+        "resource": "gold",
+        "summary": "Minecarts will make your workers more efficient (and they're fun too!)",
+        "cost": {
+            "gold": 10,
+            "wood": 10
+        }
+    },
+    {
+        "name": "Inspire the Miners",
+        "resource": "gold",
+        "summary": "Build a statue of yourself in the miner's break room to inspire them to work harder!",
+        "cost": {
+            "gold": 30
+        }
+    }
+]

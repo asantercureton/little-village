@@ -8,10 +8,7 @@ const { createTrade, executeTrade } = require('../utils/tradeMethods');
 const resolvers = {
   Query: {
     users: async () => {
-      return User.find().populate('village').populate({
-        path: 'village',
-        populate: 'level' //look at plural levels instead maybe add a query for this, if it does not work
-      });
+      return User.find().populate('village');
     },
     user: async (_, args) => {
       return User.findOne({ _id: args.id });
@@ -23,7 +20,7 @@ const resolvers = {
       throw new AuthenticationError('You need to be logged in!');
     },
     villages: async () => {
-      return Village.find().populate('trades').populate('user').populate('level').populate('upgrades');
+      return Village.find().populate('trades').populate('user').populate('upgrades');
     },
     trades: async () => {
       return await Trade.find().populate('villages').populate({
@@ -43,7 +40,7 @@ const resolvers = {
     addUser: async (_, args) => {
       //every user must given a starter village with stats set
       const user = await User.create(args);
-      const level = await Level.findOne({ level: 1 });
+      const level = 1;
       const newVillage = await Village.create(createVillage(user, level));
       user.village = newVillage;
       await user.save();

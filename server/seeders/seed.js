@@ -24,7 +24,7 @@ db.once('open', async () => {
     const seedsArr = ['tribe', 'hamlet', 'village', 'town', 'citystate', 'kingdom'];
     for(let i = 0; i < seedsArr.length; i++) {
       let user = await User.findOne({ username: seedsArr[i]});
-      let level = await Level.findOne({ level: i+1 });
+      let level = i+1;
       user.village = await Village.create(createVillage(user, level));
       await user.save();
     }

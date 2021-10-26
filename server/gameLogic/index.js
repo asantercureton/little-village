@@ -1,17 +1,18 @@
-//THIS FILE IS RESPONSIBLE FOR RUNNING LOGIC EVERY SECOND BASED ON THE PRODUCTION RATES OF EVERY VILLAGE
 const { Village } = require('../models');
 const { roundNum, getEfficiency } = require('../utils/helpers');
 
-// TODO: needs to specifically reference This Village
-function getResource(resource) {
-    if (Village.unitAllocation[resource] > 0) {
-        const rate = Village.level.productionRate;
+function getResource(Village, time, resource) {
+    if (Village.unitAllocation[resource] >= 0) {
+        //const rate = Village.level.productionRate;
+        console.log(Village);
+        // const workers = Village.unitAllocation[resource];
+        const rate = 1;
+        const workers = 2;
         const efficiency = getEfficiency(Village.upgrades[resource]);
-        const workers = Village.unitAllocation[resource];
         const abundance = Village.abundanceOfResources[resource];
 
         const harvest = (rate * efficiency) * workers * abundance;
-        const timePassed = getTimePassed(5, 1); // temp variables
+        const timePassed = time;
         const production = roundNum(harvest * timePassed);
 
         Village.amountOfResources[resource] += production;
@@ -19,15 +20,11 @@ function getResource(resource) {
     return Village.amountOfResources[resource];
 }
 
-
-
-// TODO: needs to specifically reference This Village
-// used to get each resources up to date info, should mutate db
-function updateResources() {
-    console.log('fruit: ', getResource('fruit'));
-    console.log('meat: ', getResource('meat'));
-    console.log('gold: ', getResource('gold'));
-    console.log('wood: ', getResource('wood'));
+function updateResources(Village, time) {
+    console.log('fruit: ', getResource(Village, time, 'fruit'));
+    console.log('meat: ', getResource(Village, time, 'meat'));
+    console.log('gold: ', getResource(Village, time, 'gold'));
+    console.log('wood: ', getResource(Village, time, 'wood'));
 }
 
 module.exports = { getResource, updateResources }

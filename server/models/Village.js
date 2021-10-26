@@ -34,7 +34,11 @@ const villageSchema = new Schema({
       type: Schema.Types.ObjectId,
       ref: "Trade"
     }
-  ]
+  ],
+  level: { // the state/level of the village
+    type: Schema.Types.ObjectId,
+    ref: "Level"
+  },
 },
 { timestamps: true }
 );

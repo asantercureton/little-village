@@ -75,12 +75,12 @@ villageSchema.pre('save', function (next) {
   next();
 });
 
-villageSchema.pre('find', function (next) {
-  let now = new Date();
-  const deltaTime = Math.abs(now - this.updatedAt) / 1000;
-  updateResources(this, deltaTime);
-  next();
-});
+// villageSchema.pre('find', function (next) {
+//   let now = new Date();
+//   const deltaTime = Math.abs(now - this.updatedAt) / 1000;
+//   updateResources(this._id, deltaTime);
+//   next();
+// });
 
 villageSchema.methods.updateResources = function () {
   return bcrypt.compare(password, this.password);

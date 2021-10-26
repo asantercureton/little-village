@@ -4,10 +4,8 @@
         "name": "Tribe",
         "maxPopulation": 10,
         "productionRate": 1,
-        "image": "",
+        "image": "../src/img/levels/tribe.jpg",
         "levelUpCost": {
-            "fruit": 0,
-            "meat": 0,
             "gold": 10,
             "wood": 10
         }
@@ -17,10 +15,8 @@
         "name": "Hamlet",
         "maxPopulation": 25,
         "productionRate": 1.5,
-        "image": "",
+        "image": "../src/img/levels/hamlet.jpg",
         "levelUpCost": {
-            "fruit": 0,
-            "meat": 0,
             "gold": 50,
             "wood": 50
         }
@@ -30,10 +26,8 @@
         "name": "Village",
         "maxPopulation": 50,
         "productionRate": 2,
-        "image": "",
+        "image": "../src/img/levels/village.jpg",
         "levelUpCost": {
-            "fruit": 0,
-            "meat": 0,
             "gold": 100,
             "wood": 100
         }
@@ -43,10 +37,8 @@
         "name": "Town",
         "maxPopulation": 100,
         "productionRate": 2.5,
-        "image": "",
+        "image": "../src/img/levels/town.jpg",
         "levelUpCost": {
-            "fruit": 0,
-            "meat": 0,
             "gold": 250,
             "wood": 250
         }
@@ -56,10 +48,8 @@
         "name": "Citystate",
         "maxPopulation": 175,
         "productionRate": 3,
-        "image": "",
+        "image": "../src/img/levels/citystate.jpg",
         "levelUpCost": {
-            "fruit": 0,
-            "meat": 0,
             "gold": 500,
             "wood": 500
         }
@@ -69,10 +59,8 @@
         "name": "Kingdom",
         "maxPopulation": 250,
         "productionRate": 3.5,
-        "image": "",
+        "image": "../src/img/levels/kingdom.jpg",
         "levelUpCost": {
-            "fruit": 0,
-            "meat": 0,
             "gold": 0,
             "wood": 0
         }

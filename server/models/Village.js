@@ -72,8 +72,20 @@ const villageSchema = new Schema({
 villageSchema.pre('save', function (next) {
   let now = new Date();
   console.log(Math.abs(now - this.updatedAt) / 1000);
+  //Call updateresources
   next();
 });
+
+villageSchema.pre('find', function (next) {
+  let now = new Date();
+  console.log(Math.abs(now - this.updatedAt) / 1000);
+  //Call updateresources
+  next();
+});
+
+villageSchema.methods.updateResources = function () {
+  return bcrypt.compare(password, this.password);
+};
 
 const Village = model('Village', villageSchema);
 

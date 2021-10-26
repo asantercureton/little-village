@@ -1,4 +1,4 @@
-const { roundNum, getRandom, getLimit } = require('./helpers');
+const { roundNum, getRandom, getLimit, shuffleArray } = require('./helpers');
 
 const getAbundance = () => {
     const max = 4.0;
@@ -19,7 +19,7 @@ const getAbundance = () => {
     }
 };
 
-const createVillage = (user) => { //this is run with every new user to create their starter village
+const createVillage = (user, level) => { //this is run with every new user to create their starter village
     return {
         population: 2,
         abundanceOfResources: getAbundance(),
@@ -35,7 +35,8 @@ const createVillage = (user) => { //this is run with every new user to create th
             gold: 0,
             wood: 0
         },
-        user
+        user,
+        level
     }
 }
 

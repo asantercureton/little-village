@@ -17,8 +17,6 @@ const levelSchema = new Schema({
     type: String
   },
   levelUpCost: {
-    fruit: Number,
-    meat: Number,
     gold: Number,
     wood: Number
   }

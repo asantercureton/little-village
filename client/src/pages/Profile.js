@@ -16,29 +16,40 @@ const Profile = () => {
   
   const gameLoop = () => {
     let loopResources = resources; 
-    loopResources.wood += 1;
+    let now = new Date();
+    let deltaTime = Math.abs(now - lastUpdate) / 1000;
+    console.log(deltaTime)
+    loopResources.wood += 1 * deltaTime;
 
     setResources({
       fruit: 0,
       meat: 0,
       gold: 0,
-      wood: loopResources.wood
+      wood: Math.round(loopResources.wood*10)/10
     })
-    console.log(resources)
+    lastUpdate = new Date();
   }
 
   useEffect(() => { 
 
     if(!loading){
       if (!gameLoopInit) { //set resources to correct amount 
-        let {amountOfResources: resourceCount} = user.village;
+        let {amountOfResources: resourceCount, unitAllocation} = user.village;
+        console.log(unitAllocation)
         setResources({
+          fruit: resourceCount.fruit,
+          meat: resourceCount.meat,
+          gold: resourceCount.gold,
+          wood: resourceCount.wood
+        });
+        setWorkers({
           fruit: resourceCount.fruit,
           meat: resourceCount.meat,
           gold: resourceCount.gold,
           wood: resourceCount.wood
         })
         setGameLoopInit(true);
+        lastUpdate = new Date();
         var gameLoopTimer = setInterval(gameLoop, 500);
       }
 
@@ -46,13 +57,24 @@ const Profile = () => {
 
     }
   });
-  
+
+
+  //game variables and states
+  var lastUpdate;
+
   const [resources, setResources] = useState({
     fruit: 0,
     meat: 0,
     gold: 0,
     wood: 0
   }); //set up the resources state, which will be used to get the resources from the server and update them. will be an object with keys for each resource
+
+  const [workers, setWorkers] = useState({ //how many workers for each resource
+    fruit: 0,
+    meat: 0,
+    gold: 0,
+    wood: 0
+  });
 
   const [gameLoopInit, setGameLoopInit] = useState(false); //have we set up the game loop? 
 

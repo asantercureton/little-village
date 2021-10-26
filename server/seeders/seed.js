@@ -1,9 +1,10 @@
 const db = require('../config/connection');
-const { User, Village, Trade, Level } = require('../models');
+const { User, Village, Trade, Level, Upgrade } = require('../models');
 const userSeeds = require('./userSeeds.json');
 const villageSeeds = require('./villageSeeds.json');
 const tradeSeeds = require('./tradeSeeds.json')
 const levelSeeds = require('./levelSeeds.json');
+const upgradeSeeds = require('./upgradeSeeds.json');
 const { createVillage } = require('../utils/villageMethods');
 
 db.once('open', async () => {
@@ -16,6 +17,8 @@ db.once('open', async () => {
     await Trade.create(tradeSeeds);
     await Level.deleteMany({});
     await Level.create(levelSeeds);
+    await Upgrade.deleteMany({});
+    await Upgrade.create(upgradeSeeds);
 
     // test users for each level
     const seedsArr = ['tribe', 'hamlet', 'village', 'town', 'citystate', 'kingdom'];

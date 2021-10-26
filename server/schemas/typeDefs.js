@@ -18,6 +18,7 @@ const typeDefs = gql`
     user: User
     trades: [Trade]
     level: Level
+    upgrades: UpgradeObject
   }
 
   type Trade {
@@ -38,6 +39,14 @@ const typeDefs = gql`
     levelUpCost: ResourceObject
   }
 
+  type Upgrade {
+    _id: ID
+    name: String
+    resource: String
+    summary: String
+    cost: ResourceObject
+  }
+
   type tradeObject { #an object containing the amount and resource. used for buying / selling in trades
     amount: Int
     resource: String
@@ -48,6 +57,13 @@ const typeDefs = gql`
     meat: Float
     gold: Float
     wood: Float
+  }
+
+  type UpgradeObject {
+    fruit: [Upgrade]
+    meat: [Upgrade]
+    gold: [Upgrade]
+    wood: [Upgrade]
   }
 
   type Auth {
@@ -62,6 +78,7 @@ const typeDefs = gql`
     villages: [Village]
     trades: [Trade]
     levels: [Level]
+    upgrades: Upgrade
   }
 
   type Mutation {

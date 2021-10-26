@@ -1,7 +1,32 @@
 [
   {
-    "username": "testuser",
-    "email": "test@user.com",
-    "password": "password1234"
+    "username": "tribe",
+    "email": "tribe@email.com",
+    "password": "tribe1234"
+  },
+  {
+    "username": "hamlet",
+    "email": "hamlet@email.com",
+    "password": "hamlet1234"
+  },
+  {
+    "username": "village",
+    "email": "village@email.com",
+    "password": "village1234"
+  },
+  {
+    "username": "town",
+    "email": "town@email.com",
+    "password": "town1234"
+  },
+  {
+    "username": "citystate",
+    "email": "citystate@email.com",
+    "password": "citystate1234"
+  },
+  {
+    "username": "kingdom",
+    "email": "kingdom@email.com",
+    "password": "kingdom1234"
   }
 ]

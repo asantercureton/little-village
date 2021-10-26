@@ -8,7 +8,10 @@ const { createTrade, executeTrade } = require('../utils/tradeMethods');
 const resolvers = {
   Query: {
     users: async () => {
-      return User.find().populate('village');
+      return User.find().populate('village').populate({
+        path: 'villages',
+        populate: 'level' //look at plural levels instead maybe add a query for this, if it does not work
+      });
     },
     user: async (_, args) => {
       return User.findOne({ _id: args.id });
@@ -23,7 +26,10 @@ const resolvers = {
       return Village.find().populate('trades').populate('user').populate('level').populate('upgrades');
     },
     trades: async () => {
-      return await Trade.find().populate('villages');
+      return await Trade.find().populate('villages').populate({
+        path: 'villages',
+        populate: 'user'
+      });
     },
     levels: async () => {
       return await Level.find();

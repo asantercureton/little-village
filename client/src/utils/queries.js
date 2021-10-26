@@ -45,6 +45,10 @@ export const QUERY_TRADES = gql`
       amount
       village {
         _id
+        user {
+          _id
+          username
+        }
       }
     }
   }

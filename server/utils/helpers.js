@@ -25,10 +25,15 @@ function getTimePassed(update, lastUpdate) {
     return update - lastUpdate;
 }
 
+const getEfficiency = (upgrades) => {
+    return 1 + (0.5 * upgrades.length);
+}
+
 module.exports = {
     roundNum,
     getRandom,
     getLimit,
     shuffleArray,
-    getTimePassed
+    getTimePassed,
+    getEfficiency
 };

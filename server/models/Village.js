@@ -39,6 +39,32 @@ const villageSchema = new Schema({
     type: Schema.Types.ObjectId,
     ref: "Level"
   },
+  upgrades: {
+    fruit: [
+      {
+        type: Schema.Types.ObjectId,
+        ref: "Upgrade"
+      }
+    ],
+    meat: [
+      {
+        type: Schema.Types.ObjectId,
+        ref: "Upgrade"
+      }
+    ],
+    gold: [
+      {
+        type: Schema.Types.ObjectId,
+        ref: "Upgrade"
+      }
+    ],
+    wood: [
+      {
+        type: Schema.Types.ObjectId,
+        ref: "Upgrade"
+      }
+    ]
+  }
 },
 { timestamps: true }
 );

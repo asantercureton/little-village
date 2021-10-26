@@ -1,13 +1,16 @@
 //THIS FILE IS RESPONSIBLE FOR RUNNING LOGIC EVERY SECOND BASED ON THE PRODUCTION RATES OF EVERY VILLAGE
 const { Village } = require('../models');
-const { roundNum } = require('../utils/helpers');
-
-const rate = 1;
+const { roundNum, getEfficiency } = require('../utils/helpers');
 
 // TODO: needs to specifically reference This Village
 function getResource(resource) {
     if (Village.unitAllocation[resource] > 0) {
-        const harvest = (rate * Village.unitAllocation[resource]) * Village.abundanceOfResources[resource];
+        const rate = Village.level.productionRate;
+        const efficiency = getEfficiency(Village.upgrades[resource]);
+        const workers = Village.unitAllocation[resource];
+        const abundance = Village.abundanceOfResources[resource];
+
+        const harvest = (rate * efficiency) * workers * abundance;
         const timePassed = getTimePassed(5, 1); // temp variables
         const production = roundNum(harvest * timePassed);
 

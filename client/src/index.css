@@ -71,13 +71,18 @@ header h1:hover {
   justify-content: space-between;
 }
 
+.form-label {
+  margin-right: 15px;
+}
+
 .jumbotron {
   background-color: var(--grey);
   color: rgb(10, 34, 85);
-  font-size: 175%;
+  font-size: 200%;
   display: flex;
   justify-content: center;
   margin-bottom: 50px;
+  text-align: -webkit-center;
 }
 
 .leaderboard {
@@ -102,7 +107,6 @@ header h1:hover {
   min-width: 150px;
   justify-content: center;
   width: 150px;
-
 }
 
 /* Active-Button */
@@ -204,6 +208,8 @@ header h1:hover {
   background-color: rgb(192, 192, 28);
   font-size: 150%;
   border-radius: 10px;
+  margin-top: 20px;
+
 }
 
 #signup-btn:hover {
@@ -221,6 +227,8 @@ header h1:hover {
   background-color: rgb(165, 28, 192);
   font-size: 150%;
   border-radius: 10px;
+  margin-top: 20px;
+
 }
 
 #login-btn:hover {

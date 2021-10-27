@@ -89,6 +89,10 @@ const addPopulation = (village, level) => {
 };
 
 const buyUpgrade = (village, upgrade) => {
+    if(village.upgrades[upgrade.resource].includes(upgrade)) {
+        return village;
+    }
+
     let arr = [];
     Object.keys(upgrade.cost).forEach(key => {
         arr.push(key);

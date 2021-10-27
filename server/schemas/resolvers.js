@@ -105,7 +105,7 @@ const resolvers = {
       const addPop = addPopulation(village, level[0]);
       await Village.updateOne(
         { _id: user.village }, 
-        { amountOfResources: update.amountOfResources,
+        { amountOfResources: addPop.amountOfResources,
           population: addPop.population }
       );
       village.save();
@@ -116,7 +116,15 @@ const resolvers = {
       const village = await Village.findById(user.village);
       village.save();
       const upgrade = await Upgrade.findById(args.upgradeId);
-      console.log(buyUpgrade(village, upgrade));
+      const newUpg = buyUpgrade(village, upgrade);
+      console.log(newUpg.upgrades.gold.length);
+      await Village.updateOne(
+        { _id: user.village }, 
+        { amountOfResources: newUpg.amountOfResources,
+          upgrades: newUpg.upgrades }
+      );
+      village.save();
+      return village;
     }
   }
 };

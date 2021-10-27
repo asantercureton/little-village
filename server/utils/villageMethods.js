@@ -88,10 +88,29 @@ const addPopulation = (village, level) => {
     return village;
 };
 
+const buyUpgrade = (village, upgrade) => {
+    let arr = [];
+    Object.keys(upgrade.cost).forEach(key => {
+        arr.push(key);
+    });
+    const afford = getAfford(arr, village.amountOfResources, upgrade.cost);
+    if(afford){
+        for(let i = 0; i < arr.length; i++) {
+            let resource = arr[i];
+            let amount = village.amountOfResources[resource];
+            let cost = upgrade.cost[resource];
+            village.amountOfResources[resource] = roundNum(amount - cost);
+        };
+        village.upgrades[upgrade.resource].push(upgrade);
+    }
+    return village;
+};
+
 module.exports = {
     createVillage,
     getAbundance,
     getAfford,
     levelUp,
-    addPopulation
+    addPopulation,
+    buyUpgrade
 }

@@ -2,7 +2,7 @@ const { AuthenticationError } = require('apollo-server-express');
 const { User, Village, Trade, Level, Upgrade } = require('../models');
 
 const { signToken } = require('../utils/auth');
-const { createVillage, levelUp, addPopulation } = require('../utils/villageMethods');
+const { createVillage, levelUp, addPopulation, buyUpgrade } = require('../utils/villageMethods');
 const { createTrade, executeTrade } = require('../utils/tradeMethods');
 
 const resolvers = {
@@ -111,10 +111,12 @@ const resolvers = {
       village.save();
       return village;
     },
-    buyUpgrades: async (_, args) => {
+    buyUpgrade: async (_, args) => {
       const user = await User.findById(args.userId);
       const village = await Village.findById(user.village);
       village.save();
+      const upgrade = await Upgrade.findById(args.upgradeId);
+      console.log(buyUpgrade(village, upgrade));
     }
   }
 };

@@ -66,7 +66,6 @@ header {
   align-items: center;
   flex-wrap: wrap;
   padding-left: 25px;
-
 }
 
 header a {
@@ -86,6 +85,7 @@ header a:hover {
   border: 3px solid rgba(151, 124, 3, 0.5);
   border-radius: 5px;
 }
+
 #newWorld {
   font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
 }
@@ -124,7 +124,7 @@ footer {
   color: var(--brown);
   background-image: url("../src/img/leaderboard.jpg");
   flex-shrink: inherit;
-
+  display: flex;
 }
 
 .play-btn {
@@ -431,3 +431,30 @@ footer {
   text-decoration: none;
 }
 
+/* @media screen and (max-width: 505px) { 
+  main {
+    padding-top: 225px;
+  }
+
+  .singleStory {
+    font-size: 150%;
+  }
+
+}
+
+@media screen and (max-width: 768px) {
+  .fixed-top {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    position: static;
+  }
+
+  main {
+    padding-top: 20px;
+  }
+
+  .singleStory {
+    font-size: 250%;
+  }
+} */

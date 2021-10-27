@@ -8,6 +8,10 @@
         "levelUpCost": {
             "gold": 10,
             "wood": 10
+        },
+        "buyPopulation": {
+            "fruit": 10,
+            "meat": 10
         }
     },
     {
@@ -19,6 +23,10 @@
         "levelUpCost": {
             "gold": 50,
             "wood": 50
+        },
+        "buyPopulation": {
+            "fruit": 25,
+            "meat": 25
         }
     },
     {
@@ -30,6 +38,10 @@
         "levelUpCost": {
             "gold": 100,
             "wood": 100
+        },
+        "buyPopulation": {
+            "fruit": 50,
+            "meat": 50
         }
     },
     {
@@ -41,6 +53,10 @@
         "levelUpCost": {
             "gold": 250,
             "wood": 250
+        },
+        "buyPopulation": {
+            "fruit": 100,
+            "meat": 100
         }
     },
     {
@@ -52,6 +68,10 @@
         "levelUpCost": {
             "gold": 500,
             "wood": 500
+        },
+        "buyPopulation": {
+            "fruit": 175,
+            "meat": 175
         }
     },
     {
@@ -63,6 +83,10 @@
         "levelUpCost": {
             "gold": 0,
             "wood": 0
+        },
+        "buyPopulation": {
+            "fruit": 250,
+            "meat": 250
         }
     }
 ]

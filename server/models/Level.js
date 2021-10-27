@@ -19,6 +19,10 @@ const levelSchema = new Schema({
   levelUpCost: {
     gold: Number,
     wood: Number
+  },
+  buyPopulation: {
+    fruit: Number,
+    meat: Number
   }
 });
 

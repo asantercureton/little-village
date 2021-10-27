@@ -101,7 +101,8 @@ const resolvers = {
       const user = await User.findById(args.userId);
       const village = await Village.findById(user.village);
       village.save();
-      const addPop = addPopulation(village);
+      const level = await Level.find({ level: village.level });
+      const addPop = addPopulation(village, level[0]);
       await Village.updateOne(
         { _id: user.village }, 
         { population: addPop.population }

@@ -37,6 +37,7 @@ const typeDefs = gql`
     productionRate: Float
     image: String
     levelUpCost: ResourceObject
+    buyPopulation: ResourceObject
   }
 
   type Upgrade {

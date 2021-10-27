@@ -70,9 +70,21 @@ const levelUp = (village, level) => {
     return village;
 };
 
-const addPopulation = (village) => {
-    // TODO: need to establish price for population at each level
-    village.population += 1;
+const addPopulation = (village, level) => {
+    let arr = [];
+    Object.keys(level.buyPopulation).forEach(key => {
+        arr.push(key);
+    });
+    const afford = getAfford(arr, village.amountOfResources, level.buyPopulation);
+    if(afford){
+        for(let i = 0; i < arr.length; i++) {
+            let resource = arr[i];
+            let amount = village.amountOfResources[resource];
+            let cost = level.buyPopulation[resource];
+            village.amountOfResources[resource] = roundNum(amount - cost);
+        };
+        village.population += 1;
+    }
     return village;
 };
 

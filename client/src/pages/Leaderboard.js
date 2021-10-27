@@ -34,48 +34,34 @@ const Leaderboard = () => {
 
   return (
     <main>
-      <div>
-        <table className="table table-hover leaderboard">
-          <thead>
-            <tr>
-              <th scope="col">#</th>
-              <th scope="col">Username</th>
-              <th scope="col">Village</th>
-              <th scope="col">Status</th>
-              <th scope="col">Population</th>
-              <th scope="col">Resources</th>
-            </tr>
-          </thead>
+      <div className="box">
+        <div className="card">
+          <section className="leaderboard overflow-auto">
+            <table className="table table-hover">
+              <thead>
+                <tr>
+                  <th scope="col">#</th>
+                  <th scope="col">Username</th>
+                  <th scope="col">Village</th>
+                  <th scope="col">Population</th>
+                  <th scope="col">Resources</th>
+                </tr>
+              </thead>
 
-          <tbody>
-            {villages.map((village) => (
-            <tr>
-              <th scope="row">1</th>
-              <td>{village.user.username}</td>
-              <td>{village.user.__typename}</td>
-              <td>{village.user.__typename}</td>
-              <td>{village.population}</td>
-              <td>{village.amountOfResources.fruit}</td>
-            </tr>
-            ))}
-            <tr>
-              <th scope="row">2</th>
-              <td>Username</td>
-              <td>Village</td>
-              <td>Status</td>
-              <td>Population</td>
-              <td>Resources</td>
-            </tr>
-            <tr>
-              <th scope="row">3</th>
-              <td>Username</td>
-              <td>Village</td>
-              <td>Status</td>
-              <td>Population</td>
-              <td>Resources</td>
-            </tr>
-          </tbody>
-        </table>
+              <tbody>
+                {villages.map((village) => (
+                  <tr>
+                    <td>1</td>
+                    <td>{village.user.username}</td>
+                    <td>{village.user.__typename}</td>
+                    <td>{village.population}</td>
+                    <td>{village.amountOfResources.fruit}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </section>
+        </div>
       </div>
     </main>
   );

@@ -121,18 +121,22 @@ const resolvers = {
       village.save();
       const upgrade = await Upgrade.findById(args.upgradeId);
       const newUpg = buyUpgrade(village, upgrade);
-      await Village.updateOne(
-        { _id: user.village },
+      await village.update(
         {
           amountOfResources: newUpg.amountOfResources,
-          upgrades: {
-            $push: {
-              gold: newUpg.upgrades.gold,
-              fruit: newUpg.upgrades.fruit,
-              meat: newUpg.upgrades.meat,
-              wood: newUpg.upgrades.wood
-            }
+          $addToSet: {
+            'upgrades.fruit': newUpg.upgrades.fruit
+          },
+          $addToSet: {
+            'upgrades.meat': newUpg.upgrades.meat
+          },
+          $addToSet: {
+            'upgrades.gold': newUpg.upgrades.gold
+          },
+          $addToSet: {
+            'upgrades.wood': newUpg.upgrades.wood
           }
+
         }
       );
       village.save();

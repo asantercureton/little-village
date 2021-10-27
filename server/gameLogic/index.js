@@ -7,7 +7,6 @@ function getResource(village, time, resource) {
         const workers = 2;
         // const workers = village.unitAllocation[resource];
         const efficiency = getEfficiency(village.upgrades[resource]);
-        console.log('eff', efficiency);
         const abundance = village.abundanceOfResources[resource];
 
         const harvest = (rate * efficiency) * workers * abundance;

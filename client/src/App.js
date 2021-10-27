@@ -16,6 +16,7 @@ import Leaderboard from './pages/Leaderboard';
 import Tradeboard from './pages/Tradeboard';
 import Header from './components/Header';
 import Footer from './components/Footer';
+import TradeForm from './pages/TradeForm';
 
 // Construct our main GraphQL API endpoint
 const httpLink = createHttpLink({
@@ -68,6 +69,9 @@ function App() {
             </Route>
             <Route exact path="/tradeboard">
               <Tradeboard />
+            </Route>
+            <Route exact path="/tradeform">
+              <TradeForm />
             </Route>
           </div>
           <Footer />

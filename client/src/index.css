@@ -165,6 +165,15 @@ footer {
   color: whitesmoke;
 }
 
+.row2 {
+  text-align: center;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  padding: 20px;
+  margin: 10px;
+}
+
 .villageCard {
   background-image: url("../src/img/backtest.jpg");
   color: whitesmoke;
@@ -263,6 +272,27 @@ footer {
   margin-top: -35px;
 }
 
+.multiplier {
+  padding: 30px;
+}
+
+.multiplier > label {
+  padding: 10px;
+  font-size: 80%;
+}
+
+.labelTrade {
+  margin-right: 10px;
+}
+
+.tradeTitle {
+  padding: 20px;
+}
+
+.xbox {
+  width: 8%;
+}
+
 .card-title {
   font-size: 150%;
 }
@@ -329,6 +359,58 @@ footer {
   transform: scale(1.05);
   text-decoration: none;
 }
+
+.createTrade-btn {
+  color: rgb(255, 255, 255);
+  background-color: rgb(36, 1, 231);
+  font-size: 100%;
+  border-radius: 27px;
+  padding: 10px;
+  margin: 10px;
+  width: 150px;
+  padding: 15px;
+  margin-bottom: 25px;
+}
+
+.createTrade-btn:hover {
+  color: rgb(134, 76, 0);
+  background-color: rgb(255, 255, 255);
+  cursor: pointer;
+  box-shadow: 0px 0px 8px 1px var(--yellow);
+  transition: .5s ease;
+  transform: scale(1.05);
+  text-decoration: none;
+}
+.trade-btn {
+  color: whitesmoke;
+  background-color: rgb(28, 119, 0);
+  font-size: 75%;
+  border-radius: 30px;
+  /* padding: 10px; */
+  margin: 10px;
+  width: auto;
+  padding: 15px;
+}
+
+.trade-btn:hover {
+  color: rgb(134, 76, 0);
+  background-color: rgb(255, 255, 255);
+  cursor: pointer;
+  box-shadow: 0px 0px 8px 1px var(--yellow);
+  transition: .5s ease;
+  transform: scale(1.05);
+  text-decoration: none;
+}
+
+.form-group > label {
+  margin-right: 25px;
+  padding: 10px;
+}
+
+.amount {
+  padding: 10px;
+}
+
 .worker-btn {
   color: whitesmoke;
   background-color: rgb(163, 108, 5);

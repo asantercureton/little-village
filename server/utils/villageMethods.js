@@ -38,10 +38,24 @@ const createVillage = (user, level) => { //this is run with every new user to cr
         user,
         level
     }
-}
+};
+
+const levelUp = (village, level) => {
+    let wood = village.amountOfResources.wood;
+    let gold = village.amountOfResources.gold;
+    let costWood = level.levelUpCost.wood;
+    let costGold = level.levelUpCost.gold;
+    if((wood >= costWood) && (gold >= costGold)) {
+        village.amountOfResources.wood = roundNum(wood - costWood);
+        village.amountOfResources.gold = roundNum(gold - costGold);
+        village.level += 1;
+    }
+    return village;
+};
 
 
 module.exports = {
     createVillage,
-    getAbundance
+    getAbundance,
+    levelUp
 }

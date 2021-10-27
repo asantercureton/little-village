@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import '../../../src/index.css'
 
 import Auth from '../../utils/auth';
 
@@ -11,42 +12,41 @@ function Navbar() {
 
   if (Auth.loggedIn()) {
     return (
-      <>
-      <Link to="/me">
+      <nav className ="header nav"> 
+      <Link to="/me" >
           {Auth.getProfile().data.username}'s profile
         </Link>
      
-      <Link to="/leaderboard">
+      <Link to="/leaderboard" >
           Leaderboard
         </Link>
      
-      <Link to="/tradeboard">
+      <Link to="/tradeboard" >
           Tradeboard
         </Link>
       
       <button onClick={logout}>
           Logout
         </button>   
-      </>
+      </nav>
     );
   }
   // If logged out show login controls
   return (
-    <>
-
-    <Link to="/login">
+    <nav className ="header nav ">
+    <Link to="/login" >
           Login
         </Link>
     
-    <Link to="/signup">
+    <Link to="/signup" >
           Signup
         </Link>
    
-    <Link to="/leaderboard">
+    <Link to="/leaderboard" >
           Leaderboard
         </Link>
        
-    </>
+    </nav>
   )
 }
 

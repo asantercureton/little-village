@@ -169,107 +169,79 @@ const Profile = () => {
     <div className="wrapper">
       <div className="jumbotron jumbotron-fluid">
 
-        <div className="container profileTable">
-          <h1 className="display-4 tableTitle">{user.username}'s Village.</h1>
+        <div className="profileTable">
+          <section>
+            <h1 className="display-4 tableTitle">{user.username}'s Village.</h1>
 
-          <table className="table table-hover">
+            <table className="table table-hover">
 
-            <tbody className="rows">
-              <tr className="cell">
-                <th scope="row">STATUS:</th>
-                <td>TRIBE</td>
-              </tr>
-              <tr className="cell">
-                <th scope="row">POPULATION:</th>
-                <td>{user.village.population}</td>
-              </tr>
-              <tr className="cell">
-                <th scope="row">FRUITS:</th>
-                <td>{resources.fruit}</td>
-              </tr>
-              <tr className="cell">
-                <th scope="row">GOLD:</th>
-                <td>{resources.gold}</td>
-              </tr>
-              <tr className="cell">
-                <th scope="row">MEAT:</th>
-                <td>{resources.meat}</td>
-              </tr>
-              <tr className="cell">
-                <th scope="row">WOOD:</th>
-                <td>{resources.wood}</td>
-              </tr>
-              <tr className="cell">
-                <th scope="row"># of TRADES:</th>
-                <td>3</td>
-              </tr>
-            </tbody>
-          </table>
-          <div>
-            <button type="submit" className="btn trade-btn" id="trade-btn">REQUEST A TRADE!</button>
+              <tbody className="rows">
+                <tr className="cell">
+                  <th scope="row">POPULATION:</th>
+                  <td>{user.village.population}</td>
+                </tr>
+                <tr className="cell">
+                  <th scope="row">FRUITS:</th>
+                  <td>{resources.fruit}</td>
+                </tr>
+                <tr className="cell">
+                  <th scope="row">GOLD:</th>
+                  <td>{resources.gold}</td>
+                </tr>
+                <tr className="cell">
+                  <th scope="row">MEAT:</th>
+                  <td>{resources.meat}</td>
+                </tr>
+                <tr className="cell">
+                  <th scope="row">WOOD:</th>
+                  <td>{resources.wood}</td>
+                </tr>
+                <tr className="cell">
+                  <th scope="row"># of TRADES:</th>
+                  <td>3</td>
+                </tr>
+              </tbody>
+            </table>
+          </section>
+          <div className="imageCard">
+            <h1>Image</h1>
           </div>
         </div>
-        <div className="panels">
-          <div className="workPanel">
-            <div>
-              <div className="card-body3">
-                <h5 className="card-title"><strong>Assign Workers</strong></h5>
 
-                <p className="card-text">Reallocate the workload</p>
-
-
-                <p>FARMERS:
-                  <div className="input-group"><button className="btn btn-decrement btn-outline-secondary btn-minus" type="button"><strong>−</strong></button><input type="text" inputmode="decimal" placeholder={workers.fruit}></input><button className="btn btn-increment btn-outline-secondary btn-plus" type="button"><strong>+</strong></button></div>
-                </p>
-                <p>HUNTERS:
-                  <div className="input-group  "><button className="btn btn-decrement btn-outline-secondary btn-minus" type="button"><strong>−</strong></button><input type="text" inputmode="decimal" placeholder={workers.meat} /><button className="btn btn-increment btn-outline-secondary btn-plus" type="button"><strong>+</strong></button></div>
-                </p>
-                <p>MINERS:
-                  <div className="input-group  "><button className="btn btn-decrement btn-outline-secondary btn-minus" type="button"><strong>−</strong></button><input type="text" inputmode="decimal" placeholder={workers.gold} /><button className="btn btn-increment btn-outline-secondary btn-plus" type="button"><strong>+</strong></button></div>
-                </p>
-                <p>LUMBERJACKS:
-                  <div className="input-group  "><button id="wood" className="btn btn-decrement btn-outline-secondary btn-minus" type="button" onClick={subtractWorker}><strong id="wood">−</strong></button><input type="text" inputmode="decimal" placeholder={workers.wood} /><button id="wood" className="btn btn-increment btn-outline-secondary btn-plus" type="button" onClick={addWorker}><strong id="wood">+</strong></button></div>
-                </p>
-
-                <div>
-                  <p>POPULATION: {user.village.population}</p>
-                  <p>UNASSIGNED: {user.village.population}</p>
-                </div>
-
-               
-              </div>
+        <div className="manageBox">
+          <div className="cardManage">
+            <h1>Manage Village</h1>
+            <div className="buttons">
+            <button type="submit" className="btn manage-btn" id="manage-btn">INCREASE POPULATION</button>
+            <button type="submit" className="btn manage-btn" id="manage-btn">ASSIGN WORKERS</button>
+            <button type="submit" className="btn manage-btn" id="manage-btn">PURCHASE UPGRADES</button>
+            <button type="submit" className="btn manage-btn" id="manage-btn">LEVEL UP!</button>
+            <button type="submit" className="btn manage-btn" id="manage-btn">REQUEST A TRADE!</button>
             </div>
           </div>
+          <div className="abCard">
+            <h4>Abundance Of Resources</h4>
+            <table className="table table-hover">
 
-          <div className="purchasePanel">
-            <div>
-              <div className="card-body4">
-                <h5 className="card-title"><strong>Purchase Upgrades</strong></h5>
-                <h2 className="card-text">Make a Purchase</h2>
-                <tbody>
-                  <tr className="cell">
-                    <th scope="row">FRUIT:</th>
-                    <td>{resources.fruit}/3 Owned</td>
-                    <button type="submit" className="btn trade-btn" id="worker-btn">BUY</button>
-                  </tr>
-                  <tr className="cell">
-                    <th scope="row">GOLD:</th>
-                    <td>{resources.gold}/3 Owned</td>
-                    <button type="submit" className="btn trade-btn" id="worker-btn">BUY</button>
-                  </tr>
-                  <tr className="cell">
-                    <th scope="row">MEAT:</th>
-                    <td>{resources.meat}/3 Owned</td>
-                    <button type="submit" className="btn trade-btn" id="worker-btn">BUY</button>
-                  </tr>
-                  <tr className="cell">
-                    <th scope="row">WOOD:</th>
-                    <td>{resources.wood}/3 Owned</td>
-                    <button type="submit" className="btn trade-btn" id="worker-btn">BUY</button>
-                  </tr>
-                </tbody>
-              </div>
-            </div>
+              <tbody className="rows2">
+                <tr className="cell">
+                  <th scope="row">FRUITS:</th>
+                  <td>{resources.fruit} #/sec</td>
+                </tr>
+                <tr className="cell">
+                  <th scope="row">GOLD:</th>
+                  <td>{resources.gold} #/sec</td>
+                </tr>
+                <tr className="cell">
+                  <th scope="row">MEAT:</th>
+                  <td>{resources.meat} #/sec</td>
+                </tr>
+                <tr className="cell">
+                  <th scope="row">WOOD:</th>
+                  <td>{resources.wood} #/sec</td>
+                </tr>
+              </tbody>
+            </table>
           </div>
         </div>
       </div>

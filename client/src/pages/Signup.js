@@ -48,16 +48,16 @@ const Signup = () => {
     }
     return (
       <form onSubmit={handleFormSubmit} id="login-form" className="card-body">
+          <label for="username-input-login">Username:</label>
         <div>
-          <label for="username-input-login">Username</label>
           <input name="username" value={formState.name} onChange={handleChange} type="text" id="username-input-login" />
         </div>
+          <label for="email-input-login">Email:</label>
         <div>
-          <label for="email-input-login">Email</label>
           <input name="email" value={formState.email} onChange={handleChange} type="text" id="email-input-login" />
         </div>
+          <label for="password-input-login" className="form-label">Password:</label>
         <div>
-          <label for="password-input-login" className="form-label">Password</label>
           <input name="password" value={formState.password} onChange={handleChange} type="password" id="password-input-login" />
         </div>
         <button type="submit" className="btn" id="signup-btn">SignUp</button>

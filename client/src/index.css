@@ -44,6 +44,9 @@ header {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  flex-wrap: wrap;
+  padding-left: 25px;
+
 }
 
 header a {
@@ -66,9 +69,8 @@ header h1:hover {
   cursor: pointer;
 }
 
-.nav {
-  display: flex;
-  justify-content: space-between;
+.img{
+  max-height: 50px;
 }
 
 .form-label {
@@ -89,6 +91,8 @@ header h1:hover {
   background-color: rgba(243, 171, 16, 0.911);
   color: var(--brown);
   background-image: url("../src/img/leaderboard.jpg");
+  flex-shrink: inherit;
+
 }
 
 .play-btn {

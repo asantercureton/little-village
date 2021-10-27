@@ -40,7 +40,8 @@ const Tradeboard = () => {
   return (
     <main>
       <div>
-        <table className="table table-hover leaderboard">
+        <section className="leaderboard overflow-auto">
+        <table className="table table-hover">
           <thead>
             <tr>
 
@@ -51,7 +52,7 @@ const Tradeboard = () => {
               <th scope="col">Amount Offered</th>
               <th scope="col">Resource Requested</th>
               <th scope="col">Amount Requested</th>
-              <button type="submit" className="btn login-btn" id="login-btn">Create Trade</button>
+
             </tr>
           </thead>
           <tbody>
@@ -73,6 +74,7 @@ const Tradeboard = () => {
             ))}
           </tbody>
         </table>
+        </section>
       </div>
     </main>
   );

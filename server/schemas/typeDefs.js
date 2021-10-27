@@ -86,6 +86,7 @@ const typeDefs = gql`
     login(email:String!, password:String!): Auth
     createTrade(userId:ID!, resourceSold: String!, amountSold: Int!, resourceBought: String!, amountBought: Int!, tradeAmount: Int!): Trade
     executeTrade(userId:ID!, tradeId: ID!): Trade
+    levelUp(userId:ID!): Village
   }
 `;
 

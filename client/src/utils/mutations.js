@@ -32,6 +32,14 @@ export const CREATE_TRADE = gql`
   }
 `;
 
+export const EXECUTE_TRADE = gql`
+  mutation executeTrade($userId: ID!, $tradeId: ID!) {
+    executeTrade(userId: $userId, tradeId: $tradeId) {
+      _id
+    }
+  }
+`;
+
 export const LEVEL_UP = gql`
   mutation levelUp($userId: ID!) {
     levelUp(userId: $userId) {

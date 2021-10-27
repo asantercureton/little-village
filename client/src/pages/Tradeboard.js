@@ -6,13 +6,13 @@ import Auth from '../utils/auth';
 
 import { QUERY_TRADES } from '../utils/queries';
 
-import UserList from '../components/UserList';
+
 
 
 const Tradeboard = () => {
   const { loading, data } = useQuery(QUERY_TRADES);
   const trades = data?.trades || [];
-
+  console.log('trade', trades);
   // const renderUserList = () => {
   //   if (loading) {
   //     return <h2>Loading...</h2>
@@ -34,8 +34,8 @@ const Tradeboard = () => {
     if (!Auth.loggedIn()) return null;
     return Auth.getTrade().data.trades;
   }
-
   console.log('trade', trades);
+
 
   return (
     <main>
@@ -44,50 +44,33 @@ const Tradeboard = () => {
           <thead>
             <tr>
 
-            <th scope="col">#</th>
-            <th scope="col">Username</th>
-            <th scope="col">Resource Offered</th>
-            <th scope="col">Amount Offered</th>
-            <th scope="col">Resource Requested</th>
-            <th scope="col">Amount Requested</th>
+              <th scope="col">#</th>
+              <th scope="col">Username</th>
+
+              <th scope="col">Resource Offered</th>
+              <th scope="col">Amount Offered</th>
+              <th scope="col">Resource Requested</th>
+              <th scope="col">Amount Requested</th>
+              <button type="submit" className="btn login-btn" id="login-btn">Create Trade</button>
             </tr>
           </thead>
           <tbody>
-            <tr>
-              <th scope="row">1</th>
 
-              <td>Username</td>
-              <td>Village</td>
-              <td>Resource Offered</td>
-              <td>Amount Offered</td>
-              <td>Resource Requested</td>
-              <td>Amount Requested</td>
-            </tr>
+
             {trades.map((trade) => (
-            <tr>
-              <th scope="row">2</th>
+              <tr>
+                <th scope="row"></th>
 
-            <td>User {trade._id} </td>
-            <td>Kingdom of Bethlehem {trade.village} </td>
-            <td>Offered {trade.selling.resource } </td>
-            <td> {trade.selling.amount} Stack</td>
-            <td>{trade.buying.resource}</td>
-            <td> {trade.amount } Chest</td>
-            </tr>
-          ))}
+                <td>User {trade.village.user.username}   </td>
 
-{trades.map((trade) => (
-            <tr>
-              <th scope="row">3</th>
+                <td>Offered {trade.selling.resource} </td>
+                <td> {trade.selling.amount} Stack</td>
+                <td>{trade.buying.resource}</td>
+                <td> {trade.amount} Chest</td>
+                <button type="submit" className="btn login-btn" id="login-btn">Accept Trade</button>
 
-            <td>User {trade._id} </td>
-            <td>Kingdom of Solomon {trade.village} </td>
-            <td>Offered {trade.selling.resource } </td>
-            <td> {trade.selling.amount} Stack</td>
-            <td>{trade.buying.resource}</td>
-            <td> {trade.amount } Chest</td>
-            </tr>
-          ))}
+              </tr>
+            ))}
           </tbody>
         </table>
       </div>

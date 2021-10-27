@@ -23,8 +23,8 @@ const resolvers = {
       return Village.find().populate('trades').populate('user').populate('upgrades');
     },
     trades: async () => {
-      return await Trade.find().populate('villages').populate({
-        path: 'villages',
+      return await Trade.find().populate('village').populate({
+        path: 'village',
         populate: 'user'
       });
     },

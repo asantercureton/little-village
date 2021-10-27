@@ -1,13 +1,3 @@
 [
-    {
-        "selling": {
-            "amount": 1,
-            "resource": "wood"
-        },
-        "buying": {
-            "amount": 1,
-            "resource": "gold"
-        },
-        "amount": 3 
-    }
+
   ]

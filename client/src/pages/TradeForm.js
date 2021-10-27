@@ -17,9 +17,9 @@ const TradeForm = () => {
 
     const [formState, setFormState] = useState({
         userId: user._id,
-        resourceSold: '',
+        resourceSold: 'fruit',
         amountSold: '',
-        resourceBought: '',
+        resourceBought: 'fruit',
         amountBought: '',
         tradeAmount: ''
     });
@@ -36,9 +36,10 @@ const TradeForm = () => {
     };
 
     const handleFormSubmit = async (event) => {
+        console.log({ ...formState });
         event.preventDefault();
         try {
-            const { tradeData } = await createTrade({
+            const { createData } = await createTrade({
                 variables: { ...formState },
             });
 
@@ -48,9 +49,9 @@ const TradeForm = () => {
         // clear form values
         setFormState({
             userId: user._id,
-            resourceSold: '',
+            resourceSold: 'fruit',
             amountSold: '',
-            resourceBought: '',
+            resourceBought: 'fruit',
             amountBought: '',
             tradeAmount: ''
         });
@@ -89,10 +90,10 @@ const TradeForm = () => {
                     <label for="exampleInputEmail1">Resource Requested: </label>
                 </div>
                 <select name="resourceBought" value={formState.resourceBought} onChange={handleChange} className="form-control-sm" id="exampleFormControlSelect1">
-                    <option>Fruit</option>
-                    <option>Meat</option>
-                    <option>Gold</option>
-                    <option>Wood</option>
+                    <option value='fruit'>Fruit</option>
+                    <option value='meat'>Meat</option>
+                    <option value='gold'>Gold</option>
+                    <option value='wood'>Wood</option>
                 </select>
 
                 <div>

@@ -16,7 +16,7 @@ const Profile = () => {
 
   const gameLoop = () => { //TODO: Rework gameloop to render not based on time since last frame, but time since the information was refreshed
     let loopResources = resources;
-    
+
     let now = new Date();
     let deltaTime = Math.abs(now - lastUpdate) / 1000;
     let { abundanceOfResources } = user.village;
@@ -24,7 +24,7 @@ const Profile = () => {
       loopResources[resource] += workers[resource] * abundanceOfResources[resource] * deltaTime;
       console.log(workers[resource])
     }
-    
+
 
     setResources({
       fruit: Math.round(loopResources.fruit * 10) / 10,
@@ -125,15 +125,17 @@ const Profile = () => {
     if (id) return null;
     return (
       <ul>
-        <p><strong>username:</strong> {user.username}</p>
-        <p><strong>email:</strong> {user.email}</p>
+        <h3>Username:</h3>
+        <p>{user.username}</p>
+        <h3>Email:</h3>
+        <p>{user.email}</p>
       </ul>
     );
   }
 
   const addWorker = async (e) => {
     let tempWorkers = workers;
-    let totalWorkers = 0; 
+    let totalWorkers = 0;
     console.log(workers)
     for (let r in workers) {
       totalWorkers += workers[r]
@@ -166,8 +168,9 @@ const Profile = () => {
   return (
     <div className="wrapper">
       <div className="jumbotron jumbotron-fluid">
-        <div className="container">
-          <h1 className="display-4 tableTitle">My Village.</h1>
+
+        <div className="container profileTable">
+          <h1 className="display-4 tableTitle">{user.username}'s Village.</h1>
 
           <table className="table table-hover">
 
@@ -206,78 +209,71 @@ const Profile = () => {
             <button type="submit" className="btn trade-btn" id="trade-btn">REQUEST A TRADE!</button>
           </div>
         </div>
-
-        <div className="sidePanel">
-          <div className="card2">
-            <div className="card-body2">
-              <h5 className="card-title"><strong>Village Name</strong></h5>
-              <p className="card-text">{renderCurrentUserInfo()}</p>
-
-            </div>
-          </div>
-        </div>
-      </div>
-      <div className="sidePanel">
-        <div>
-          <div className="card-body3">
-            <h5 className="card-title"><strong>Assign Workers</strong></h5>
-
-            <p className="card-text">Reallocate the workload</p>
-
-
-            <p>FARMERS:
-              <div className="input-group"><button className="btn btn-decrement btn-outline-secondary btn-minus" type="button"><strong>−</strong></button><input type="text" inputmode="decimal" placeholder={workers.fruit}></input><button className="btn btn-increment btn-outline-secondary btn-plus" type="button"><strong>+</strong></button></div>
-            </p>
-            <p>HUNTERS:
-              <div className="input-group  "><button className="btn btn-decrement btn-outline-secondary btn-minus" type="button"><strong>−</strong></button><input type="text" inputmode="decimal" placeholder={workers.meat} /><button className="btn btn-increment btn-outline-secondary btn-plus" type="button"><strong>+</strong></button></div>
-            </p>
-            <p>MINERS:
-              <div className="input-group  "><button className="btn btn-decrement btn-outline-secondary btn-minus" type="button"><strong>−</strong></button><input type="text" inputmode="decimal" placeholder={workers.gold} /><button className="btn btn-increment btn-outline-secondary btn-plus" type="button"><strong>+</strong></button></div>
-            </p>
-            <p>LUMBERJACKS:
-              <div className="input-group  "><button id="wood" className="btn btn-decrement btn-outline-secondary btn-minus" type="button" onClick={subtractWorker}><strong id="wood">−</strong></button><input type="text" inputmode="decimal" placeholder={workers.wood} /><button id="wood" className="btn btn-increment btn-outline-secondary btn-plus" type="button" onClick={addWorker}><strong id="wood">+</strong></button></div>
-            </p>
-
+        <div className="panels">
+          <div className="workPanel">
             <div>
-              <p>POPULATION: {user.village.population}</p>
-              <p>UNASSIGNED: {user.village.population}</p>
+              <div className="card-body3">
+                <h5 className="card-title"><strong>Assign Workers</strong></h5>
+
+                <p className="card-text">Reallocate the workload</p>
+
+
+                <p>FARMERS:
+                  <div className="input-group"><button className="btn btn-decrement btn-outline-secondary btn-minus" type="button"><strong>−</strong></button><input type="text" inputmode="decimal" placeholder={workers.fruit}></input><button className="btn btn-increment btn-outline-secondary btn-plus" type="button"><strong>+</strong></button></div>
+                </p>
+                <p>HUNTERS:
+                  <div className="input-group  "><button className="btn btn-decrement btn-outline-secondary btn-minus" type="button"><strong>−</strong></button><input type="text" inputmode="decimal" placeholder={workers.meat} /><button className="btn btn-increment btn-outline-secondary btn-plus" type="button"><strong>+</strong></button></div>
+                </p>
+                <p>MINERS:
+                  <div className="input-group  "><button className="btn btn-decrement btn-outline-secondary btn-minus" type="button"><strong>−</strong></button><input type="text" inputmode="decimal" placeholder={workers.gold} /><button className="btn btn-increment btn-outline-secondary btn-plus" type="button"><strong>+</strong></button></div>
+                </p>
+                <p>LUMBERJACKS:
+                  <div className="input-group  "><button id="wood" className="btn btn-decrement btn-outline-secondary btn-minus" type="button" onClick={subtractWorker}><strong id="wood">−</strong></button><input type="text" inputmode="decimal" placeholder={workers.wood} /><button id="wood" className="btn btn-increment btn-outline-secondary btn-plus" type="button" onClick={addWorker}><strong id="wood">+</strong></button></div>
+                </p>
+
+                <div>
+                  <p>POPULATION: {user.village.population}</p>
+                  <p>UNASSIGNED: {user.village.population}</p>
+                </div>
+
+               
+              </div>
             </div>
+          </div>
 
-            <button type="submit" className="btn confirm-btn" id="worker-btn">CONFIRM</button>
-
-
-
+          <div className="purchasePanel">
+            <div>
+              <div className="card-body4">
+                <h5 className="card-title"><strong>Purchase Upgrades</strong></h5>
+                <h2 className="card-text">Make a Purchase</h2>
+                <tbody>
+                  <tr className="cell">
+                    <th scope="row">FRUIT:</th>
+                    <td>{resources.fruit}/3 Owned</td>
+                    <button type="submit" className="btn trade-btn" id="worker-btn">BUY</button>
+                  </tr>
+                  <tr className="cell">
+                    <th scope="row">GOLD:</th>
+                    <td>{resources.gold}/3 Owned</td>
+                    <button type="submit" className="btn trade-btn" id="worker-btn">BUY</button>
+                  </tr>
+                  <tr className="cell">
+                    <th scope="row">MEAT:</th>
+                    <td>{resources.meat}/3 Owned</td>
+                    <button type="submit" className="btn trade-btn" id="worker-btn">BUY</button>
+                  </tr>
+                  <tr className="cell">
+                    <th scope="row">WOOD:</th>
+                    <td>{resources.wood}/3 Owned</td>
+                    <button type="submit" className="btn trade-btn" id="worker-btn">BUY</button>
+                  </tr>
+                </tbody>
+              </div>
+            </div>
           </div>
         </div>
       </div>
-      <div className="sidePanel">
-        <div>
-          <div className="card-body4">
-            <h5 className="card-title"><strong>Purchase Upgrades</strong></h5>
-            <h2 className="card-text">Make a Purchase</h2>
-            <tr className="cell">
-              <th scope="row">FRUIT:</th>
-              <td>{resources.fruit}/3 Owned</td>
-              <button type="submit" className="btn trade-btn" id="worker-btn">BUY</button>
-            </tr>
-            <tr className="cell">
-              <th scope="row">GOLD:</th>
-              <td>{resources.gold}/3 Owned</td>
-              <button type="submit" className="btn trade-btn" id="worker-btn">BUY</button>
-            </tr>
-            <tr className="cell">
-              <th scope="row">MEAT:</th>
-              <td>{resources.meat}/3 Owned</td>
-              <button type="submit" className="btn trade-btn" id="worker-btn">BUY</button>
-            </tr>
-            <tr className="cell">
-              <th scope="row">WOOD:</th>
-              <td>{resources.wood}/3 Owned</td>
-              <button type="submit" className="btn trade-btn" id="worker-btn">BUY</button>
-            </tr>
-          </div>
-        </div>
-      </div>
+
     </div>
   );
 };

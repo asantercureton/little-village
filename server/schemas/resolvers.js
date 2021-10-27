@@ -92,7 +92,7 @@ const resolvers = {
       await Village.updateOne(
         { _id: user.village }, 
         { amountOfResources: update.amountOfResources,
-        level: update.level }
+          level: update.level }
       );
       village.save();
       return village;
@@ -105,10 +105,16 @@ const resolvers = {
       const addPop = addPopulation(village, level[0]);
       await Village.updateOne(
         { _id: user.village }, 
-        { population: addPop.population }
+        { amountOfResources: update.amountOfResources,
+          population: addPop.population }
       );
       village.save();
       return village;
+    },
+    buyUpgrades: async (_, args) => {
+      const user = await User.findById(args.userId);
+      const village = await Village.findById(user.village);
+      village.save();
     }
   }
 };

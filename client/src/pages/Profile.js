@@ -14,14 +14,17 @@ import UserList from '../components/UserList';
 const Profile = () => {
   const { id } = useParams();
 
-  const gameLoop = () => {
+  const gameLoop = () => { //TODO: Rework gameloop to render not based on time since last frame, but time since the information was refreshed
     let loopResources = resources;
+    
     let now = new Date();
     let deltaTime = Math.abs(now - lastUpdate) / 1000;
     let { abundanceOfResources } = user.village;
     for (let resource in loopResources) {
       loopResources[resource] += workers[resource] * abundanceOfResources[resource] * deltaTime;
+      console.log(workers[resource])
     }
+    
 
     setResources({
       fruit: Math.round(loopResources.fruit * 10) / 10,
@@ -50,8 +53,6 @@ const Profile = () => {
           gold: unitAllocation.gold,
           wood: unitAllocation.wood
         });
-        console.log(unitAllocation.wood)
-        console.log(workers)
         setGameLoopInit(true);
         lastUpdate = new Date();
         var gameLoopTimer = setInterval(gameLoop, 250);
@@ -130,6 +131,38 @@ const Profile = () => {
     );
   }
 
+  const addWorker = async (e) => {
+    let tempWorkers = workers;
+    let totalWorkers = 0; 
+    console.log(workers)
+    for (let r in workers) {
+      totalWorkers += workers[r]
+    }
+    console.log(totalWorkers, user.village.population)
+    if (totalWorkers + 1 <= user.village.population) {
+      tempWorkers[e.target.id] += 1;
+      await setWorkers({
+        fruit: tempWorkers.fruit,
+        meat: tempWorkers.meat,
+        gold: tempWorkers.gold,
+        wood: tempWorkers.wood,
+      });
+    }
+  }
+
+  const subtractWorker = async (e) => {
+    let tempWorkers = workers;
+    if (tempWorkers[e.target.id] - 1 >= 0) {
+      tempWorkers[e.target.id] -= 1;
+      await setWorkers({
+        fruit: tempWorkers.fruit,
+        meat: tempWorkers.meat,
+        gold: tempWorkers.gold,
+        wood: tempWorkers.wood,
+      });
+    }
+  }
+
   return (
     <div className="wrapper">
       <div className="jumbotron jumbotron-fluid">
@@ -193,16 +226,16 @@ const Profile = () => {
 
 
             <p>FARMERS:
-              <div className="input-group"><button className="btn btn-decrement btn-outline-secondary btn-minus" type="button"><strong>−</strong></button><input type="text" inputmode="decimal" placeholder="" /><button className="btn btn-increment btn-outline-secondary btn-plus" type="button"><strong>+</strong></button></div>
+              <div className="input-group"><button className="btn btn-decrement btn-outline-secondary btn-minus" type="button"><strong>−</strong></button><input type="text" inputmode="decimal" placeholder={workers.fruit}></input><button className="btn btn-increment btn-outline-secondary btn-plus" type="button"><strong>+</strong></button></div>
             </p>
             <p>HUNTERS:
-              <div className="input-group  "><button className="btn btn-decrement btn-outline-secondary btn-minus" type="button"><strong>−</strong></button><input type="text" inputmode="decimal" placeholder="" /><button className="btn btn-increment btn-outline-secondary btn-plus" type="button"><strong>+</strong></button></div>
+              <div className="input-group  "><button className="btn btn-decrement btn-outline-secondary btn-minus" type="button"><strong>−</strong></button><input type="text" inputmode="decimal" placeholder={workers.meat} /><button className="btn btn-increment btn-outline-secondary btn-plus" type="button"><strong>+</strong></button></div>
             </p>
             <p>MINERS:
-              <div className="input-group  "><button className="btn btn-decrement btn-outline-secondary btn-minus" type="button"><strong>−</strong></button><input type="text" inputmode="decimal" placeholder="" /><button className="btn btn-increment btn-outline-secondary btn-plus" type="button"><strong>+</strong></button></div>
+              <div className="input-group  "><button className="btn btn-decrement btn-outline-secondary btn-minus" type="button"><strong>−</strong></button><input type="text" inputmode="decimal" placeholder={workers.gold} /><button className="btn btn-increment btn-outline-secondary btn-plus" type="button"><strong>+</strong></button></div>
             </p>
             <p>LUMBERJACKS:
-              <div className="input-group  "><button className="btn btn-decrement btn-outline-secondary btn-minus" type="button"><strong>−</strong></button><input type="text" inputmode="decimal" placeholder="" /><button className="btn btn-increment btn-outline-secondary btn-plus" type="button"><strong>+</strong></button></div>
+              <div className="input-group  "><button id="wood" className="btn btn-decrement btn-outline-secondary btn-minus" type="button" onClick={subtractWorker}><strong id="wood">−</strong></button><input type="text" inputmode="decimal" placeholder={workers.wood} /><button id="wood" className="btn btn-increment btn-outline-secondary btn-plus" type="button" onClick={addWorker}><strong id="wood">+</strong></button></div>
             </p>
 
             <div>

@@ -37,6 +37,7 @@ const typeDefs = gql`
     productionRate: Float
     image: String
     levelUpCost: ResourceObject
+    buyPopulation: ResourceObject
   }
 
   type Upgrade {
@@ -60,10 +61,10 @@ const typeDefs = gql`
   }
 
   type UpgradeObject {
-    fruit: [Upgrade]
-    meat: [Upgrade]
-    gold: [Upgrade]
-    wood: [Upgrade]
+    fruit: [ID]
+    meat: [ID]
+    gold: [ID]
+    wood: [ID]
   }
 
   type Auth {
@@ -88,6 +89,7 @@ const typeDefs = gql`
     executeTrade(userId:ID!, tradeId: ID!): Trade
     levelUp(userId:ID!): Village
     addPopulation(userId:ID!): Village
+    buyUpgrade(userId:ID!, upgradeId:ID!): Village
   }
 `;
 

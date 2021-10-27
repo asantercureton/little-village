@@ -2,7 +2,7 @@ const { AuthenticationError } = require('apollo-server-express');
 const { User, Village, Trade, Level, Upgrade } = require('../models');
 
 const { signToken } = require('../utils/auth');
-const { createVillage, levelUp, addPopulation } = require('../utils/villageMethods');
+const { createVillage, levelUp, addPopulation, buyUpgrade } = require('../utils/villageMethods');
 const { createTrade, executeTrade } = require('../utils/tradeMethods');
 
 const resolvers = {
@@ -69,7 +69,7 @@ const resolvers = {
       const newTrade = await Trade.create(createTrade(user.village, args));
       const village = await Village.findById(user.village);
       await Village.updateOne(
-        { _id: user.village }, 
+        { _id: user.village },
         { $push: { trades: newTrade } }
       );
       village.save();
@@ -90,9 +90,11 @@ const resolvers = {
       const level = await Level.find({ level: village.level });
       const update = levelUp(village, level[0]);
       await Village.updateOne(
-        { _id: user.village }, 
-        { amountOfResources: update.amountOfResources,
-        level: update.level }
+        { _id: user.village },
+        {
+          amountOfResources: update.amountOfResources,
+          level: update.level
+        }
       );
       village.save();
       return village;
@@ -101,10 +103,41 @@ const resolvers = {
       const user = await User.findById(args.userId);
       const village = await Village.findById(user.village);
       village.save();
-      const addPop = addPopulation(village);
+      const level = await Level.find({ level: village.level });
+      const addPop = addPopulation(village, level[0]);
       await Village.updateOne(
-        { _id: user.village }, 
-        { population: addPop.population }
+        { _id: user.village },
+        {
+          amountOfResources: addPop.amountOfResources,
+          population: addPop.population
+        }
+      );
+      village.save();
+      return village;
+    },
+    buyUpgrade: async (_, args) => {
+      const user = await User.findById(args.userId);
+      const village = await Village.findById(user.village);
+      village.save();
+      const upgrade = await Upgrade.findById(args.upgradeId);
+      const newUpg = buyUpgrade(village, upgrade);
+      await village.update(
+        {
+          amountOfResources: newUpg.amountOfResources,
+          $addToSet: {
+            'upgrades.fruit': newUpg.upgrades.fruit
+          },
+          $addToSet: {
+            'upgrades.meat': newUpg.upgrades.meat
+          },
+          $addToSet: {
+            'upgrades.gold': newUpg.upgrades.gold
+          },
+          $addToSet: {
+            'upgrades.wood': newUpg.upgrades.wood
+          }
+
+        }
       );
       village.save();
       return village;

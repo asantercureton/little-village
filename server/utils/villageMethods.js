@@ -28,7 +28,20 @@ const getAfford = (arr, owned, price) => {
         if(amount >= cost) { afford++ };
     }
     return (arr.length === afford) ? true : false;
-}
+};
+
+const getTransaction = (arr, owned, price) => {
+    for(let i = 0; i < arr.length; i++) {
+        let resource = arr[i];
+        let amount = owned[resource];
+        let cost = price[resource];
+        owned[resource] = amount - cost;
+    };
+    Object.keys(owned).forEach(key => {
+        owned[key] = roundNum(owned[key]);
+    });
+    return owned;
+};
 
 const createVillage = (user, level) => { //this is run with every new user to create their starter village
     return {
@@ -54,25 +67,46 @@ const createVillage = (user, level) => { //this is run with every new user to cr
 const levelUp = (village, level) => {
     let arr = [];
     Object.keys(level.levelUpCost).forEach(key => {
-        arr.push(key);
+        if(level.levelUpCost[key] > 0) {
+            arr.push(key);
+        }
     });
     
     const afford = getAfford(arr, village.amountOfResources, level.levelUpCost);
     if(afford) {
-        for(let i = 0; i < arr.length; i++) {
-            let resource = arr[i];
-            let amount = village.amountOfResources[resource];
-            let cost = level.levelUpCost[resource];
-            village.amountOfResources[resource] = roundNum(amount - cost);
-        };
+        village.amountofResources = getTransaction(arr, village.amountOfResources, level.levelUpCost);
         village.level += 1;
     }
     return village;
 };
 
-const addPopulation = (village) => {
-    // TODO: need to establish price for population at each level
-    village.population += 1;
+const addPopulation = (village, level) => {
+    let arr = [];
+    Object.keys(level.buyPopulation).forEach(key => {
+        if(level.buyPopulation[key] > 0) {
+            arr.push(key);
+        }
+    });
+    const afford = getAfford(arr, village.amountOfResources, level.buyPopulation);
+    if(afford){
+        village.amountofResources = getTransaction(arr, village.amountOfResources, level.buyPopulation);
+        village.population += 1;
+    }
+    return village;
+};
+
+const buyUpgrade = (village, upgrade) => {
+    let arr = [];
+    Object.keys(upgrade.cost).forEach(key => {
+        if(upgrade.cost[key] > 0) {
+            arr.push(key);
+        }
+    });
+    const afford = getAfford(arr, village.amountOfResources, upgrade.cost);
+    if(afford){
+        village.amountofResources = getTransaction(arr, village.amountOfResources, upgrade.cost);
+        village.upgrades[upgrade.resource].push(upgrade._id);
+    }
     return village;
 };
 
@@ -80,6 +114,8 @@ module.exports = {
     createVillage,
     getAbundance,
     getAfford,
+    getTransaction,
     levelUp,
-    addPopulation
+    addPopulation,
+    buyUpgrade
 }

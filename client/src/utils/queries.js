@@ -100,6 +100,12 @@ export const QUERY_VILLAGES = gql`
     villages {
       _id
       population
+      amountOfResources {
+          fruit
+          meat
+          gold
+          wood
+          }
       user {
         _id
         username

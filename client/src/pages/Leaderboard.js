@@ -46,15 +46,18 @@ const Leaderboard = () => {
               <th scope="col">Resources</th>
             </tr>
           </thead>
+
           <tbody>
+            {villages.map((village) => (
             <tr>
               <th scope="row">1</th>
-              <td>Username</td>
-              <td>Village</td>
-              <td>Status</td>
-              <td>Population</td>
-              <td>Resources</td>
+              <td>{village.user.username}</td>
+              <td>{village.user.__typename}</td>
+              <td>{village.user.__typename}</td>
+              <td>{village.population}</td>
+              <td>{village.amountOfResources.fruit}</td>
             </tr>
+            ))}
             <tr>
               <th scope="row">2</th>
               <td>Username</td>

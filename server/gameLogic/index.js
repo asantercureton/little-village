@@ -1,18 +1,16 @@
 const { Village } = require('../models');
-const { roundNum, getEfficiency } = require('../utils/helpers');
+const { roundNum, getEfficiency, getRate } = require('../utils/helpers');
 
 function getResource(village, time, resource) {
     if (village.unitAllocation[resource] >= 0) {
-        // const rate = village.level.productionRate;
-        // const workers = village.unitAllocation[resource];
-        const rate = 1;
+        const rate = getRate(village.level);
         const workers = 2;
+        // const workers = village.unitAllocation[resource];
         const efficiency = getEfficiency(village.upgrades[resource]);
         const abundance = village.abundanceOfResources[resource];
 
         const harvest = (rate * efficiency) * workers * abundance;
-        const timePassed = time;
-        const production = roundNum(harvest * timePassed);
+        const production = roundNum(harvest * time);
 
         village.amountOfResources[resource] += production;
     }

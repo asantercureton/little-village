@@ -19,6 +19,17 @@ const getAbundance = () => {
     }
 };
 
+const getAfford = (arr, owned, price) => {
+    let afford = 0;
+    for(let i = 0; i < arr.length; i++) {
+        let resource = arr[i];
+        let amount = owned[resource];
+        let cost = price[resource];
+        if(amount >= cost) { afford++ };
+    }
+    return (arr.length === afford) ? true : false;
+}
+
 const createVillage = (user, level) => { //this is run with every new user to create their starter village
     return {
         population: 2,
@@ -41,21 +52,34 @@ const createVillage = (user, level) => { //this is run with every new user to cr
 };
 
 const levelUp = (village, level) => {
-    let wood = village.amountOfResources.wood;
-    let gold = village.amountOfResources.gold;
-    let costWood = level.levelUpCost.wood;
-    let costGold = level.levelUpCost.gold;
-    if((wood >= costWood) && (gold >= costGold)) {
-        village.amountOfResources.wood = roundNum(wood - costWood);
-        village.amountOfResources.gold = roundNum(gold - costGold);
+    let arr = [];
+    Object.keys(level.levelUpCost).forEach(key => {
+        arr.push(key);
+    });
+    
+    const afford = getAfford(arr, village.amountOfResources, level.levelUpCost);
+    if(afford) {
+        for(let i = 0; i < arr.length; i++) {
+            let resource = arr[i];
+            let amount = village.amountOfResources[resource];
+            let cost = level.levelUpCost[resource];
+            village.amountOfResources[resource] = roundNum(amount - cost);
+        };
         village.level += 1;
     }
     return village;
 };
 
+const addPopulation = (village) => {
+    // TODO: need to establish price for population at each level
+    village.population += 1;
+    return village;
+};
 
 module.exports = {
     createVillage,
     getAbundance,
-    levelUp
+    getAfford,
+    levelUp,
+    addPopulation
 }

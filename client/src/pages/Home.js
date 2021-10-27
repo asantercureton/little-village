@@ -28,16 +28,17 @@ const Home = () => {
     <main>
       <div className="jumbotron align-items-center">
         <div className="justify-content-center">
-          <h1 className="lead">An online game where users create their own village, gather resources to grow and expand their village, while trading with others for resources they don't have.</h1>
-         
-          <h1 className="display-4">GAME PLAY</h1>
+          <h1 className="headline">An online game where users create their own village, gather resources to grow and expand their village, while trading with others for resources they don't have.</h1>
+         <hr id="tag"/>
+          <h1 className="display-1">GAME PLAY</h1>
+          <hr id="tag"/>
           <ol>
             <li>Gather resources (fruits, meat, gold, wood) according to how abundant your territory is in each type of resource.</li>
             <li>Trade with other villages for resources you don’t have.</li>
             <li>Spend those resources to improve your village.</li>
           </ol>
          
-          <p>Your new world awaits...</p>
+          <p id="newWorld">Your new world awaits...</p>
          
           <a href="/" className="play-btn"><span>PLAY!</span></a>
 

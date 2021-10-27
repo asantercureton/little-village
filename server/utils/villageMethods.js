@@ -54,7 +54,9 @@ const createVillage = (user, level) => { //this is run with every new user to cr
 const levelUp = (village, level) => {
     let arr = [];
     Object.keys(level.levelUpCost).forEach(key => {
-        arr.push(key);
+        if(level.levelUpCost[key] > 0) {
+            arr.push(key);
+        }
     });
     
     const afford = getAfford(arr, village.amountOfResources, level.levelUpCost);
@@ -73,7 +75,9 @@ const levelUp = (village, level) => {
 const addPopulation = (village, level) => {
     let arr = [];
     Object.keys(level.buyPopulation).forEach(key => {
-        arr.push(key);
+        if(level.buyPopulation[key] > 0) {
+            arr.push(key);
+        }
     });
     const afford = getAfford(arr, village.amountOfResources, level.buyPopulation);
     if(afford){
@@ -89,13 +93,11 @@ const addPopulation = (village, level) => {
 };
 
 const buyUpgrade = (village, upgrade) => {
-    if(village.upgrades[upgrade.resource].includes(upgrade)) {
-        return village;
-    }
-
     let arr = [];
     Object.keys(upgrade.cost).forEach(key => {
-        arr.push(key);
+        if(upgrade.cost[key] > 0) {
+            arr.push(key);
+        }
     });
     const afford = getAfford(arr, village.amountOfResources, upgrade.cost);
     if(afford){

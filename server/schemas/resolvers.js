@@ -69,7 +69,7 @@ const resolvers = {
       const newTrade = await Trade.create(createTrade(user.village, args));
       const village = await Village.findById(user.village);
       await Village.updateOne(
-        { _id: user.village }, 
+        { _id: user.village },
         { $push: { trades: newTrade } }
       );
       village.save();
@@ -90,9 +90,11 @@ const resolvers = {
       const level = await Level.find({ level: village.level });
       const update = levelUp(village, level[0]);
       await Village.updateOne(
-        { _id: user.village }, 
-        { amountOfResources: update.amountOfResources,
-          level: update.level }
+        { _id: user.village },
+        {
+          amountOfResources: update.amountOfResources,
+          level: update.level
+        }
       );
       village.save();
       return village;
@@ -104,9 +106,11 @@ const resolvers = {
       const level = await Level.find({ level: village.level });
       const addPop = addPopulation(village, level[0]);
       await Village.updateOne(
-        { _id: user.village }, 
-        { amountOfResources: addPop.amountOfResources,
-          population: addPop.population }
+        { _id: user.village },
+        {
+          amountOfResources: addPop.amountOfResources,
+          population: addPop.population
+        }
       );
       village.save();
       return village;
@@ -117,11 +121,19 @@ const resolvers = {
       village.save();
       const upgrade = await Upgrade.findById(args.upgradeId);
       const newUpg = buyUpgrade(village, upgrade);
-      console.log(newUpg.upgrades.gold.length);
       await Village.updateOne(
-        { _id: user.village }, 
-        { amountOfResources: newUpg.amountOfResources,
-          upgrades: newUpg.upgrades }
+        { _id: user.village },
+        {
+          amountOfResources: newUpg.amountOfResources,
+          upgrades: {
+            $push: {
+              gold: newUpg.upgrades.gold,
+              fruit: newUpg.upgrades.fruit,
+              meat: newUpg.upgrades.meat,
+              wood: newUpg.upgrades.wood
+            }
+          }
+        }
       );
       village.save();
       return village;

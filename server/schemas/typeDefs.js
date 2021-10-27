@@ -61,10 +61,10 @@ const typeDefs = gql`
   }
 
   type UpgradeObject {
-    fruit: [Upgrade]
-    meat: [Upgrade]
-    gold: [Upgrade]
-    wood: [Upgrade]
+    fruit: [ID]
+    meat: [ID]
+    gold: [ID]
+    wood: [ID]
   }
 
   type Auth {

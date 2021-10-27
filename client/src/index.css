@@ -24,15 +24,35 @@
   margin-bottom: 10px;
 }
 
-main {
-   background: url("../src/img/gold.jpg");
-   min-height: 100vh;
-   background-attachment: fixed;
-   background-position: center;
-   background-repeat: no-repeat;
-   background-size: cover;
+body {
+  background: url("../src/img/gold.jpg");
+  min-height: 100vh;
+  background-attachment: fixed;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
 }
 
+
+.headline {
+  font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+  font-size: 100%;
+  color: #020146d5;
+  margin-bottom: 50px;
+}
+
+ol li {
+  font-size: 90%;
+  color: #020146d5;
+}
+
+.display-1 {
+  text-align: center;
+  color: rgba(146, 88, 1, 0.897);
+  padding: 10px;
+  margin-bottom: 20px;
+  font-size:175%;
+}
 .display-4 {
   text-align: center;
   padding: 10px;
@@ -59,6 +79,13 @@ header a:hover {
   transition: .5s ease;
   font-size: larger;
 }
+#tag {
+  border: 3px solid rgba(151, 124, 3, 0.5);
+  border-radius: 5px;
+}
+#newWorld {
+  font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+}
 
 header h1:hover {
   color: rgb(253, 172, 66);
@@ -69,6 +96,15 @@ header h1:hover {
 .nav {
   display: flex;
   justify-content: space-between;
+}
+
+footer {
+  color: aliceblue;
+  margin-bottom: 20px;
+  font-size: 120%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .form-label {
@@ -106,7 +142,7 @@ header h1:hover {
   font-family: 'Butcherman', cursive;
   min-width: 150px;
   justify-content: center;
-  width: 150px;
+  width: 300px;
 }
 
 /* Active-Button */

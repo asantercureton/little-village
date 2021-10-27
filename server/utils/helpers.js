@@ -19,8 +19,6 @@ const shuffleArray = (array) => {
     return array;
 };
 
-// TODO: find # of seconds between now and last updated timestamp
-// use timestamp info from model
 function getTimePassed(update, lastUpdate) {
     return update - lastUpdate;
 }
@@ -29,11 +27,16 @@ const getEfficiency = (upgrades) => {
     return 1 + (0.5 * upgrades.length);
 }
 
+const getRate = (level) => {
+    return 1 + (0.2 * (level - 1));
+}
+
 module.exports = {
     roundNum,
     getRandom,
     getLimit,
     shuffleArray,
     getTimePassed,
-    getEfficiency
+    getEfficiency,
+    getRate
 };

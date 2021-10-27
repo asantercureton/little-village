@@ -2,10 +2,11 @@
 // Node Modules
 import React, { useState, useEffect } from 'react';
 import { Redirect, useParams } from 'react-router-dom';
-import { useQuery, useLazyQuery } from '@apollo/client';
+import { useQuery, useLazyQuery, useMutation} from '@apollo/client';
 // Utilities
 import Auth from '../utils/auth';
 import { QUERY_USERS, QUERY_USER, QUERY_ME, QUERY_LEVEL } from '../utils/queries';
+import { ALLOCATE_UNIT } from '../utils/mutations';
 // Components
 import UserList from '../components/UserList';
 
@@ -24,7 +25,7 @@ const Profile = () => {
     let { abundanceOfResources } = user.village;
     for (let resource in loopResources) {
       loopResources[resource] += workers[resource] * abundanceOfResources[resource] * deltaTime;
-      console.log(workers[resource])
+      //console.log(workers[resource])
     }
 
 
@@ -37,9 +38,56 @@ const Profile = () => {
     lastUpdate = new Date();
   }
 
+  const syncData = async () => { //syncs client and server data
+    //await refetch()
+    if (!loading) {
+      console.log(user.village)
+      var { amountOfResources: resourceCount, unitAllocation, abundanceOfResources } = user.village;
+      await setResources({
+        fruit: resourceCount.fruit,
+        meat: resourceCount.meat,
+        gold: resourceCount.gold,
+        wood: resourceCount.wood
+      });
+      console.log(resourceCount.fruit)
+      await setWorkers({
+        fruit: unitAllocation.fruit,
+        meat: unitAllocation.meat,
+        gold: unitAllocation.gold,
+        wood: unitAllocation.wood
+      });
+    }
+  };
+
+  useEffect(async () => { //make this not async and create new function to fetch server data
+    if (!loading) {
+      if (!gameLoopInit && user?.username) { //set resources to correct amount 
+        var { amountOfResources: resourceCount, unitAllocation, abundanceOfResources } = user.village;
+        // console.log(user)
+        // await setResources({
+        //   fruit: resourceCount.fruit,
+        //   meat: resourceCount.meat,
+        //   gold: resourceCount.gold,
+        //   wood: resourceCount.wood
+        // });
+        // await setWorkers({
+        //   fruit: unitAllocation.fruit,
+        //   meat: unitAllocation.meat,
+        //   gold: unitAllocation.gold,
+        //   wood: unitAllocation.wood
+        // });
+        await syncData()
+        setGameLoopInit(true);
+        lastUpdate = new Date();
+        var gameLoopTimer = setInterval(gameLoop, 250);
+      }
+    }
+  });
+
 
   //game variables and states
   var lastUpdate;
+  const [allocateUnit, { data: unitData, loading: unitsLoading, error: unitError }] = useMutation(ALLOCATE_UNIT);
 
   const [resources, setResources] = useState({
     fruit: 0,
@@ -58,8 +106,9 @@ const Profile = () => {
   const [gameLoopInit, setGameLoopInit] = useState(false); //have we set up the game loop? 
 
   // Get current user
-  const { loading, data, error } = useQuery(id ? QUERY_USER : QUERY_ME, {
+  const { loading, data, error, refetch} = useQuery(id ? QUERY_USER : QUERY_ME, {
     variables: { id },
+    pollInterval: 500
   });
 
   // Get a list of all users
@@ -133,12 +182,8 @@ const Profile = () => {
     console.log(totalWorkers, user.village.population)
     if (totalWorkers + 1 <= user.village.population) {
       tempWorkers[e.target.id] += 1;
-      await setWorkers({
-        fruit: tempWorkers.fruit,
-        meat: tempWorkers.meat,
-        gold: tempWorkers.gold,
-        wood: tempWorkers.wood,
-      });
+      await allocateUnit({ variables: { userId: user._id,  resource: e.target.id, amount: 1} });
+      await syncData();
     }
   }
 
@@ -146,6 +191,7 @@ const Profile = () => {
     let tempWorkers = workers;
     if (tempWorkers[e.target.id] - 1 >= 0) {
       tempWorkers[e.target.id] -= 1;
+      await allocateUnit({ variables: { userId: user._id,  resource: e.target.id, amount: -1} });
       await setWorkers({
         fruit: tempWorkers.fruit,
         meat: tempWorkers.meat,

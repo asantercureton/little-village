@@ -11,10 +11,18 @@ const resolvers = {
       return User.find().populate('village');
     },
     user: async (_, args) => {
-      return User.findOne({ _id: args.id }).populate('village');
+      let user = await User.findOne({ _id: args.id });
+      let village = await Village.findById(user.village);
+      await village.save()
+      return user.populate('village');
     },
     me: async (_, args, context) => {
       if (context.user) {
+        console.log("fuck u");
+        let user = await User.findOne({ _id: context.user._id });
+        console.log(user);
+        let village = await Village.findById(user.village);
+        await village.save()
         return User.findOne({ _id: context.user._id }).populate('village');
       }
       throw new AuthenticationError('You need to be logged in!');

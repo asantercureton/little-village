@@ -179,3 +179,20 @@ export const QUERY_LEVEL = gql`
     }
   }
 `;
+
+export const QUERY_UPGRADES = gql`
+  query upgrades {
+    upgrades {
+      _id
+      name
+      resource
+      summary
+      cost {
+        fruit
+        meat
+        gold
+        wood
+      }
+    }
+}
+`;

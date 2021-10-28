@@ -28,7 +28,7 @@ const ManageState = (props) => {
           <h4>Current Population: {props.user.village.population}</h4>
           <h4>Max Population: {props.level.maxPopulation}</h4>
           <h5>Cost: {popCost(props.level.buyPopulation)}</h5>
-          <button type="submit" className="btn population-btn" id="population1-btn">BUY 1</button>
+          <button onClick={props.handleAddPop} type="submit" className="btn population-btn" id="population1-btn">BUY 1</button>
           </div>
       }
       case 'workers': {
@@ -88,10 +88,8 @@ const ManageState = (props) => {
 
           <p>Level Up to {props.level.nextLevel}</p>
           <div>
-            <h3>Cost:</h3>
-            <p>50 Wood</p>
-            <p>50 Gold</p>
-            <button type="submit" className="btn levelup-btn" id="levelup-btn">BUY</button>
+            <h3>Cost: {popCost(props.level.levelUpCost)}</h3>
+            <button onClick={props.handleLevelUp} type="submit" className="btn levelup-btn" id="levelup-btn">BUY</button>
           </div></div>
       }
       default: {

@@ -2,10 +2,11 @@
 // Node Modules
 import React, { useState, useEffect } from 'react';
 import { Redirect, useParams } from 'react-router-dom';
-import { useQuery, useLazyQuery } from '@apollo/client';
+import { useQuery, useLazyQuery, useMutation } from '@apollo/client';
 // Utilities
 import Auth from '../utils/auth';
 import { QUERY_USERS, QUERY_USER, QUERY_ME, QUERY_LEVEL } from '../utils/queries';
+import { ADD_POPULATION, LEVEL_UP, BUY_UPGRADE } from '../utils/mutations';
 // Components
 import UserList from '../components/UserList';
 
@@ -69,6 +70,10 @@ const Profile = () => {
 
   const [currentLevel, { data: levelData }] = useLazyQuery(QUERY_LEVEL);
 
+  const [addPopulation, { data: popData }] = useMutation(ADD_POPULATION);
+  const [levelUp, { data: levelUpData }] = useMutation(LEVEL_UP);
+  const [buyUpgrade, { data: buyData }] = useMutation(BUY_UPGRADE);
+  
   useEffect(() => {
     if (user?.village?.level) {
       currentLevel({
@@ -85,9 +90,53 @@ const Profile = () => {
 
   if (error) console.log(error);
 
+
   const handleClose = () => {
     setType(null);
   }
+
+  const handleAddPop = async (event) => {
+    event.preventDefault();
+    try {
+      await addPopulation({
+        variables: {
+          userId: user._id
+        },
+      });
+
+    } catch (e) {
+      console.error(e);
+    }
+  };
+
+  const handleLevelUp = async (event) => {
+    event.preventDefault();
+    try {
+      await levelUp({
+        variables: {
+          userId: user._id
+        },
+      });
+
+    } catch (e) {
+      console.error(e);
+    }
+  };
+
+  const handleBuyUpgrade = async (event) => {
+    event.preventDefault();
+    try {
+      await buyUpgrade({
+        variables: {
+          userId: user._id,
+          upgradeId: event.target.value
+        },
+      });
+
+    } catch (e) {
+      console.error(e);
+    }
+  };
 
   // redirect to personal profile page if username is yours
   if (Auth.loggedIn() && Auth.getProfile().data._id === id) {
@@ -215,6 +264,9 @@ const Profile = () => {
                 type={type}
                 setType={setType}
                 handleClose={handleClose}
+                handleAddPop={handleAddPop}
+                handleLevelUp={handleLevelUp}
+                handleBuyUpgrade={handleBuyUpgrade}
                 user={user}
                 level={level}
               />

@@ -114,7 +114,6 @@ const TradeForm = () => {
                         <label className="labelTrade">Trade Multiplier:</label>
                         <input name="tradeAmount" value={formState.tradeAmount} onChange={handleChange} className="xbox" type="text" inputmode="decimal" placeholder="" />
                     </div>
-                    <label>(Keep field blank for infinite trades)</label>
                 </div>
                 <button type="submit" className="btn createTrade-btn">OFFER TRADE</button>
             </form>

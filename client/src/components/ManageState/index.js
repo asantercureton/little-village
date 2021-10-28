@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 const ManageState = (props) => {
   const styles = {
@@ -14,9 +15,9 @@ const ManageState = (props) => {
   const popCost = (buyPop) => {
     let arr = [];
     Object.keys(buyPop).forEach(key => {
-        if(buyPop[key] > 0) {
-            arr.push(buyPop[key] + ' ' + key.toUpperCase());
-        }
+      if (buyPop[key] > 0) {
+        arr.push(buyPop[key] + ' ' + key.toUpperCase());
+      }
     });
     return arr.join(' & ');
   }
@@ -29,14 +30,11 @@ const ManageState = (props) => {
           <h4>Max Population: {props.level.maxPopulation}</h4>
           <h5>Cost: {popCost(props.level.buyPopulation)}</h5>
           <button onClick={props.handleAddPop} type="submit" className="btn population-btn" id="population1-btn">BUY 1</button>
-          </div>
+        </div>
       }
       case 'workers': {
         return <div><h5 className="card-title"><strong>Assign Workers</strong></h5>
-
           <p className="card-text">Reallocate the workload</p>
-
-
           <p>FARMERS:
             <div className="input-group"><button id="fruit" className="btn btn-decrement btn-outline-secondary btn-minus" onClick={props.subtractWorker} type="button"><strong id="fruit">−</strong></button><input type="text" inputmode="decimal" placeholder={props.workers.fruit}></input><button id="fruit" onClick={props.addWorker} className="btn btn-increment btn-outline-secondary btn-plus" type="button"><strong id="fruit">+</strong></button></div>
           </p>
@@ -49,19 +47,13 @@ const ManageState = (props) => {
           <p>LUMBERJACKS:
             <div className="input-group"><button id="wood" onClick={props.subtractWorker} className="btn btn-decrement btn-outline-secondary btn-minus" type="button"><strong id="wood">−</strong></button><input type="text" inputmode="decimal" placeholder={props.workers.wood} /><button id="wood" onClick={props.addWorker} className="btn btn-increment btn-outline-secondary btn-plus" type="button"><strong id="wood">+</strong></button></div>
           </p>
-
-          <div>
-            <p>POPULATION:</p>
-            <p>UNASSIGNED:</p>
-          </div>
         </div>
-
       }
       case 'upgrades': {
         return <div><h5 className="card-title"><strong>Purchase Upgrades</strong></h5>
           <h2 className="card-text">Make a Purchase</h2>
           <tbody>
-          <tr className="cell">
+            <tr className="cell">
               <th scope="row">🍎 FRUIT:</th>
               <td>/3 Owned</td>
               <button type="submit" className="btn trade-btn" id="worker-btn">BUY</button>
@@ -101,7 +93,11 @@ const ManageState = (props) => {
               <h1>Manage Village</h1>
               <button type="submit" className="btn manage-btn" id="manage-btn" onClick={() => props.setType('population')}>INCREASE POPULATION</button>
               <button type="submit" className="btn manage-btn" id="manage-btn" onClick={() => props.setType('workers')}>ASSIGN WORKERS</button>
-              <button type="submit" className="btn manage-btn" id="manage-btn">REQUEST A TRADE</button>
+                <Link to="/tradeform" className="btn manage-btn" id="manage-btn">
+              <button type="submit">
+                  REQUEST A TRADE
+              </button>
+                </Link>
               <button type="submit" className="btn manage-btn" id="manage-btn" onClick={() => props.setType('levelup')}>LEVEL UP!</button>
             </div>
           </div>

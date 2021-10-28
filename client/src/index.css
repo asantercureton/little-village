@@ -122,6 +122,9 @@ footer {
 .jumbotron {
   background-color: var(--grey);
   font-size: 100%;
+}
+
+.screenWidth {
   width: 100vw;
 }
 
@@ -225,9 +228,11 @@ footer {
   background-color: rgba(55, 0, 255, 0.404);
   width: 100%;
 }
+
 .card-body2 > p {
   margin-right: 45px;
 }
+
 .card-body3 {
   /* background-image: url("../src/img/city.jpg"); */
   background-color: rgba(100, 39, 3, 0.644);
@@ -235,8 +240,8 @@ footer {
   border-radius: 18px;
   padding: 50px;
   margin: 15px;
-
 }
+
 .card-body4 {
   /* background-image: url("../src/img/city.jpg"); */
   background-color: rgba(243, 195, 36, 0.644);
@@ -244,7 +249,24 @@ footer {
   border-radius: 18px;
   padding: 50px;
   margin: 50px;
+}
 
+.card-body5 {
+  /* background-image: url("../src/img/city.jpg"); */
+  background-color: rgba(1, 72, 85, 0.705);
+  color: whitesmoke;
+  border-radius: 18px;
+  padding: 50px;
+  margin: 50px;
+}
+
+.card-body6 {
+  /* background-image: url("../src/img/city.jpg"); */
+  background-color: rgba(16, 1, 85, 0.705);
+  color: whitesmoke;
+  border-radius: 18px;
+  padding: 50px;
+  margin: 50px;
 }
 
 .panels {
@@ -288,7 +310,7 @@ footer {
   display: flex;
   padding: 50px;
   justify-content: space-evenly;
-  margin-top: -90px;
+  margin-top: -70px;
   flex-wrap: wrap;
 }
 
@@ -306,6 +328,18 @@ footer {
 
 .purchasePanel {
   font-size: 70%;
+  text-align: center;
+  margin-top: -35px;
+}
+
+.levelupPanel {
+  font-size: 100%;
+  text-align: center;
+  margin-top: -35px;
+}
+
+.populationPanel {
+  font-size: 100%;
   text-align: center;
   margin-top: -35px;
 }
@@ -402,6 +436,48 @@ footer {
 
 .trade-btn:hover {
   color: rgb(134, 76, 0);
+  background-color: rgb(255, 255, 255);
+  cursor: pointer;
+  box-shadow: 0px 0px 8px 1px var(--yellow);
+  transition: .5s ease;
+  transform: scale(1.05);
+  text-decoration: none;
+}
+
+.levelup-btn {
+  color: whitesmoke;
+  background-image: linear-gradient(rgb(190, 146, 0), rgb(87, 47, 2));
+  font-size: 75%;
+  border-radius: 10px;
+  /* padding: 10px; */
+  margin: 10px;
+  width: 100px;
+  padding: 15px;
+}
+
+.levelup-btn:hover {
+  color: rgb(255, 189, 102);
+  background-color: rgb(255, 255, 255);
+  cursor: pointer;
+  box-shadow: 0px 0px 8px 1px var(--yellow);
+  transition: .5s ease;
+  transform: scale(1.05);
+  text-decoration: none;
+}
+
+.population-btn {
+  color: whitesmoke;
+  background-image: linear-gradient(rgb(199, 0, 182), rgb(30, 0, 37));
+  font-size: 75%;
+  border-radius: 10px;
+  /* padding: 10px; */
+  margin: 10px;
+  width: 100px;
+  padding: 15px;
+}
+
+.population-btn:hover {
+  color: rgb(255, 189, 102);
   background-color: rgb(255, 255, 255);
   cursor: pointer;
   box-shadow: 0px 0px 8px 1px var(--yellow);

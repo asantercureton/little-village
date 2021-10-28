@@ -90,11 +90,8 @@ const typeDefs = gql`
     executeTrade(userId:ID!, tradeId: ID!): Trade
     levelUp(userId:ID!): Village
     addPopulation(userId:ID!): Village
-<<<<<<< HEAD
     buyUpgrade(userId:ID!, upgradeId:ID!): Village
-=======
     allocateUnit(userId:ID!, resource: String!, amount: Int!): Boolean
->>>>>>> 20c2fd4 (merge...)
   }
 `;
 

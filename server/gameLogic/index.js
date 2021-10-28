@@ -17,10 +17,10 @@ function getResource(village, time, resource) {
 }
 
 function updateResources(village, time) {
-    console.log('fruit: ', getResource(village, time, 'fruit'));
-    console.log('meat: ', getResource(village, time, 'meat'));
-    console.log('gold: ', getResource(village, time, 'gold'));
-    console.log('wood: ', getResource(village, time, 'wood'));
+    getResource(village, time, 'fruit');
+    getResource(village, time, 'meat');
+    getResource(village, time, 'gold');
+    getResource(village, time, 'wood');
 }
 
 module.exports = { getResource, updateResources }

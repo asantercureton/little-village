@@ -115,6 +115,7 @@ export const QUERY_VILLAGES = gql`
     villages {
       _id
       population
+      level
       amountOfResources {
           fruit
           meat

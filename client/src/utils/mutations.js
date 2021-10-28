@@ -32,18 +32,34 @@ export const CREATE_TRADE = gql`
   }
 `;
 
-export const ADD_COMMENT = gql`
-  mutation addComment($thoughtId: ID!, $commentText: String!) {
-    addComment(thoughtId: $thoughtId, commentText: $commentText) {
+export const EXECUTE_TRADE = gql`
+  mutation executeTrade($userId: ID!, $tradeId: ID!) {
+    executeTrade(userId: $userId, tradeId: $tradeId) {
       _id
-      thoughtText
-      thoughtAuthor
-      createdAt
-      comments {
-        _id
-        commentText
-        createdAt
-      }
+    }
+  }
+`;
+
+export const LEVEL_UP = gql`
+  mutation levelUp($userId: ID!) {
+    levelUp(userId: $userId) {
+      level
+    }
+  }
+`;
+
+export const ADD_POPULATION = gql`
+  mutation addPopulation($userId: ID!) {
+    addPopulation(userId: $userId) {
+      population
+    }
+  }
+`;
+
+export const BUY_UPGRADE = gql`
+  mutation buyUpgrade($userId: ID!, $upgradeId: ID!) {
+    buyUpgrade(userId: $userId, upgradeId: $upgradeId){
+      _id
     }
   }
 `;

@@ -17,6 +17,8 @@ export const QUERY_USER = gql`
       username
       email
       village {
+        population
+        level
         amountOfResources {
           fruit
           meat
@@ -30,6 +32,12 @@ export const QUERY_USER = gql`
           wood
         }
         abundanceOfResources {
+          fruit
+          meat
+          gold
+          wood
+        }
+        upgrades {
           fruit
           meat
           gold
@@ -48,6 +56,7 @@ export const QUERY_ME = gql`
       email
       village {
         population
+        level
         amountOfResources {
           fruit
           meat
@@ -61,6 +70,12 @@ export const QUERY_ME = gql`
           wood
         }
         abundanceOfResources {
+          fruit
+          meat
+          gold
+          wood
+        }
+        upgrades {
           fruit
           meat
           gold
@@ -100,6 +115,7 @@ export const QUERY_VILLAGES = gql`
     villages {
       _id
       population
+      level
       amountOfResources {
           fruit
           meat
@@ -115,4 +131,69 @@ export const QUERY_VILLAGES = gql`
       }
     }
   }
+`;
+
+export const QUERY_LEVELS = gql`
+  query levels {
+    levels {
+      _id
+      level
+      name
+      maxPopulation
+      image
+      levelUpCost {
+        fruit
+        meat
+        gold
+        wood
+      }
+      buyPopulation{
+        fruit
+        meat
+        gold
+        wood
+      }
+    }
+  }
+`;
+
+export const QUERY_LEVEL = gql`
+  query level {
+    level {
+      _id
+      level
+      name
+      maxPopulation
+      image
+      levelUpCost {
+        fruit
+        meat
+        gold
+        wood
+      }
+      buyPopulation{
+        fruit
+        meat
+        gold
+        wood
+      }
+    }
+  }
+`;
+
+export const QUERY_UPGRADES = gql`
+  query upgrades {
+    upgrades {
+      _id
+      name
+      resource
+      summary
+      cost {
+        fruit
+        meat
+        gold
+        wood
+      }
+    }
+}
 `;

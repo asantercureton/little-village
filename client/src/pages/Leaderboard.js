@@ -1,36 +1,53 @@
 import React from 'react';
 import { useQuery } from '@apollo/client';
-import Auth from '../utils/auth';
 
 
-import { QUERY_VILLAGES } from '../utils/queries';
+import { QUERY_VILLAGES, QUERY_LEVELS } from '../utils/queries';
 
-import UserList from '../components/UserList';
-
-
+// TODO: displays totalResources, but not up to date
+// every village that hasn't saved yet appears as 0
+// do we want a max number of villages? like top 25
 const Leaderboard = () => {
   const { loading, data } = useQuery(QUERY_VILLAGES);
   const villages = data?.villages || [];
 
-  // const renderUserList = () => {
-  //   if (loading) {
-  //     return <h2>Loading...</h2>
-  //   } else {
-  //     return <UserList users={users} title="List of Users" />
-  //   }
-  // }
+  const { loading: levelLoading, data: levelData } = useQuery(QUERY_LEVELS);
+  const levels = levelData?.levels || [];
+  console.log(levels);
+  
+  const levelName = (num) => {
+    const level = levels.find(level => (level.level === num ));
+    return level.name;
+  };
 
-  const renderUsername = () => {
-    if (!Auth.loggedIn()) return null;
-    return Auth.getProfile().data.username;
+  const sortedVillages = [...villages].sort((a, b) => {
+    return (b.population - a.population);
+  });
+
+  const totalResources = (amountOfResources) => {
+    return (parseInt(amountOfResources.fruit) + parseInt(amountOfResources.meat)
+      + parseInt(amountOfResources.gold) + parseInt(amountOfResources.wood));
   }
 
-  const renderVillage = () => {
-    if (!Auth.loggedIn()) return null;
-    return Auth.getProfile().data.username;
-  }
-
-  console.log('village', villages);
+  const renderBoard = () => {
+    if (loading || levelLoading) {
+      return <tbody><tr><td>Loading...</td></tr></tbody>
+    } else {
+      return (
+        <tbody>
+          {sortedVillages.map((village, index) => (
+            <tr key={village._id}>
+              <td>{index + 1}</td>
+              <td>{village.user.username}</td>
+              <td>{levelName(village.level)}</td>
+              <td>{village.population}</td>
+              <td>{totalResources(village.amountOfResources)}</td>
+            </tr>
+          ))}
+        </tbody>
+      );
+    }
+  };
 
   return (
     <main>
@@ -42,23 +59,12 @@ const Leaderboard = () => {
                 <tr>
                   <th scope="col">#</th>
                   <th scope="col">Username</th>
-                  <th scope="col">Village</th>
+                  <th scope="col">Level</th>
                   <th scope="col">Population</th>
-                  <th scope="col">Resources</th>
+                  <th scope="col">Total Resources</th>
                 </tr>
               </thead>
-
-              <tbody>
-                {villages.map((village) => (
-                  <tr>
-                    <td>1</td>
-                    <td>{village.user.username}</td>
-                    <td>{village.user.__typename}</td>
-                    <td>{village.population}</td>
-                    <td>{village.amountOfResources.fruit}</td>
-                  </tr>
-                ))}
-              </tbody>
+              {renderBoard()}
             </table>
           </section>
         </div>

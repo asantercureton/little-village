@@ -34,7 +34,6 @@ const typeDefs = gql`
     level: Int
     name: String
     maxPopulation: Int
-    productionRate: Float
     image: String
     levelUpCost: ResourceObject
     buyPopulation: ResourceObject
@@ -79,6 +78,7 @@ const typeDefs = gql`
     villages: [Village]
     trades: [Trade]
     levels: [Level]
+    level(level: Int!): Level
     upgrades: [Upgrade]
   }
 

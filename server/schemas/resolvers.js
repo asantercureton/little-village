@@ -31,6 +31,9 @@ const resolvers = {
     levels: async () => {
       return await Level.find();
     },
+    level: async (_, args) => {
+      return await Level.findOne({ level: args.level });
+    },
     upgrades: async () => {
       return await Upgrade.find();
     }
@@ -87,8 +90,8 @@ const resolvers = {
       const user = await User.findById(args.userId);
       const village = await Village.findById(user.village);
       village.save();
-      const level = await Level.find({ level: village.level });
-      const update = levelUp(village, level[0]);
+      const level = await Level.findOne({ level: village.level });
+      const update = levelUp(village, level);
       await Village.updateOne(
         { _id: user.village },
         {
@@ -103,8 +106,8 @@ const resolvers = {
       const user = await User.findById(args.userId);
       const village = await Village.findById(user.village);
       village.save();
-      const level = await Level.find({ level: village.level });
-      const addPop = addPopulation(village, level[0]);
+      const level = await Level.findOne({ level: village.level });
+      const addPop = addPopulation(village, level);
       await Village.updateOne(
         { _id: user.village },
         {

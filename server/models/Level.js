@@ -10,9 +10,6 @@ const levelSchema = new Schema({
   maxPopulation: {
     type: Number
   },
-  productionRate: {
-    type: Number
-  },
   image: { // link to associated image
     type: String
   },

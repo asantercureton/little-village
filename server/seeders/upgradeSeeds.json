@@ -1,5 +1,55 @@
 [
     {
+        "name": "Better Equipment",
+        "resource": "fruit",
+        "summary": "Your farmers will be more efficient if you give them better tools.",
+        "cost": {
+            "wood": 10
+        }
+    },
+    {
+        "name": "Fertilize Fields",
+        "resource": "fruit",
+        "summary": "Your farmers will have better harvests if they improve their crops.",
+        "cost": {
+            "gold": 10,
+            "wood": 10
+        }
+    },
+    {
+        "name": "Inspire the Farmers",
+        "resource": "fruit",
+        "summary": "Build a statue of yourself in the fields to inspire the farmers to work harder!",
+        "cost": {
+            "gold": 30
+        }
+    },
+    {
+        "name": "Better Bows",
+        "resource": "meat",
+        "summary": "Your hunters will be more efficient if you give them better tools.",
+        "cost": {
+            "wood": 10
+        }
+    },
+    {
+        "name": "Expand Hunting Grounds",
+        "resource": "meat",
+        "summary": "Your hunters will be more efficient if there is more territory to hunt in.",
+        "cost": {
+            "gold": 10,
+            "wood": 10
+        }
+    },
+    {
+        "name": "Inspire the Hunters",
+        "resource": "meat",
+        "summary": "Hang a Self Portrait in the Hunter's Lodge to inspire them to work harder!",
+        "cost": {
+            "gold": 30
+        }
+    },
+    {
         "name": "Better Pickaxes",
         "resource": "gold",
         "summary": "Your miners will be more efficient if you give them better tools.",
@@ -19,7 +69,32 @@
     {
         "name": "Inspire the Miners",
         "resource": "gold",
-        "summary": "Build a statue of yourself in the miner's break room to inspire them to work harder!",
+        "summary": "Carve a sculpture of your face into the mountainside to inspire the miners to work harder!",
+        "cost": {
+            "gold": 30
+        }
+    },
+    {
+        "name": "Better Axes",
+        "resource": "wood",
+        "summary": "Your lumberjacks will be more efficient if you give them better tools.",
+        "cost": {
+            "wood": 10
+        }
+    },
+    {
+        "name": "Plant New Trees",
+        "resource": "wood",
+        "summary": "Planting new trees will be more efficient and sustainable.",
+        "cost": {
+            "gold": 10,
+            "wood": 10
+        }
+    },
+    {
+        "name": "Inspire the Lumberjacks",
+        "resource": "wood",
+        "summary": "Plant a Memorial Tree in your honor to inspire the lumberjacks to work harder!",
         "cost": {
             "gold": 30
         }

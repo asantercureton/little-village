@@ -49,7 +49,9 @@ const Login = () => {
       )
     }
     return (
-      <form onSubmit={handleFormSubmit} id="login-form" className="card-body">
+      <form onSubmit={handleFormSubmit} id="login-form" className="card-body" style={{
+        backgroundImage: `url(${process.env.PUBLIC_URL}/img/backtest.jpg)`
+      }}>
           <label for="email-input-login" className="form-label">Email:</label>
         <div>
           <input name="email" value={formState.email}
@@ -66,11 +68,13 @@ const Login = () => {
   };
 
   return (
-    <main>
-      <div className="container justify-content-center text-center">
-        <div className="card">
+    <main >
+      <div className="container justify-content-center text-center" >
+        <div className="card" style={{
+            backgroundImage: `url(${process.env.PUBLIC_URL}/img/backtest.jpg)`
+          }}>
           <div className="card-header">
-            <h2 className="card-title" id="login">Login</h2>
+            <h2 className="card-title" id="login" >Login</h2>
           </div>
           {renderForm()}
           {error && <div>{error.message}</div>}

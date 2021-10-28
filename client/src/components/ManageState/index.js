@@ -90,7 +90,9 @@ const ManageState = (props) => {
       }
       default: {
         return <div className="manageBox">
-          <div className="cardManage">
+          <div className="cardManage" style={{
+            backgroundImage: `url(${process.env.PUBLIC_URL}/img/backtest.jpg)`
+          }}>
             <div className="buttons">
               <h1>Manage Village</h1>
               <button type="submit" className="btn manage-btn" id="manage-btn" onClick={() => props.setType('population')}>INCREASE POPULATION</button>

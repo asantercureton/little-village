@@ -167,7 +167,7 @@ const Profile = () => {
 
   return (
     <div className="wrapper">
-      <div className="jumbotron jumbotron-fluid">
+      <div className="jumbotron jumbotron-fluid screenWidth">
 
         <div className="profileTable">
           <section>
@@ -212,11 +212,11 @@ const Profile = () => {
           <div className="cardManage">
             <h1>Manage Village</h1>
             <div className="buttons">
-            <button type="submit" className="btn manage-btn" id="manage-btn">INCREASE POPULATION</button>
-            <button type="submit" className="btn manage-btn" id="manage-btn">ASSIGN WORKERS</button>
-            <button type="submit" className="btn manage-btn" id="manage-btn">PURCHASE UPGRADES</button>
-            <button type="submit" className="btn manage-btn" id="manage-btn">LEVEL UP!</button>
-            <button type="submit" className="btn manage-btn" id="manage-btn">REQUEST A TRADE!</button>
+              <button type="submit" className="btn manage-btn" id="manage-btn">INCREASE POPULATION</button>
+              <button type="submit" className="btn manage-btn" id="manage-btn">ASSIGN WORKERS</button>
+              <button type="submit" className="btn manage-btn" id="manage-btn">PURCHASE UPGRADES</button>
+              <button type="submit" className="btn manage-btn" id="manage-btn">LEVEL UP!</button>
+              <button type="submit" className="btn manage-btn" id="manage-btn">REQUEST A TRADE!</button>
             </div>
           </div>
           <div className="abCard">
@@ -245,6 +245,10 @@ const Profile = () => {
           </div>
         </div>
       </div>
+
+
+
+      
 
     </div>
   );

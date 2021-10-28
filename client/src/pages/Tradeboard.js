@@ -6,8 +6,7 @@ import { QUERY_TRADES, QUERY_USER, QUERY_ME } from '../utils/queries';
 import { EXECUTE_TRADE } from '../utils/mutations';
 
 
-// TODO: change emojis
-// executeTrade function DOES run, but the resolver doesn't update the villages
+// TODO: executeTrade function DOES run, but the resolver doesn't update the villages
 // display if the trade is successful or not (if they can't afford it); maybe use acceptData as true/false
 const Tradeboard = () => {
   const { loading, data } = useQuery(QUERY_TRADES);

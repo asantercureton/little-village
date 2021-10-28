@@ -5,6 +5,7 @@ import { useQuery } from '@apollo/client';
 import { QUERY_VILLAGES, QUERY_LEVELS } from '../utils/queries';
 
 // TODO: displays totalResources, but not up to date
+// maybe run save for all villages at least once a day
 // every village that hasn't saved yet appears as 0
 // do we want a max number of villages? like top 25
 const Leaderboard = () => {

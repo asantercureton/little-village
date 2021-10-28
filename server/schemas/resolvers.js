@@ -84,7 +84,10 @@ const resolvers = {
       const village1 = await Village.findById(trade.village);
       const village2 = await Village.findById(user.village);
       executeTrade(village1, village2, trade);
-      return trade
+      if (trade.amount <= 0) {
+        await Trade.findByIdAndDelete(trade._id);
+      }
+      return trade;
     },
     levelUp: async (_, args) => {
       const user = await User.findById(args.userId);

@@ -9,7 +9,7 @@ const createTrade = (village, { resourceSold, amountSold, resourceBought, amount
         buying: {
             amount: amountBought,
             resource: resourceBought
-          },
+        },
         amount: tradeAmount,
         village
     }
@@ -23,11 +23,13 @@ const executeTrade = (village1, village2, trade) => {
         village1.amountOfResources[trade.buying.resource] += trade.buying.amount;
         village2.amountOfResources[trade.selling.resource] += trade.selling.amount;
         village2.amountOfResources[trade.buying.resource] -= trade.buying.amount;
+        trade.amount -= 1;
+        trade.save();
         village1.save();
         village2.save();
         return true
     }
-    return false 
+    return false
 }
 
 

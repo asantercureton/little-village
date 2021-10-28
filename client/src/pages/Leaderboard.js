@@ -54,7 +54,7 @@ const Leaderboard = () => {
       <div className="box">
         <div className="card">
           <section className="otherboard overflow-auto" style={{
-            backgroundImage: `url(${process.env.PUBLIC_URL}/img/otherboard.jpg)`
+            backgroundImage: `url(${process.env.PUBLIC_URL}/img/pape.jpg)`
           }}>
             <table className="table table-hover">
               <thead>

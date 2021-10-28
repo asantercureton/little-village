@@ -1,22 +1,23 @@
 import React, { useState } from 'react';
-import { Redirect, useParams } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import { useQuery, useMutation } from '@apollo/client';
 
 import { CREATE_TRADE } from '../utils/mutations';
 import { QUERY_USER, QUERY_ME } from '../utils/queries';
 
-
+// TODO: need to accept infinity as a tradeAmount (will not submit blank request)
+// alert the user that their trade request was successful
 const TradeForm = () => {
     const { id } = useParams();
 
-    const { loading, data, error } = useQuery(id ? QUERY_USER : QUERY_ME, {
+    const { loading, data: userData, error } = useQuery(id ? QUERY_USER : QUERY_ME, {
         variables: { id },
     });
 
-    const user = data?.me || data?.user || {};
+    const user = userData?.me || userData?.user || {};
 
+    const userId = user._id;
     const [formState, setFormState] = useState({
-        userId: user._id,
         resourceSold: 'fruit',
         amountSold: '',
         resourceBought: 'fruit',
@@ -24,7 +25,7 @@ const TradeForm = () => {
         tradeAmount: ''
     });
 
-    const [createTrade, { error: tradeError, data: tradeData }] = useMutation(CREATE_TRADE);
+    const [createTrade, { data }] = useMutation(CREATE_TRADE);
 
     const handleChange = (event) => {
         const { name, value } = event.target;
@@ -36,19 +37,23 @@ const TradeForm = () => {
     };
 
     const handleFormSubmit = async (event) => {
-        console.log({ ...formState });
         event.preventDefault();
         try {
-            const { createData } = await createTrade({
-                variables: { ...formState },
+            await createTrade({
+                variables: {
+                    userId: userId,
+                    resourceSold: formState.resourceSold,
+                    amountSold: parseInt(formState.amountSold),
+                    resourceBought: formState.resourceBought,
+                    amountBought: parseInt(formState.amountBought),
+                    tradeAmount: parseInt(formState.tradeAmount)
+                },
             });
 
         } catch (e) {
             console.error(e);
         }
-        // clear form values
         setFormState({
-            userId: user._id,
             resourceSold: 'fruit',
             amountSold: '',
             resourceBought: 'fruit',
@@ -58,14 +63,11 @@ const TradeForm = () => {
     };
 
     const renderForm = () => {
-        if (tradeData) {
-            return (
-                <div>
-                    <h2> Trade Created!</h2>
-                    <p>Make Another Offer?</p>
-                </div>
-            )
-        }
+        // if (true) {
+        //     return (
+        //       <h2>Trade Requested! Make Another Offer?</h2>
+        //     )
+        // }
         return (
             <form onSubmit={handleFormSubmit}>
                 <div className="form-group">

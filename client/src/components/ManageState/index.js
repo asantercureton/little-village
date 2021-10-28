@@ -20,6 +20,7 @@ const ManageState = (props) => {
     });
     return arr.join(' & ');
   }
+  console.log(props)
 
   const renderItems = () => {
     switch (props.type) {

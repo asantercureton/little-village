@@ -230,7 +230,8 @@ const Profile = () => {
             backgroundImage: `url(${process.env.PUBLIC_URL}/img/backtest.jpg)`
           }}>
             <ManageState 
-              type={type} 
+              type={type}
+              setType={setType}
               handleClose={handleClose}
             />
             <h1>Manage Village</h1>

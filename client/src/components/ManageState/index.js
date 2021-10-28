@@ -39,16 +39,16 @@ const ManageState = (props) => {
 
 
           <p>FARMERS:
-            <div className="input-group"><button className="btn btn-decrement btn-outline-secondary btn-minus" type="button"><strong>−</strong></button><input type="text" inputmode="decimal" placeholder=""></input><button className="btn btn-increment btn-outline-secondary btn-plus" type="button"><strong>+</strong></button></div>
+            <div className="input-group"><button id="fruit" className="btn btn-decrement btn-outline-secondary btn-minus" onClick={props.subtractWorker} type="button"><strong id="fruit">−</strong></button><input type="text" inputmode="decimal" placeholder={props.workers.fruit}></input><button id="fruit" onClick={props.addWorker} className="btn btn-increment btn-outline-secondary btn-plus" type="button"><strong id="fruit">+</strong></button></div>
           </p>
           <p>HUNTERS:
-            <div className="input-group"><button className="btn btn-decrement btn-outline-secondary btn-minus" type="button"><strong>−</strong></button><input type="text" inputmode="decimal" placeholder="" /><button className="btn btn-increment btn-outline-secondary btn-plus" type="button"><strong>+</strong></button></div>
+            <div className="input-group"><button id="meat" className="btn btn-decrement btn-outline-secondary btn-minus" onClick={props.subtractWorker} type="button"><strong id="meat">−</strong></button><input type="text" inputmode="decimal" placeholder={props.workers.meat} /><button id="meat" onClick={props.addWorker} className="btn btn-increment btn-outline-secondary btn-plus" type="button"><strong id="meat">+</strong></button></div>
           </p>
           <p>MINERS:
-            <div className="input-group"><button className="btn btn-decrement btn-outline-secondary btn-minus" type="button"><strong>−</strong></button><input type="text" inputmode="decimal" placeholder="" /><button className="btn btn-increment btn-outline-secondary btn-plus" type="button"><strong>+</strong></button></div>
+            <div className="input-group"><button id="gold" onClick={props.subtractWorker} className="btn btn-decrement btn-outline-secondary btn-minus" type="button"><strong id="gold">−</strong></button><input type="text" inputmode="decimal" placeholder={props.workers.gold} /><button id="gold" onClick={props.addWorker} className="btn btn-increment btn-outline-secondary btn-plus" type="button"><strong id="gold">+</strong></button></div>
           </p>
           <p>LUMBERJACKS:
-            <div className="input-group"><button id="wood" className="btn btn-decrement btn-outline-secondary btn-minus" type="button"><strong id="wood">−</strong></button><input type="text" inputmode="decimal" placeholder="" /><button id="wood" className="btn btn-increment btn-outline-secondary btn-plus" type="button" onClick=""><strong id="wood">+</strong></button></div>
+            <div className="input-group"><button id="wood" onClick={props.subtractWorker} className="btn btn-decrement btn-outline-secondary btn-minus" type="button"><strong id="wood">−</strong></button><input type="text" inputmode="decimal" placeholder={props.workers.wood} /><button id="wood" onClick={props.addWorker} className="btn btn-increment btn-outline-secondary btn-plus" type="button"><strong id="wood">+</strong></button></div>
           </p>
 
           <div>

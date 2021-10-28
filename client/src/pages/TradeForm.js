@@ -7,7 +7,6 @@ import { QUERY_USER, QUERY_ME } from '../utils/queries';
 
 // TODO: need to accept infinity as a tradeAmount (will not submit blank request)
 // ensure that you must be logged in as a user to view this page & make a trade
-// alert the user that their trade request was successful
 const TradeForm = () => {
     const { id } = useParams();
 
@@ -63,12 +62,15 @@ const TradeForm = () => {
         });
     };
 
+    const successMessage = () => {
+        if (data) {
+            return (
+              <h2>Trade Requested! Make Another Offer?</h2>
+            )
+        }
+    };
+
     const renderForm = () => {
-        // if (true) {
-        //     return (
-        //       <h2>Trade Requested! Make Another Offer?</h2>
-        //     )
-        // }
         return (
             <form onSubmit={handleFormSubmit}>
                 <div className="form-group">
@@ -93,10 +95,10 @@ const TradeForm = () => {
                     <label for="exampleInputEmail1">Resource Requested: </label>
                 </div>
                 <select name="resourceBought" value={formState.resourceBought} onChange={handleChange} className="form-control-sm" id="exampleFormControlSelect1">
-                    <option value='fruit'>Fruit</option>
-                    <option value='meat'>Meat</option>
-                    <option value='gold'>Gold</option>
-                    <option value='wood'>Wood</option>
+                    <option value="fruit">Fruit</option>
+                    <option value="meat">Meat</option>
+                    <option value="gold">Gold</option>
+                    <option value="wood">Wood</option>
                 </select>
 
                 <div>
@@ -121,6 +123,7 @@ const TradeForm = () => {
             <div className="trade">
                 <div className="row2">
                     <div className="villageCard">
+                        {successMessage()}
                         <h1 className="tradeTitle">CREATE A TRADE!</h1>
                         {renderForm()}
                         {error && <div>{error.message}</div>}

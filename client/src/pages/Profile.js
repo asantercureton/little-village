@@ -5,7 +5,7 @@ import { useQuery, useLazyQuery, useMutation} from '@apollo/client';
 // Utilities
 import Auth from '../utils/auth';
 import { QUERY_USERS, QUERY_USER, QUERY_ME, QUERY_LEVEL } from '../utils/queries';
-import { ALLOCATE_UNIT, GET_UPDATED_RESOURCES } from '../utils/mutations';
+import { ADD_POPULATION, LEVEL_UP, BUY_UPGRADE, ALLOCATE_UNIT, GET_UPDATED_RESOURCES } from '../utils/mutations';
 // Components
 import UserList from '../components/UserList';
 
@@ -53,6 +53,10 @@ const Profile = () => {
 
   const [currentLevel, { data: levelData }] = useLazyQuery(QUERY_LEVEL);
 
+  const [addPopulation, { data: popData }] = useMutation(ADD_POPULATION);
+  const [levelUp, { data: levelUpData }] = useMutation(LEVEL_UP);
+  const [buyUpgrade, { data: buyData }] = useMutation(BUY_UPGRADE);
+  
   useEffect(() => {
     if (user?.village?.level) {
       currentLevel({
@@ -65,9 +69,53 @@ const Profile = () => {
   
   if (error) console.log(error);
 
+
   const handleClose = () => {
     setType(null);
   }
+
+  const handleAddPop = async (event) => {
+    event.preventDefault();
+    try {
+      await addPopulation({
+        variables: {
+          userId: user._id
+        },
+      });
+
+    } catch (e) {
+      console.error(e);
+    }
+  };
+
+  const handleLevelUp = async (event) => {
+    event.preventDefault();
+    try {
+      await levelUp({
+        variables: {
+          userId: user._id
+        },
+      });
+
+    } catch (e) {
+      console.error(e);
+    }
+  };
+
+  const handleBuyUpgrade = async (event) => {
+    event.preventDefault();
+    try {
+      await buyUpgrade({
+        variables: {
+          userId: user._id,
+          upgradeId: event.target.value
+        },
+      });
+
+    } catch (e) {
+      console.error(e);
+          }
+  };
 
   //const [gameLoopInit, setGameLoopInit] = useState(false); //have we set up the game loop? 
 useEffect(() => { //make this not async and create new function to fetch server data
@@ -264,6 +312,9 @@ useEffect(() => { //make this not async and create new function to fetch server 
                 type={type}
                 setType={setType}
                 handleClose={handleClose}
+                handleAddPop={handleAddPop}
+                handleLevelUp={handleLevelUp}
+                handleBuyUpgrade={handleBuyUpgrade}
                 user={user}
                 level={level}
               />

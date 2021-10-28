@@ -26,12 +26,13 @@
 }
 
 body {
-  background: url(`${process.env.PUBLIC_URL}/img/gold.jpg`);
+  /* background: url(`${process.env.PUBLIC_URL}/img/gold.jpg`); */
   min-height: 100vh;
   background-attachment: fixed;
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
+
 }
 
 
@@ -183,12 +184,12 @@ footer {
 }
 
 .card {
-  background-image: url(`${process.env.PUBLIC_URL}/img/backtest.jpg`);
+  /* background-image: url(`${process.env.PUBLIC_URL}/img/backtest.jpg`); */
   color: whitesmoke;
 }
 
 .cardManage {
-  background-image: url(`${process.env.PUBLIC_URL}/img/backtest.jpg`);
+  /* background-image: url(`${process.env.PUBLIC_URL}/img/backtest.jpg`); */
   color: whitesmoke;
   display: flex;
   align-items: center;
@@ -220,12 +221,12 @@ footer {
 }
 
 .villageCard {
-  background-image: url(`${process.env.PUBLIC_URL}/img/backtest.jpg`);
+  /* background-image: url(`${process.env.PUBLIC_URL}/img/backtest.jpg`); */
   color: whitesmoke;
 }
 .card2 {
   
-  background-image: url(`${process.env.PUBLIC_URL}/img/backtest.jpg`);
+  /* background-image: url(`${process.env.PUBLIC_URL}/img/backtest.jpg`); */
   opacity: .85;
   display: flex;
   color: whitesmoke;
@@ -293,7 +294,7 @@ footer {
 }
 
 .wrapper {
-  background-image: url(`${process.env.PUBLIC_URL}/img/hamlet2.jpg`);
+  /* background-image: url(`${process.env.PUBLIC_URL}/img/hamlet2.jpg`); */
   background-size: cover;
   height: 100%;
   display: flex;

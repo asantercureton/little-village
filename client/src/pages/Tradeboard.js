@@ -55,7 +55,7 @@ const Tradeboard = () => {
       return <tbody><tr><td>Loading...</td></tr></tbody>
     } else {
       return (
-        <tbody>
+        <tbody >
           {trades.map((trade) => (
             <tr key={trade._id}>
               <td>{trade.village.user.username}</td>
@@ -73,7 +73,10 @@ const Tradeboard = () => {
   return (
     <main>
       <div>
-        <section className="leaderboard overflow-auto">
+        <section className="leaderboard overflow-auto"
+        style={{
+          backgroundImage: `url(${process.env.PUBLIC_URL}/img/leaderboard.jpg)`
+        }}>
           <table className="table table-hover">
             <thead>
               <tr>

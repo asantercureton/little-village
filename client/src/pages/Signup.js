@@ -47,7 +47,9 @@ const Signup = () => {
       )
     }
     return (
-      <form onSubmit={handleFormSubmit} id="login-form" className="card-body">
+      <form onSubmit={handleFormSubmit} id="login-form" className="card-body" style={{
+        backgroundImage: `url(${process.env.PUBLIC_URL}/img/backtest.jpg)`
+      }}>
           <label for="username-input-login">Username:</label>
         <div>
           <input name="username" value={formState.name} onChange={handleChange} type="text" id="username-input-login" />
@@ -68,7 +70,9 @@ const Signup = () => {
   return (
     <main>
       <div className="container justify-content-center text-center">
-        <div className="card">
+        <div className="card" style={{
+            backgroundImage: `url(${process.env.PUBLIC_URL}/img/backtest.jpg)`
+          }}>
           <div className="card-header">
             <h2 className="card-title">SignUp!</h2>
           </div>

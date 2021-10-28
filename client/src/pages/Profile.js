@@ -180,7 +180,9 @@ const Profile = () => {
 
 
   return (
-    <div className="wrapper">
+    <div className="wrapper" style={{
+      backgroundImage: `url(${process.env.PUBLIC_URL}/img/hamlet2.jpg)`
+    }}>
       <div className="jumbotron jumbotron-fluid screenWidth">
 
         <div className="profileTable">
@@ -227,10 +229,11 @@ const Profile = () => {
 
 
         <div className="manageBox">
-          <div className="cardManage">
-          <ManageState 
-              // showing={showing}
-              setType={setType}
+          <div className="cardManage" style={{
+            backgroundImage: `url(${process.env.PUBLIC_URL}/img/backtest.jpg)`
+          }}>
+            <ManageState 
+              showing={showing}
               type={type} 
               handleClose={handleClose}
             />

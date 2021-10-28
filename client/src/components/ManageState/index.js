@@ -20,19 +20,77 @@ const ManageState = (props) => {
     return arr.join(' & ');
   }
 
+  const checkCapacity = () => {
+    if (props.user.village.population >= props.level.maxPopulation) {
+      return <div><h1>You're at Capacity!</h1>
+        <h4>Current Population: {props.user.village.population}</h4>
+        <h4>Max Population: {props.level.maxPopulation}</h4>
+        <h4>Level Up to Expand!</h4>
+      </div>
+    } else {
+      return <div><h1>Increase Population</h1>
+        <h4>Current Population: {props.user.village.population}</h4>
+        <h4>Max Population: {props.level.maxPopulation}</h4>
+        <h5>Cost: {popCost(props.level.buyPopulation)}</h5>
+        {renderPopBtn()}
+      </div>
+    }
+  }
+
+  const checkMaxLevel = () => {
+    if (props.level.nextLevel) {
+      return <button type="submit" className="btn manage-btn" id="manage-btn" onClick={() => props.setType('levelup')}>LEVEL UP!</button>
+    } else {
+      return <button type="submit" className="btn manage-btn" id="manage-btn">YOU'RE MAX LEVEL!</button>
+    }
+  }
+
+  const renderPopBtn = () => {
+    if (checkAfford(props.user.village.amountOfResources, props.level.buyPopulation)) {
+      return <button onClick={props.handleAddPop} type="submit" className="btn population-btn" id="population1-btn">BUY 1</button>
+    } else {
+      return <button disabled type="submit" className="btn population-btn" id="population1-btn">CAN'T AFFORD</button>
+    }
+  }
+
+  const renderLevelBtn = () => {
+    if (checkAfford(props.user.village.amountOfResources, props.level.levelUpCost)) {
+      return <button onClick={props.handleLevelUp} type="submit" className="btn levelup-btn" id="levelup-btn">BUY</button>
+    } else {
+      return <button disabled type="submit" className="btn levelup-btn" id="levelup-btn">CAN'T AFFORD</button>
+    }
+  }
+
+  const checkAfford = (owned, price) => {
+    let arr = [];
+    let afford = 0;
+    Object.keys(price).forEach(key => {
+      if (price[key] > 0) {
+        arr.push(key);
+      }
+    });
+    for (let i = 0; i < arr.length; i++) {
+      let resource = arr[i];
+      let amount = owned[resource];
+      let cost = price[resource];
+      if (amount >= cost) { afford++ };
+    }
+    
+    if (arr.length === afford) {
+      return true;
+    } else {
+      return false;
+    }
+  };
+
   const renderItems = () => {
     switch (props.type) {
       case 'population': {
-        return <div><h1>Increase Population</h1>
-          <h4>Current Population: {props.user.village.population}</h4>
-          <h4>Max Population: {props.level.maxPopulation}</h4>
-          <h5>Cost: {popCost(props.level.buyPopulation)}</h5>
-          <button onClick={props.handleAddPop} type="submit" className="btn population-btn" id="population1-btn">BUY 1</button>
-        </div>
+        return checkCapacity()
       }
       case 'workers': {
         return <div><h5 className="card-title"><strong>Assign Workers</strong></h5>
-          <p className="card-text">Reallocate the workload</p>
+          <p className="card-text">Allocate the Workload</p>
           <p>FARMERS:
             <div className="input-group"><button id="fruit" className="btn btn-decrement btn-outline-secondary btn-minus" onClick={props.subtractWorker} type="button"><strong id="fruit">−</strong></button><input type="text" disabled="true" inputmode="decimal" placeholder={props.workers.fruit}></input><button id="fruit" onClick={props.addWorker} className="btn btn-increment btn-outline-secondary btn-plus" type="button"><strong id="fruit">+</strong></button></div>
           </p>
@@ -74,12 +132,12 @@ const ManageState = (props) => {
           </tbody></div>
       }
       case 'levelup': {
-        return <div><h1>Level Up!</h1>
-
+        return <div>
+          <h1>Level Up!</h1>
           <p>Level Up to {props.level.nextLevel}</p>
           <div>
             <h3>Cost: {popCost(props.level.levelUpCost)}</h3>
-            <button onClick={props.handleLevelUp} type="submit" className="btn levelup-btn" id="levelup-btn">BUY</button>
+            {renderLevelBtn()}
           </div></div>
       }
       default: {
@@ -91,10 +149,12 @@ const ManageState = (props) => {
               <h1>Manage Village</h1>
               <button type="submit" className="btn manage-btn" id="manage-btn" onClick={() => props.setType('population')}>INCREASE POPULATION</button>
               <button type="submit" className="btn manage-btn" id="manage-btn" onClick={() => props.setType('workers')}>ASSIGN WORKERS</button>
-              <button type="submit" className="btn manage-btn" id="manage-btn" onClick={() => props.setType('levelup')}>LEVEL UP!</button>
-                <Link to="/tradeform">
-              <p className="btn request-btn" id="request-btn">REQUEST A TRADE</p>
-                </Link>
+              <Link to="/tradeform" className="btn manage-btn" id="manage-btn">
+                <button type="submit">
+                  REQUEST A TRADE
+                </button>
+              </Link>
+              {checkMaxLevel()}
             </div>
           </div>
         </div>

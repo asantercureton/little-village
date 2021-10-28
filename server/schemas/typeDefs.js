@@ -37,7 +37,7 @@ const typeDefs = gql`
     image: String
     levelUpCost: ResourceObject
     buyPopulation: ResourceObject
-    nextLevel: Int
+    nextLevel: String
   }
 
   type Upgrade {

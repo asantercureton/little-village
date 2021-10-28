@@ -22,7 +22,7 @@ const levelSchema = new Schema({
     meat: Number
   },
   nextLevel: {
-    type: Number
+    type: String
   }
 });
 

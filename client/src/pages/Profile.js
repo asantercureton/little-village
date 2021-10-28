@@ -220,8 +220,7 @@ const Profile = () => {
 
           </section>
           <div className="imageCard">
-            {/* level img src = "../src/img/levels/tribe.jpg" */}
-            <img src={`${process.env.PUBLIC_URL}/tribe.jpg`} alt={level.name} />
+            <img src={`${process.env.PUBLIC_URL}/img/levels/${level.image}`} alt={level.name} />
           </div>
         </div>
 

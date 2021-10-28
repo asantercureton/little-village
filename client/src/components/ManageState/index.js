@@ -3,13 +3,11 @@ import { Link } from 'react-router-dom';
 
 const ManageState = (props) => {
   const styles = {
-    width: "100%",
-    height: "100%",
-    backgroundColor: "red",
-    position: "absolute",
+    // width: "100%",
+    // height: "100%",
+    backgroundImage: `url(${process.env.PUBLIC_URL}/img/otherboard.jpg)`,
     top: 0,
     left: 0,
-    overflowY: "scroll"
   }
 
   const popCost = (buyPop) => {
@@ -93,12 +91,10 @@ const ManageState = (props) => {
               <h1>Manage Village</h1>
               <button type="submit" className="btn manage-btn" id="manage-btn" onClick={() => props.setType('population')}>INCREASE POPULATION</button>
               <button type="submit" className="btn manage-btn" id="manage-btn" onClick={() => props.setType('workers')}>ASSIGN WORKERS</button>
-                <Link to="/tradeform" className="btn manage-btn" id="manage-btn">
-              <button type="submit">
-                  REQUEST A TRADE
-              </button>
-                </Link>
               <button type="submit" className="btn manage-btn" id="manage-btn" onClick={() => props.setType('levelup')}>LEVEL UP!</button>
+                <Link to="/tradeform">
+              <p className="btn request-btn" id="request-btn">REQUEST A TRADE</p>
+                </Link>
             </div>
           </div>
         </div>

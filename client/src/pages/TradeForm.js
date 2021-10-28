@@ -81,10 +81,10 @@ const TradeForm = () => {
                         <label for="exampleInputEmail1">Resource Offered: </label>
                     </div>
                     <select name="resourceSold" value={formState.resourceSold} onChange={handleChange} className="form-control-sm" id="exampleFormControlSelect1">
-                        <option value='fruit'>Fruit</option>
-                        <option value='meat'>Meat</option>
-                        <option value='gold'>Gold</option>
-                        <option value='wood'>Wood</option>
+                        <option value='fruit'>🍎 Fruit</option>
+                        <option value='meat'>🥩 Meat</option>
+                        <option value='gold'>💰 Gold</option>
+                        <option value='wood'>🌲 Wood</option>
                     </select>
 
                     <div>
@@ -98,10 +98,10 @@ const TradeForm = () => {
                     <label for="exampleInputEmail1">Resource Requested: </label>
                 </div>
                 <select name="resourceBought" value={formState.resourceBought} onChange={handleChange} className="form-control-sm" id="exampleFormControlSelect1">
-                    <option value="fruit">Fruit</option>
-                    <option value="meat">Meat</option>
-                    <option value="gold">Gold</option>
-                    <option value="wood">Wood</option>
+                    <option value="fruit">🍎 Fruit</option>
+                    <option value="meat">🥩 Meat</option>
+                    <option value="gold">💰 Gold</option>
+                    <option value="wood">🌲 Wood</option>
                 </select>
 
                 <div>

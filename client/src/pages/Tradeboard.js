@@ -25,11 +25,11 @@ const Tradeboard = () => {
       case 'fruit':
         return '🍎 Fruit: ';
       case 'meat':
-        return '🍎 Meat: ';
+        return '🥩 Meat: ';
       case 'gold':
-        return '🍎 Gold: ';
+        return '💰 Gold: ';
       case 'wood':
-        return '🍎 Wood: ';
+        return '🌲 Wood: ';
       default:
         return resource;
     }

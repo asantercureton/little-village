@@ -195,7 +195,7 @@ const Profile = () => {
                   <td>{user.village.population}</td>
                 </tr>
                 <tr className="cell">
-                  <th scope="row">🍎  FRUITS:</th>
+                  <th scope="row">🍎 FRUIT:</th>
                   <td>{resources.fruit}</td>
                 </tr>
                 <tr className="cell">

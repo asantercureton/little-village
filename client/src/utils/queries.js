@@ -153,13 +153,14 @@ export const QUERY_LEVELS = gql`
         gold
         wood
       }
+      nextLevel
     }
   }
 `;
 
 export const QUERY_LEVEL = gql`
-  query level {
-    level {
+  query level($level: Int!) {
+    level(level: $level) {
       _id
       level
       name
@@ -177,6 +178,7 @@ export const QUERY_LEVEL = gql`
         gold
         wood
       }
+      nextLevel
     }
   }
 `;

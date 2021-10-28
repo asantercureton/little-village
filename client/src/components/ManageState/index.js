@@ -1,6 +1,4 @@
-import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
-import { useQuery } from '@apollo/client';
+import React from 'react';
 
 const ManageState = (props) => {
   const styles = {
@@ -10,20 +8,28 @@ const ManageState = (props) => {
     position: "absolute",
     top: 0,
     left: 0,
-    overflowY: "scroll",
-    // display: props.showing ? 'block' : 'none'
+    overflowY: "scroll"
+  }
+
+  const popCost = (buyPop) => {
+    let arr = [];
+    Object.keys(buyPop).forEach(key => {
+        if(buyPop[key] > 0) {
+            arr.push(buyPop[key] + ' ' + key.toUpperCase());
+        }
+    });
+    return arr.join(' & ');
   }
 
   const renderItems = () => {
     switch (props.type) {
       case 'population': {
         return <div><h1>Increase Population</h1>
-          <h4>Current Population: 22</h4>
-          <h4>Max Population: 25</h4>
-          <h5>Cost: 5 Fruit</h5>
+          <h4>Current Population: {props.user.village.population}</h4>
+          <h4>Max Population: {props.level.maxPopulation}</h4>
+          <h5>Cost: {popCost(props.level.buyPopulation)}</h5>
           <button type="submit" className="btn population-btn" id="population1-btn">BUY 1</button>
-          <button type="submit" className="btn population-btn" id="population5-btn">BUY 5</button>
-          <button type="submit" className="btn population-btn" id="population25-btn">BUY 25</button></div>
+          </div>
       }
       case 'workers': {
         return <div><h5 className="card-title"><strong>Assign Workers</strong></h5>
@@ -35,13 +41,13 @@ const ManageState = (props) => {
             <div className="input-group"><button className="btn btn-decrement btn-outline-secondary btn-minus" type="button"><strong>−</strong></button><input type="text" inputmode="decimal" placeholder=""></input><button className="btn btn-increment btn-outline-secondary btn-plus" type="button"><strong>+</strong></button></div>
           </p>
           <p>HUNTERS:
-            <div className="input-group  "><button className="btn btn-decrement btn-outline-secondary btn-minus" type="button"><strong>−</strong></button><input type="text" inputmode="decimal" placeholder="" /><button className="btn btn-increment btn-outline-secondary btn-plus" type="button"><strong>+</strong></button></div>
+            <div className="input-group"><button className="btn btn-decrement btn-outline-secondary btn-minus" type="button"><strong>−</strong></button><input type="text" inputmode="decimal" placeholder="" /><button className="btn btn-increment btn-outline-secondary btn-plus" type="button"><strong>+</strong></button></div>
           </p>
           <p>MINERS:
-            <div className="input-group  "><button className="btn btn-decrement btn-outline-secondary btn-minus" type="button"><strong>−</strong></button><input type="text" inputmode="decimal" placeholder="" /><button className="btn btn-increment btn-outline-secondary btn-plus" type="button"><strong>+</strong></button></div>
+            <div className="input-group"><button className="btn btn-decrement btn-outline-secondary btn-minus" type="button"><strong>−</strong></button><input type="text" inputmode="decimal" placeholder="" /><button className="btn btn-increment btn-outline-secondary btn-plus" type="button"><strong>+</strong></button></div>
           </p>
           <p>LUMBERJACKS:
-            <div className="input-group  "><button id="wood" className="btn btn-decrement btn-outline-secondary btn-minus" type="button"><strong id="wood">−</strong></button><input type="text" inputmode="decimal" placeholder="" /><button id="wood" className="btn btn-increment btn-outline-secondary btn-plus" type="button" onClick=""><strong id="wood">+</strong></button></div>
+            <div className="input-group"><button id="wood" className="btn btn-decrement btn-outline-secondary btn-minus" type="button"><strong id="wood">−</strong></button><input type="text" inputmode="decimal" placeholder="" /><button id="wood" className="btn btn-increment btn-outline-secondary btn-plus" type="button" onClick=""><strong id="wood">+</strong></button></div>
           </p>
 
           <div>

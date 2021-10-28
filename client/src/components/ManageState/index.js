@@ -11,7 +11,7 @@ const ManageState = (props) => {
     top: 0,
     left: 0,
     overflowY: "scroll",
-    display: props.showing ? 'block' : 'none'
+    // display: props.showing ? 'block' : 'none'
   }
 
   const renderItems = () => {
@@ -89,18 +89,28 @@ const ManageState = (props) => {
           </div></div>
       }
       default: {
-        return <h1>Default</h1>
+        return <div className="manageBox">
+          <div className="cardManage">
+            <div className="buttons">
+              <h1>Manage Village</h1>
+              <button type="submit" className="btn manage-btn" id="manage-btn" onClick={() => props.setType('population')}>INCREASE POPULATION</button>
+              <button type="submit" className="btn manage-btn" id="manage-btn" onClick={() => props.setType('workers')}>ASSIGN WORKERS</button>
+              <button type="submit" className="btn manage-btn" id="manage-btn" onClick={() => props.setType('upgrades')}>PURCHASE UPGRADES</button>
+              <button type="submit" className="btn manage-btn" id="manage-btn" onClick={() => props.setType('levelup')}>LEVEL UP!</button>
+            </div>
+          </div>
+        </div>
       }
     }
   }
 
-  
+
 
   return (
     <div style={styles}>
-      <button onClick={props.handleClose}>
-        Back to Profile
-      </button>
+      {props.type === null ? [] : <button onClick={props.handleClose}>
+        Manage Village
+      </button>}
       {renderItems()}
     </div>
   );

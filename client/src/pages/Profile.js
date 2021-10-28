@@ -14,7 +14,7 @@ import ManageState from '../components/ManageState';
 const Profile = () => {
   const { id } = useParams();
 
-  const [showing, setShowing] = useState(true);
+  // const [showing, setShowing] = useState(true);
   const [type, setType] = useState(null);
 
   const gameLoop = () => { //TODO: Rework gameloop to render not based on time since last frame, but time since the information was refreshed
@@ -99,14 +99,14 @@ const Profile = () => {
 
   if (error) console.log(error);
 
-  const { loading: levelLoading, data: levelData } = useQuery(QUERY_LEVELS);
-  const levels = levelData?.levels || [];
-  const level = levels.find(level => (level.level === user.village.level));
-  const nextLevel = levels.find(level => (level.level === (user.village.level + 1)));
+  // const { loading: levelLoading, data: levelData } = useQuery(QUERY_LEVELS);
+  // const levels = levelData?.levels || [];
+  // const level = levels.find(level => (level.level === user.village.level));
+  // const nextLevel = levels.find(level => (level.level === (user.village.level + 1)));
 
   const handleClose = () => {
-    setType('');
-    setShowing(false);
+    setType(null);
+    // setShowing(false);
   }
 
   // redirect to personal profile page if username is yours
@@ -114,7 +114,7 @@ const Profile = () => {
     return <Redirect to="/me" />;
   }
 
-  if (loading || usersLoading || levelLoading) {
+  if (loading || usersLoading) {
     return <h4>Loading...</h4>;
   }
 
@@ -185,7 +185,7 @@ const Profile = () => {
 
         <div className="profileTable">
           <section>
-            <h1 className="display-4 tableTitle">{user.username}'s {level.name}</h1>
+            {/* <h1 className="display-4 tableTitle">{user.username}'s {level.name}</h1> */}
 
             <table className="table table-hover">
 
@@ -216,29 +216,27 @@ const Profile = () => {
                 </tr>
               </tbody>
             </table>
+            <button type="submit" className="btn request-btn" id="request-btn">REQUEST A TRADE!</button>
+
           </section>
           <div className="imageCard">
             {/* level img src = "../src/img/levels/tribe.jpg" */}
-            <img src={level.image} alt={level.name} />
+            {/* <img src={level.image} alt={level.name} /> */}
           </div>
         </div>
 
+
         <div className="manageBox">
           <div className="cardManage">
-            <ManageState 
-              showing={showing}
+          <ManageState 
+              // showing={showing}
+              setType={setType}
               type={type} 
               handleClose={handleClose}
             />
             <h1>Manage Village</h1>
-            <div className="buttons">
-              <button type="submit" className="btn manage-btn" id="manage-btn">INCREASE POPULATION</button>
-              <button type="submit" className="btn manage-btn" id="manage-btn">ASSIGN WORKERS</button>
-              <button type="submit" className="btn manage-btn" id="manage-btn">PURCHASE UPGRADES</button>
-              <button type="submit" className="btn manage-btn" id="manage-btn">LEVEL UP!</button>
-              <button type="submit" className="btn manage-btn" id="manage-btn">REQUEST A TRADE!</button>
-            </div>
           </div>
+
           <div className="abCard">
             <table className="table table-hover">
               <thead>

@@ -14,7 +14,6 @@ import ManageState from '../components/ManageState';
 const Profile = () => {
   const { id } = useParams();
 
-  const [showing, setShowing] = useState(true);
   const [type, setType] = useState(null);
 
   const gameLoop = () => { //TODO: Rework gameloop to render not based on time since last frame, but time since the information was refreshed
@@ -105,8 +104,7 @@ const Profile = () => {
   const nextLevel = levels.find(level => (level.level === (user.village.level + 1)));
 
   const handleClose = () => {
-    setType('');
-    setShowing(false);
+    setType(null);
   }
 
   // redirect to personal profile page if username is yours
@@ -218,32 +216,29 @@ const Profile = () => {
                 </tr>
               </tbody>
             </table>
+            <button type="submit" className="btn request-btn" id="request-btn">REQUEST A TRADE!</button>
+
           </section>
           <div className="imageCard">
-            {/* level img src = "../src/img/levels/tribe.jpg" */}
-            <img src={`${process.env.PUBLIC_URL}/tribe.jpg`} alt={level.name} />
+            <img src={`${process.env.PUBLIC_URL}/img/levels/${level.image}`} alt={level.name} />
           </div>
         </div>
 
-        <div className="manageBox " >
+
+        <div className="manageBox">
           <div className="cardManage" style={{
             backgroundImage: `url(${process.env.PUBLIC_URL}/img/backtest.jpg)`
           }}>
             <ManageState 
-              showing={showing}
               type={type} 
               handleClose={handleClose}
             />
             <h1>Manage Village</h1>
-            <div className="buttons">
-              <button type="submit" className="btn manage-btn" id="manage-btn">INCREASE POPULATION</button>
-              <button type="submit" className="btn manage-btn" id="manage-btn">ASSIGN WORKERS</button>
-              <button type="submit" className="btn manage-btn" id="manage-btn">PURCHASE UPGRADES</button>
-              <button type="submit" className="btn manage-btn" id="manage-btn">LEVEL UP!</button>
-              <button type="submit" className="btn manage-btn" id="manage-btn">REQUEST A TRADE!</button>
-            </div>
           </div>
+
+
           <div className="abCard overflow-auto">
+          
             <table className="table table-hover">
               <thead>
                 <th scope="col">Resource</th>

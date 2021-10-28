@@ -20,34 +20,6 @@ const ManageState = (props) => {
     });
     return arr.join(' & ');
   }
-  console.log(props)
-  
-  const renderUpgrades = () => {
-    return <div><h5 className="card-title"><strong>Purchase Upgrades</strong></h5>
-          <h2 className="card-text">{} Upgrades</h2>
-          <tbody>
-            <tr className="cell">
-              <th scope="row">🍎 FRUIT:</th>
-              <td>/3 Owned</td>
-              <button type="submit" className="btn trade-btn" id="worker-btn">BUY</button>
-            </tr>
-            <tr className="cell">
-              <th scope="row">🥩 MEAT:</th>
-              <td>/3 Owned</td>
-              <button type="submit" className="btn trade-btn" id="worker-btn">BUY</button>
-            </tr>
-            <tr className="cell">
-              <th scope="row">💰 GOLD:</th>
-              <td>/3 Owned</td>
-              <button type="submit" className="btn trade-btn" id="worker-btn">BUY</button>
-            </tr>
-            <tr className="cell">
-              <th scope="row">🌲 WOOD:</th>
-              <td>/3 Owned</td>
-              <button type="submit" className="btn trade-btn" id="worker-btn">BUY</button>
-            </tr>
-          </tbody></div>
-  };
 
   const renderItems = () => {
     switch (props.type) {
@@ -89,18 +61,18 @@ const ManageState = (props) => {
         return <div><h5 className="card-title"><strong>Purchase Upgrades</strong></h5>
           <h2 className="card-text">Make a Purchase</h2>
           <tbody>
-            <tr className="cell">
+          <tr className="cell">
               <th scope="row">🍎 FRUIT:</th>
               <td>/3 Owned</td>
               <button type="submit" className="btn trade-btn" id="worker-btn">BUY</button>
             </tr>
             <tr className="cell">
-              <th scope="row">🥩 GOLD:</th>
+              <th scope="row">🥩 MEAT:</th>
               <td>/3 Owned</td>
               <button type="submit" className="btn trade-btn" id="worker-btn">BUY</button>
             </tr>
             <tr className="cell">
-              <th scope="row">💰 MEAT:</th>
+              <th scope="row">💰 GOLD:</th>
               <td>/3 Owned</td>
               <button type="submit" className="btn trade-btn" id="worker-btn">BUY</button>
             </tr>
@@ -129,7 +101,7 @@ const ManageState = (props) => {
               <h1>Manage Village</h1>
               <button type="submit" className="btn manage-btn" id="manage-btn" onClick={() => props.setType('population')}>INCREASE POPULATION</button>
               <button type="submit" className="btn manage-btn" id="manage-btn" onClick={() => props.setType('workers')}>ASSIGN WORKERS</button>
-              <button type="submit" className="btn manage-btn" id="manage-btn" onClick={() => props.setType('upgrades')}>PURCHASE UPGRADES</button>
+              <button type="submit" className="btn manage-btn" id="manage-btn">REQUEST A TRADE</button>
               <button type="submit" className="btn manage-btn" id="manage-btn" onClick={() => props.setType('levelup')}>LEVEL UP!</button>
             </div>
           </div>

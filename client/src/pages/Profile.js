@@ -7,7 +7,6 @@ import Auth from '../utils/auth';
 import { QUERY_USERS, QUERY_USER, QUERY_ME, QUERY_LEVEL } from '../utils/queries';
 import { ADD_POPULATION, LEVEL_UP, BUY_UPGRADE, ALLOCATE_UNIT, GET_UPDATED_RESOURCES } from '../utils/mutations';
 // Components
-import UserList from '../components/UserList';
 
 import ManageState from '../components/ManageState';
 
@@ -75,10 +74,6 @@ const Profile = () => {
     setType(null);
   }
 
-  const handleChooseUpgrade = () => {
-    setChosen(null);
-  }
-
   const handleAddPop = async (event) => {
     event.preventDefault();
     try {
@@ -101,7 +96,7 @@ const Profile = () => {
           userId: user._id
         },
       });
-
+      window.location.refresh();
     } catch (e) {
       console.error(e);
     }
@@ -214,25 +209,6 @@ useEffect(() => { //make this not async and create new function to fetch server 
     );
   }
 
-  const renderUserList = () => {
-    if (usersLoading) return null;
-    // Only renders users who's profile we're not currently viewing
-    const notMeUsers = users.filter(o => o._id !== user._id);
-    return <UserList users={notMeUsers} title="User List" />;
-  };
-
-  const renderCurrentUserInfo = () => {
-    if (id) return null;
-    return (
-      <ul>
-        <h3>Username:</h3>
-        <p>{user.username}</p>
-        <h3>Email:</h3>
-        <p>{user.email}</p>
-      </ul>
-    );
-  }
-
   const addWorker = async (e) => {
     let tempWorkers = workers;
     let totalWorkers = 0;
@@ -300,8 +276,6 @@ useEffect(() => { //make this not async and create new function to fetch server 
                   </tr>
                 </tbody>
               </table>
-              <button type="submit" className="btn request-btn" id="request-btn">REQUEST A TRADE!</button>
-
             </section>
             <div className="imageCard">
               <img src={`${process.env.PUBLIC_URL}/img/levels/${level.image}`} alt={level.name} />
@@ -332,7 +306,6 @@ useEffect(() => { //make this not async and create new function to fetch server 
                   <th scope="col">Resource</th>
                   <th scope="col">Abundance</th>
                   <th scope="col">Workers</th>
-                  <th scope="col">Upgrades</th>
                   <th scope="col">Earnings</th>
                 </thead>
                 <tbody className="rows2">
@@ -340,28 +313,24 @@ useEffect(() => { //make this not async and create new function to fetch server 
                     <th scope="row">🍎 FRUIT:</th>
                     <td>{user.village.abundanceOfResources.fruit}</td>
                     <td>{workers.fruit}</td>
-                    <td>{user.village.upgrades.fruit.length}</td>
                     <td>*{resources.fruit} #/sec</td>
                   </tr>
                   <tr className="cell">
                     <th scope="row">🥩 MEAT:</th>
                     <td>{user.village.abundanceOfResources.meat}</td>
                     <td>{workers.meat}</td>
-                    <td>{user.village.upgrades.meat.length}</td>
                     <td>*{resources.meat} #/sec</td>
                   </tr>
                   <tr className="cell">
                     <th scope="row">💰 GOLD:</th>
                     <td>{user.village.abundanceOfResources.gold}</td>
                     <td>{workers.gold}</td>
-                    <td>{user.village.upgrades.gold.length}</td>
                     <td>*{resources.gold} #/sec</td>
                   </tr>
                   <tr className="cell">
                     <th scope="row">🌲 WOOD:</th>
                     <td>{user.village.abundanceOfResources.wood}</td>
                     <td>{workers.wood}</td>
-                    <td>{user.village.upgrades.wood.length}</td>
                     <td>*{resources.wood} #/sec</td>
                   </tr>
                 </tbody>

@@ -155,7 +155,7 @@ const Profile = () => {
         gold: Math.round(temp.gold * 10) / 10,
         wood: Math.round(temp.wood * 10) / 10
       })
-      console.log(oResources)
+      // console.log(oResources)
       //setLastUpdate(new Date());
     }
   }

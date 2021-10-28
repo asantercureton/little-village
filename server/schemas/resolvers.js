@@ -73,16 +73,20 @@ const resolvers = {
 
       return { token, user };
     },
-    createTrade: async (_, args) => {
-      const user = await User.findById(args.userId);
-      const newTrade = await Trade.create(createTrade(user.village, args));
-      const village = await Village.findById(user.village);
-      await Village.updateOne(
-        { _id: user.village },
-        { $push: { trades: newTrade } }
-      );
-      village.save();
-      return newTrade
+    createTrade: async (_, args, context) => {
+      if (context.user) {
+        const user = await User.findById(args.userId);
+        const newTrade = await Trade.create(createTrade(user.village, args));
+        const village = await Village.findById(user.village);
+        await Village.updateOne(
+          { _id: user.village },
+          { $push: { trades: newTrade } }
+        );
+        await village.save();
+        return newTrade
+      } else {
+        throw new AuthenticationError('Not Logged In!')
+      }
     },
     executeTrade: async (_, args) => {
       try {

@@ -20,6 +20,14 @@ const ManageState = (props) => {
     return arr.join(' & ');
   }
 
+  const checkMaxLevel = () => {
+    if(props.level.nextLevel){
+      return <button type="submit" className="btn manage-btn" id="manage-btn" onClick={() => props.setType('levelup')}>LEVEL UP!</button>
+    } else {
+      return <button type="submit" className="btn manage-btn" id="manage-btn">YOU'RE MAX LEVEL!</button>
+    }
+  }
+
   const renderItems = () => {
     switch (props.type) {
       case 'population': {
@@ -74,8 +82,8 @@ const ManageState = (props) => {
           </tbody></div>
       }
       case 'levelup': {
-        return <div><h1>Level Up!</h1>
-
+        return <div>
+          <h1>Level Up!</h1>
           <p>Level Up to {props.level.nextLevel}</p>
           <div>
             <h3>Cost: {popCost(props.level.levelUpCost)}</h3>
@@ -91,10 +99,12 @@ const ManageState = (props) => {
               <h1>Manage Village</h1>
               <button type="submit" className="btn manage-btn" id="manage-btn" onClick={() => props.setType('population')}>INCREASE POPULATION</button>
               <button type="submit" className="btn manage-btn" id="manage-btn" onClick={() => props.setType('workers')}>ASSIGN WORKERS</button>
-              <button type="submit" className="btn manage-btn" id="manage-btn" onClick={() => props.setType('levelup')}>LEVEL UP!</button>
-                <Link to="/tradeform">
-              <p className="btn request-btn" id="request-btn">REQUEST A TRADE</p>
-                </Link>
+              <Link to="/tradeform" className="btn manage-btn" id="manage-btn">
+                <button type="submit">
+                  REQUEST A TRADE
+                </button>
+              </Link>
+              {checkMaxLevel()}
             </div>
           </div>
         </div>

@@ -1,7 +1,7 @@
 // Node Modules
 import React, { useState, useEffect } from 'react';
 import { Redirect, useParams } from 'react-router-dom';
-import { useQuery, useLazyQuery, useMutation} from '@apollo/client';
+import { useQuery, useLazyQuery, useMutation } from '@apollo/client';
 // Utilities
 import Auth from '../utils/auth';
 import { QUERY_USERS, QUERY_USER, QUERY_ME, QUERY_LEVEL } from '../utils/queries';
@@ -40,10 +40,10 @@ const Profile = () => {
   });
 
   const [allocateUnit, { data: unitData, loading: unitsLoading, error: unitError }] = useMutation(ALLOCATE_UNIT);
-  const [getUpdatedResources, { data: updateData, loading: updateLoading, error: updateError}] = useMutation(GET_UPDATED_RESOURCES)
-  
+  const [getUpdatedResources, { data: updateData, loading: updateLoading, error: updateError }] = useMutation(GET_UPDATED_RESOURCES)
+
   // Get current user
-  const { loading, data, error} = useQuery(id ? QUERY_USER : QUERY_ME, {
+  const { loading, data, error } = useQuery(id ? QUERY_USER : QUERY_ME, {
     variables: { id }
   });
 
@@ -57,7 +57,7 @@ const Profile = () => {
   const [addPopulation, { data: popData }] = useMutation(ADD_POPULATION);
   const [levelUp, { data: levelUpData }] = useMutation(LEVEL_UP);
   const [buyUpgrade, { data: buyData }] = useMutation(BUY_UPGRADE);
-  
+
   useEffect(() => {
     if (user?.village?.level) {
       currentLevel({
@@ -67,7 +67,7 @@ const Profile = () => {
   }, [currentLevel, user?.village?.level]);
 
   const level = levelData?.level || {};
-  
+
   if (error) console.log(error);
 
 
@@ -83,7 +83,7 @@ const Profile = () => {
           userId: user._id
         },
       });
-      setSyncDataFlag(true)
+      setSyncDataFlag(true);
     } catch (e) {
       console.error(e);
     }
@@ -115,20 +115,19 @@ const Profile = () => {
 
     } catch (e) {
       console.error(e);
-          }
+    }
   };
 
-useEffect(() => { //make this not async and create new function to fetch server data
-  if (!loading) {
-    if (user?.username && syncDataFlag) { //set resources to correct amount 
-      syncData();
-      console.log("USE EFFECT")
-      
+  useEffect(() => { //make this not async and create new function to fetch server data
+    if (!loading) {
+      if (user?.username && syncDataFlag) { //set resources to correct amount 
+        syncData();
+        console.log("USE EFFECT")
+      }
     }
-  }
-}, [loading, syncDataFlag]);
+  }, [loading, syncDataFlag]);
 
-  
+
   useEffect(() => {
     if (user) {
       clearInterval(intervalId);
@@ -141,8 +140,8 @@ useEffect(() => { //make this not async and create new function to fetch server 
     let now = new Date();
     let deltaTime = Math.abs(now - lastUpdate) / 1000;
     if (user.village) {
-     
-     let { abundanceOfResources } = user.village;
+
+      let { abundanceOfResources } = user.village;
       let temp = { ...resources };
       for (let resource in temp) {
 
@@ -216,7 +215,7 @@ useEffect(() => { //make this not async and create new function to fetch server 
     }
     if (totalWorkers + 1 <= population) {
       tempWorkers[e.target.id] += 1;
-      await allocateUnit({ variables: { userId: user._id,  resource: e.target.id, amount: 1} });
+      await allocateUnit({ variables: { userId: user._id, resource: e.target.id, amount: 1 } });
       setSyncDataFlag(true);
     }
   }
@@ -225,9 +224,16 @@ useEffect(() => { //make this not async and create new function to fetch server 
     let tempWorkers = workers;
     if (tempWorkers[e.target.id] - 1 >= 0) {
       tempWorkers[e.target.id] -= 1;
-      await allocateUnit({ variables: { userId: user._id,  resource: e.target.id, amount: -1} });
+      await allocateUnit({ variables: { userId: user._id, resource: e.target.id, amount: -1 } });
       setSyncDataFlag(true)
     }
+  }
+
+  const earningsPerSec = (village, workers, resource) => {
+    const rate = 1 + (0.2 * (village.level - 1));
+    const labor = workers[resource];
+    const abundance = village.abundanceOfResources[resource];
+    return Math.round((rate * labor * abundance) * 10) / 10;
   }
 
 
@@ -269,7 +275,7 @@ useEffect(() => { //make this not async and create new function to fetch server 
                   </tr>
                   <tr className="cell">
                     <th scope="row"># of TRADES:</th>
-                    <td>{user.village.trades ? user.village.trades.length: 0}</td>
+                    <td>{user.village.trades ? user.village.trades.length : 0}</td>
                   </tr>
                 </tbody>
               </table>
@@ -312,25 +318,25 @@ useEffect(() => { //make this not async and create new function to fetch server 
                     <th scope="row">🍎 FRUIT:</th>
                     <td>{user.village.abundanceOfResources.fruit}</td>
                     <td>{workers.fruit}</td>
-                    <td>*{resources.fruit} #/sec</td>
+                    <td>{earningsPerSec(user.village, workers, 'fruit')} / sec</td>
                   </tr>
                   <tr className="cell">
                     <th scope="row">🥩 MEAT:</th>
                     <td>{user.village.abundanceOfResources.meat}</td>
                     <td>{workers.meat}</td>
-                    <td>*{resources.meat} #/sec</td>
+                    <td>{earningsPerSec(user.village, workers, 'meat')} / sec</td>
                   </tr>
                   <tr className="cell">
                     <th scope="row">💰 GOLD:</th>
                     <td>{user.village.abundanceOfResources.gold}</td>
                     <td>{workers.gold}</td>
-                    <td>*{resources.gold} #/sec</td>
+                    <td>{earningsPerSec(user.village, workers, 'gold')} / sec</td>
                   </tr>
                   <tr className="cell">
                     <th scope="row">🌲 WOOD:</th>
                     <td>{user.village.abundanceOfResources.wood}</td>
                     <td>{workers.wood}</td>
-                    <td>*{resources.wood} #/sec</td>
+                    <td>{earningsPerSec(user.village, workers, 'wood')} / sec</td>
                   </tr>
                 </tbody>
               </table>

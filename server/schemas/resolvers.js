@@ -126,10 +126,12 @@ const resolvers = {
       totalWorkers += village.unitAllocation.wood;
 
       if ((totalWorkers + args.amount <= village.population) && (village.unitAllocation[r] + args.amount >= 0)) {
+        await village.save();
         village.unitAllocation[r] += args.amount;
         await village.save();
         return user.populate('village');
       }else{
+        await village.save();
         return user.populate('village');
       }
     },

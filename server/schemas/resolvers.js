@@ -73,46 +73,36 @@ const resolvers = {
 
       return { token, user };
     },
-    createTrade: async (_, args) => {
-      const user = await User.findById(args.userId);
-      const newTrade = await Trade.create(createTrade(user.village, args));
-      const village = await Village.findById(user.village);
-      await Village.updateOne(
-        { _id: user.village },
-        { $push: { trades: newTrade } }
-      );
-      village.save();
-      return newTrade
+    createTrade: async (_, args, context) => {
+      if (context.user) {
+        const user = await User.findById(args.userId);
+        const newTrade = await Trade.create(createTrade(user.village, args));
+        const village = await Village.findById(user.village);
+        await Village.updateOne(
+          { _id: user.village },
+          { $push: { trades: newTrade } }
+        );
+        await village.save();
+        return newTrade
+      } else {
+        throw new AuthenticationError('Not Logged In!')
+      }
     },
     executeTrade: async (_, args) => {
-      const user = await User.findById(args.userId);
-      const trade = await Trade.findById(args.tradeId);
-      const village1 = await Village.findById(trade.village);
-      const village2 = await Village.findById(user.village);
-      executeTrade(village1, village2, trade);
-      if (trade.amount <= 0) {
-        await Trade.findByIdAndDelete(trade._id);
-      }
-      return trade;
-    },
-    allocateUnit: async (_, args) => { //TODO: Make all mutations confirm identities using context
-      const user = await User.findById(args.userId);
-      const village = await Village.findById(user.village);
-      let totalWorkers = 0;
-      let r = args.resource;
-      totalWorkers += village.unitAllocation.fruit;
-      totalWorkers += village.unitAllocation.meat;
-      totalWorkers += village.unitAllocation.gold;
-      totalWorkers += village.unitAllocation.wood;
-
-      if ((totalWorkers + args.amount <= village.population) && (village.unitAllocation[r] + args.amount >= 0)) {
-        await village.save();
-        village.unitAllocation[r] += args.amount;
-        await village.save();
-        return user.populate('village');
-      }else{
-        await village.save();
-        return user.populate('village');
+      try {
+        const user = await User.findById(args.userId);
+        const trade = await Trade.findById(args.tradeId);
+        console.log(trade._id)
+        if (trade && user) {
+          const village1 = await Village.findById(trade.village);
+          const village2 = await Village.findById(user.village);
+          executeTrade(village1, village2, trade);
+          return User;
+        } else {
+          throw new Error('Trade not found!');
+        }
+      } catch (e) {
+        throw new Error('Trade not found!');
       }
     },
     allocateUnit: async (_, args) => { //TODO: Make all mutations confirm identities using context
@@ -130,7 +120,27 @@ const resolvers = {
         village.unitAllocation[r] += args.amount;
         await village.save();
         return user.populate('village');
-      }else{
+      } else {
+        await village.save();
+        return user.populate('village');
+      }
+    },
+    allocateUnit: async (_, args) => { //TODO: Make all mutations confirm identities using context
+      const user = await User.findById(args.userId);
+      const village = await Village.findById(user.village);
+      let totalWorkers = 0;
+      let r = args.resource;
+      totalWorkers += village.unitAllocation.fruit;
+      totalWorkers += village.unitAllocation.meat;
+      totalWorkers += village.unitAllocation.gold;
+      totalWorkers += village.unitAllocation.wood;
+
+      if ((totalWorkers + args.amount <= village.population) && (village.unitAllocation[r] + args.amount >= 0)) {
+        await village.save();
+        village.unitAllocation[r] += args.amount;
+        await village.save();
+        return user.populate('village');
+      } else {
         await village.save();
         return user.populate('village');
       }
@@ -200,7 +210,7 @@ const resolvers = {
         const village = await Village.findById(user.village);
         await village.save();
         return village.populate('trades').populate('user').populate('upgrades');
-      }else if (context.user) {
+      } else if (context.user) {
         let user = await User.findOne({ _id: context.user._id });
         let village = await Village.findById(user.village);
         await village.save()

@@ -88,7 +88,7 @@ const ManageState = (props) => {
       case 'levelup': {
         return <div><h1>Level Up!</h1>
 
-          <p>Level Up to (Next Level)</p>
+          <p>Level Up to {props.level.nextLevel}</p>
           <div>
             <h3>Cost:</h3>
             <p>50 Wood</p>

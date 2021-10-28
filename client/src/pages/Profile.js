@@ -71,14 +71,14 @@ const Profile = () => {
 
   useEffect(() => {
     if (user?.village?.level) {
-        currentLevel({
-          variables: { level: user.village.level },
-        });
+      currentLevel({
+        variables: { level: user.village.level },
+      });
     }
   }, [currentLevel, user?.village?.level]);
 
   const level = levelData?.level || {};
-  
+
   if (loading || usersLoading) {
     return <h4>Loading...</h4>;
   }
@@ -167,7 +167,7 @@ const Profile = () => {
 
           <div className="profileTable">
             <section>
-              {/* <h1 className="display-4 tableTitle">{user.username}'s {level.name}</h1> */}
+              <h1 className="display-4 tableTitle">{user.username}'s {level.name}</h1>
 
               <table className="table table-hover">
 
@@ -202,7 +202,7 @@ const Profile = () => {
 
             </section>
             <div className="imageCard">
-              {/* <img src={`${process.env.PUBLIC_URL}/img/levels/${level.image}`} alt={level.name} /> */}
+              <img src={`${process.env.PUBLIC_URL}/img/levels/${level.image}`} alt={level.name} />
             </div>
           </div>
 
@@ -216,7 +216,7 @@ const Profile = () => {
                 setType={setType}
                 handleClose={handleClose}
                 user={user}
-              // level={level}
+                level={level}
               />
               <h1>Manage Village</h1>
             </div>

@@ -126,7 +126,9 @@ const TradeForm = () => {
         <main>
             <div className="trade">
                 <div className="row2">
-                    <div className="villageCard">
+                    <div className="villageCard" style={{
+            backgroundImage: `url(${process.env.PUBLIC_URL}/img/backtest.jpg)`
+          }}>
                         {successMessage()}
                         <h1 className="tradeTitle">CREATE A TRADE!</h1>
                         {renderForm()}

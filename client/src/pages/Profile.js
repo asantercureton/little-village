@@ -16,6 +16,7 @@ const Profile = () => {
   const [lastUpdate, setLastUpdate] = useState(null)
   const [syncDataFlag, setSyncDataFlag] = useState(true);
   const [intervalId, setIntervalId] = useState("intervalId");
+  const [type, setType] = useState(null);
   const [resources, setResources] = useState({
     fruit: 0,
     meat: 0,

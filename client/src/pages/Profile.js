@@ -177,23 +177,23 @@ const Profile = () => {
 
               <tbody className="rows">
                 <tr className="cell">
-                  <th scope="row">POPULATION:</th>
+                  <th scope="row">🧍‍♂️ POPULATION:</th>
                   <td>{user.village.population}</td>
                 </tr>
                 <tr className="cell">
-                  <th scope="row">FRUITS:</th>
+                  <th scope="row">🍎  FRUITS:</th>
                   <td>{resources.fruit}</td>
                 </tr>
                 <tr className="cell">
-                  <th scope="row">GOLD:</th>
+                  <th scope="row">💰 GOLD:</th>
                   <td>{resources.gold}</td>
                 </tr>
                 <tr className="cell">
-                  <th scope="row">MEAT:</th>
+                  <th scope="row">🥩 MEAT:</th>
                   <td>{resources.meat}</td>
                 </tr>
                 <tr className="cell">
-                  <th scope="row">WOOD:</th>
+                  <th scope="row">🌲 WOOD:</th>
                   <td>{resources.wood}</td>
                 </tr>
                 <tr className="cell">
@@ -225,19 +225,19 @@ const Profile = () => {
 
               <tbody className="rows2">
                 <tr className="cell">
-                  <th scope="row">FRUITS:</th>
+                  <th scope="row">🍎 FRUITS:</th>
                   <td>{resources.fruit} #/sec</td>
                 </tr>
                 <tr className="cell">
-                  <th scope="row">GOLD:</th>
+                  <th scope="row">💰 GOLD:</th>
                   <td>{resources.gold} #/sec</td>
                 </tr>
                 <tr className="cell">
-                  <th scope="row">MEAT:</th>
+                  <th scope="row">🥩 MEAT:</th>
                   <td>{resources.meat} #/sec</td>
                 </tr>
                 <tr className="cell">
-                  <th scope="row">WOOD:</th>
+                  <th scope="row">🌲 WOOD:</th>
                   <td>{resources.wood} #/sec</td>
                 </tr>
               </tbody>

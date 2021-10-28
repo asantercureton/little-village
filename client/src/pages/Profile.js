@@ -17,6 +17,7 @@ const Profile = () => {
   const [syncDataFlag, setSyncDataFlag] = useState(true);
   const [intervalId, setIntervalId] = useState("intervalId");
   const [type, setType] = useState(null);
+  const [chosen, setChosen] = useState(null);
   const [resources, setResources] = useState({
     fruit: 0,
     meat: 0,
@@ -72,6 +73,10 @@ const Profile = () => {
 
   const handleClose = () => {
     setType(null);
+  }
+
+  const handleChooseUpgrade = () => {
+    setChosen(null);
   }
 
   const handleAddPop = async (event) => {

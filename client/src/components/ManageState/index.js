@@ -21,6 +21,33 @@ const ManageState = (props) => {
     return arr.join(' & ');
   }
   console.log(props)
+  
+  const renderUpgrades = () => {
+    return <div><h5 className="card-title"><strong>Purchase Upgrades</strong></h5>
+          <h2 className="card-text">{} Upgrades</h2>
+          <tbody>
+            <tr className="cell">
+              <th scope="row">🍎 FRUIT:</th>
+              <td>/3 Owned</td>
+              <button type="submit" className="btn trade-btn" id="worker-btn">BUY</button>
+            </tr>
+            <tr className="cell">
+              <th scope="row">🥩 MEAT:</th>
+              <td>/3 Owned</td>
+              <button type="submit" className="btn trade-btn" id="worker-btn">BUY</button>
+            </tr>
+            <tr className="cell">
+              <th scope="row">💰 GOLD:</th>
+              <td>/3 Owned</td>
+              <button type="submit" className="btn trade-btn" id="worker-btn">BUY</button>
+            </tr>
+            <tr className="cell">
+              <th scope="row">🌲 WOOD:</th>
+              <td>/3 Owned</td>
+              <button type="submit" className="btn trade-btn" id="worker-btn">BUY</button>
+            </tr>
+          </tbody></div>
+  };
 
   const renderItems = () => {
     switch (props.type) {
@@ -63,22 +90,22 @@ const ManageState = (props) => {
           <h2 className="card-text">Make a Purchase</h2>
           <tbody>
             <tr className="cell">
-              <th scope="row">FRUIT:</th>
+              <th scope="row">🍎 FRUIT:</th>
               <td>/3 Owned</td>
               <button type="submit" className="btn trade-btn" id="worker-btn">BUY</button>
             </tr>
             <tr className="cell">
-              <th scope="row">GOLD:</th>
+              <th scope="row">🥩 GOLD:</th>
               <td>/3 Owned</td>
               <button type="submit" className="btn trade-btn" id="worker-btn">BUY</button>
             </tr>
             <tr className="cell">
-              <th scope="row">MEAT:</th>
+              <th scope="row">💰 MEAT:</th>
               <td>/3 Owned</td>
               <button type="submit" className="btn trade-btn" id="worker-btn">BUY</button>
             </tr>
             <tr className="cell">
-              <th scope="row">WOOD:</th>
+              <th scope="row">🌲 WOOD:</th>
               <td>/3 Owned</td>
               <button type="submit" className="btn trade-btn" id="worker-btn">BUY</button>
             </tr>

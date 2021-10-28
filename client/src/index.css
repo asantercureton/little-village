@@ -26,7 +26,7 @@
 }
 
 body {
-  background: url("../src/img/gold.jpg");
+  background: url(`${process.env.PUBLIC_URL}/img/gold.jpg`);
   min-height: 100vh;
   background-attachment: fixed;
   background-position: center;
@@ -72,8 +72,6 @@ header {
   justify-content: center;
   align-items: center;
   flex-wrap: wrap;
-  background: linear-gradient(to right, transparent, rgb(46, 31, 15)),url("../src/img/banner.jpg");
-
 }
 
 header h1 {
@@ -142,14 +140,12 @@ footer {
 .leaderboard {
   background-color: rgba(243, 171, 16, 0.911);
   color: var(--brown);
-  background-image: url("../src/img/leaderboard.jpg");
   flex-shrink: inherit;
   display: flex;
 }
 .otherboard {
   background-color: rgba(243, 171, 16, 0.911);
   color: var(--brown);
-  background-image: url("../src/img/otherboard.jpg");
   flex-shrink: inherit;
   display: flex;
 }
@@ -188,12 +184,12 @@ footer {
 }
 
 .card {
-  background-image: url("../src/img/backtest.jpg");
+  background-image: url(`${process.env.PUBLIC_URL}/img/backtest.jpg`);
   color: whitesmoke;
 }
 
 .cardManage {
-  background-image: url("../src/img/backtest.jpg");
+  background-image: url(`${process.env.PUBLIC_URL}/img/backtest.jpg`);
   color: whitesmoke;
   display: flex;
   align-items: center;
@@ -225,12 +221,12 @@ footer {
 }
 
 .villageCard {
-  background-image: url("../src/img/backtest.jpg");
+  background-image: url(`${process.env.PUBLIC_URL}/img/backtest.jpg`);
   color: whitesmoke;
 }
 .card2 {
   
-  background-image: url("../src/img/backtest.jpg");
+  background-image: url(`${process.env.PUBLIC_URL}/img/backtest.jpg`);
   opacity: .85;
   display: flex;
   color: whitesmoke;
@@ -253,7 +249,7 @@ footer {
 }
 
 .card-body3 {
-  /* background-image: url("../src/img/city.jpg"); */
+  /* background-image: url("../srcurl(`./img/city.jpg"); */
   background-color: rgba(100, 39, 3, 0.644);
   color: rgba(245, 245, 245, 0.836);
   border-radius: 18px;
@@ -262,7 +258,7 @@ footer {
 }
 
 .card-body4 {
-  /* background-image: url("../src/img/city.jpg"); */
+  /* background-image: url("../srcurl(`./img/city.jpg"); */
   background-color: rgba(243, 195, 36, 0.644);
   color: #000e1ace;
   border-radius: 18px;
@@ -271,7 +267,7 @@ footer {
 }
 
 .card-body5 {
-  /* background-image: url("../src/img/city.jpg"); */
+  /* background-image: url("../srcurl(`./img/city.jpg"); */
   background-color: rgba(1, 72, 85, 0.705);
   color: whitesmoke;
   border-radius: 18px;
@@ -280,7 +276,7 @@ footer {
 }
 
 .card-body6 {
-  /* background-image: url("../src/img/city.jpg"); */
+  /* background-image: url("../srcurl(`./img/city.jpg"); */
   background-color: rgba(16, 1, 85, 0.705);
   color: whitesmoke;
   border-radius: 18px;
@@ -298,7 +294,7 @@ footer {
 }
 
 .wrapper {
-  background-image: url("../src/img/hamlet2.jpg");
+  background-image: url(`${process.env.PUBLIC_URL}/img/hamlet2.jpg`);
   background-size: cover;
   height: 100%;
   display: flex;

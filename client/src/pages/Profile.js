@@ -294,6 +294,9 @@ useEffect(() => { //make this not async and create new function to fetch server 
                 handleAddPop={handleAddPop}
                 handleLevelUp={handleLevelUp}
                 handleBuyUpgrade={handleBuyUpgrade}
+                workers={workers}
+                addWorker={addWorker}
+                subtractWorker={subtractWorker}
                 user={user}
                 level={level}
               />

@@ -11,10 +11,16 @@ const resolvers = {
       return User.find().populate('village');
     },
     user: async (_, args) => {
-      return User.findOne({ _id: args.id }).populate('village');
+      let user = await User.findOne({ _id: args.id });
+      let village = await Village.findById(user.village);
+      await village.save()
+      return user.populate('village');
     },
     me: async (_, args, context) => {
       if (context.user) {
+        let user = await User.findOne({ _id: context.user._id });
+        let village = await Village.findById(user.village);
+        await village.save()
         return User.findOne({ _id: context.user._id }).populate('village');
       }
       throw new AuthenticationError('You need to be logged in!');
@@ -89,6 +95,46 @@ const resolvers = {
       }
       return trade;
     },
+    allocateUnit: async (_, args) => { //TODO: Make all mutations confirm identities using context
+      const user = await User.findById(args.userId);
+      const village = await Village.findById(user.village);
+      let totalWorkers = 0;
+      let r = args.resource;
+      totalWorkers += village.unitAllocation.fruit;
+      totalWorkers += village.unitAllocation.meat;
+      totalWorkers += village.unitAllocation.gold;
+      totalWorkers += village.unitAllocation.wood;
+
+      if ((totalWorkers + args.amount <= village.population) && (village.unitAllocation[r] + args.amount >= 0)) {
+        await village.save();
+        village.unitAllocation[r] += args.amount;
+        await village.save();
+        return user.populate('village');
+      }else{
+        await village.save();
+        return user.populate('village');
+      }
+    },
+    allocateUnit: async (_, args) => { //TODO: Make all mutations confirm identities using context
+      const user = await User.findById(args.userId);
+      const village = await Village.findById(user.village);
+      let totalWorkers = 0;
+      let r = args.resource;
+      totalWorkers += village.unitAllocation.fruit;
+      totalWorkers += village.unitAllocation.meat;
+      totalWorkers += village.unitAllocation.gold;
+      totalWorkers += village.unitAllocation.wood;
+
+      if ((totalWorkers + args.amount <= village.population) && (village.unitAllocation[r] + args.amount >= 0)) {
+        await village.save();
+        village.unitAllocation[r] += args.amount;
+        await village.save();
+        return user.populate('village');
+      }else{
+        await village.save();
+        return user.populate('village');
+      }
+    },
     levelUp: async (_, args) => {
       const user = await User.findById(args.userId);
       const village = await Village.findById(user.village);
@@ -147,6 +193,21 @@ const resolvers = {
       );
       village.save();
       return village;
+    },
+    getUpdatedResources: async (_, args, context) => {
+      if (args.id) {
+        const user = await User.findById(args.id);
+        const village = await Village.findById(user.village);
+        await village.save();
+        return village.populate('trades').populate('user').populate('upgrades');
+      }else if (context.user) {
+        let user = await User.findOne({ _id: context.user._id });
+        let village = await Village.findById(user.village);
+        await village.save()
+        return village.populate('trades').populate('user').populate('upgrades');
+      } else {
+        throw new AuthenticationError('No user specified');
+      }
     }
   }
 };

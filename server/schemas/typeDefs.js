@@ -91,6 +91,8 @@ const typeDefs = gql`
     levelUp(userId:ID!): Village
     addPopulation(userId:ID!): Village
     buyUpgrade(userId:ID!, upgradeId:ID!): Village
+    allocateUnit(userId:ID!, resource: String!, amount: Int!): User
+    getUpdatedResources(id:ID): Village
   }
 `;
 

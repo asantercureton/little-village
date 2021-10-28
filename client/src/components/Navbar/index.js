@@ -27,6 +27,10 @@ function Navbar() {
       <Link to="/tradeform" >
           Create Trade
         </Link>
+
+      <Link to="/stats" >
+          Stats
+        </Link>
       
       <button onClick={logout}>
           Logout
@@ -48,6 +52,10 @@ function Navbar() {
     <Link to="/leaderboard" >
           Leaderboard
         </Link>
+    
+    <Link to="/stats" >
+          Stats
+    </Link>
        
     </nav>
   )

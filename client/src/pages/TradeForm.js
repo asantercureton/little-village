@@ -6,6 +6,7 @@ import { CREATE_TRADE } from '../utils/mutations';
 import { QUERY_USER, QUERY_ME } from '../utils/queries';
 
 // TODO: need to accept infinity as a tradeAmount (will not submit blank request)
+// ensure that you must be logged in as a user to view this page & make a trade
 // alert the user that their trade request was successful
 const TradeForm = () => {
     const { id } = useParams();

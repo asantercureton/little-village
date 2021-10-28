@@ -90,7 +90,7 @@ const ManageState = (props) => {
       }
       case 'workers': {
         return <div><h5 className="card-title"><strong>Assign Workers</strong></h5>
-          <p className="card-text">Reallocate the workload</p>
+          <p className="card-text">Allocate the Workload</p>
           <p>FARMERS:
             <div className="input-group"><button id="fruit" className="btn btn-decrement btn-outline-secondary btn-minus" onClick={props.subtractWorker} type="button"><strong id="fruit">−</strong></button><input type="text" inputmode="decimal" placeholder={props.workers.fruit}></input><button id="fruit" onClick={props.addWorker} className="btn btn-increment btn-outline-secondary btn-plus" type="button"><strong id="fruit">+</strong></button></div>
           </p>

@@ -115,6 +115,24 @@ const resolvers = {
         return user.populate('village');
       }
     },
+    allocateUnit: async (_, args) => { //TODO: Make all mutations confirm identities using context
+      const user = await User.findById(args.userId);
+      const village = await Village.findById(user.village);
+      let totalWorkers = 0;
+      let r = args.resource;
+      totalWorkers += village.unitAllocation.fruit;
+      totalWorkers += village.unitAllocation.meat;
+      totalWorkers += village.unitAllocation.gold;
+      totalWorkers += village.unitAllocation.wood;
+
+      if ((totalWorkers + args.amount <= village.population) && (village.unitAllocation[r] + args.amount >= 0)) {
+        village.unitAllocation[r] += args.amount;
+        await village.save();
+        return user.populate('village');
+      }else{
+        return user.populate('village');
+      }
+    },
     levelUp: async (_, args) => {
       const user = await User.findById(args.userId);
       const village = await Village.findById(user.village);

@@ -198,8 +198,12 @@ const Profile = () => {
     if (totalWorkers + 1 <= user.village.population) {
       tempWorkers[e.target.id] += 1;
       await allocateUnit({ variables: { userId: user._id,  resource: e.target.id, amount: 1} });
+<<<<<<< HEAD
       clearInterval(gameLoopTimer)
       setSyncDataFlag(true);
+=======
+      await syncData();
+>>>>>>> 5b01005 (staging)
     }
   }
 
@@ -208,6 +212,7 @@ const Profile = () => {
     if (tempWorkers[e.target.id] - 1 >= 0) {
       tempWorkers[e.target.id] -= 1;
       await allocateUnit({ variables: { userId: user._id,  resource: e.target.id, amount: -1} });
+<<<<<<< HEAD
       clearInterval(gameLoopTimer)
       setSyncDataFlag(true)
     }
@@ -261,6 +266,90 @@ const Profile = () => {
             </section>
             <div className="imageCard">
               <img src={`${process.env.PUBLIC_URL}/img/levels/${level.image}`} alt={level.name} />
+=======
+      await setWorkers({
+        fruit: tempWorkers.fruit,
+        meat: tempWorkers.meat,
+        gold: tempWorkers.gold,
+        wood: tempWorkers.wood,
+      });
+    }
+  }
+
+  return (
+    <div className="wrapper">
+      <div className="jumbotron jumbotron-fluid">
+
+        <div className="container profileTable">
+          <h1 className="display-4 tableTitle">{user.username}'s Village.</h1>
+
+          <table className="table table-hover">
+
+            <tbody className="rows">
+              <tr className="cell">
+                <th scope="row">STATUS:</th>
+                <td>TRIBE</td>
+              </tr>
+              <tr className="cell">
+                <th scope="row">POPULATION:</th>
+                <td>{user.village.population}</td>
+              </tr>
+              <tr className="cell">
+                <th scope="row">FRUITS:</th>
+                <td>{resources.fruit}</td>
+              </tr>
+              <tr className="cell">
+                <th scope="row">MEAT:</th>
+                <td>{resources.meat}</td>
+              </tr>
+              <tr className="cell">
+                <th scope="row">GOLD:</th>
+                <td>{resources.gold}</td>
+              </tr>
+              <tr className="cell">
+                <th scope="row">WOOD:</th>
+                <td>{resources.wood}</td>
+              </tr>
+              <tr className="cell">
+                <th scope="row"># of TRADES:</th>
+                <td>3</td>
+              </tr>
+            </tbody>
+          </table>
+          <div>
+            <button type="submit" className="btn trade-btn" id="trade-btn">REQUEST A TRADE!</button>
+          </div>
+        </div>
+        <div className="panels">
+          <div className="workPanel">
+            <div>
+              <div className="card-body3">
+                <h5 className="card-title"><strong>Assign Workers</strong></h5>
+
+                <p className="card-text">Reallocate the workload</p>
+
+
+                <p>FARMERS:
+                  <div className="input-group"><button id="fruit" onClick={subtractWorker} className="btn btn-decrement btn-outline-secondary btn-minus" type="button"><strong id="fruit">−</strong></button><input type="text" inputmode="decimal" placeholder={workers.fruit}></input><button id="fruit" onClick={addWorker} className="btn btn-increment btn-outline-secondary btn-plus" type="button"><strong id="fruit">+</strong></button></div>
+                </p>
+                <p>HUNTERS:
+                  <div className="input-group"><button id="meat" onClick={subtractWorker} className="btn btn-decrement btn-outline-secondary btn-minus" type="button"><strong id="meat">−</strong></button><input type="text" inputmode="decimal" placeholder={workers.meat} /><button id="meat" onClick={addWorker} className="btn btn-increment btn-outline-secondary btn-plus" type="button"><strong id="meat">+</strong></button></div>
+                </p>
+                <p>MINERS:
+                  <div className="input-group"><button id="gold" onClick={subtractWorker} className="btn btn-decrement btn-outline-secondary btn-minus" type="button"><strong id="gold">−</strong></button><input type="text" inputmode="decimal" placeholder={workers.gold} /><button id="gold" onClick={addWorker} className="btn btn-increment btn-outline-secondary btn-plus" type="button"><strong id="gold">+</strong></button></div>
+                </p>
+                <p>LUMBERJACKS:
+                  <div className="input-group"><button id="wood" className="btn btn-decrement btn-outline-secondary btn-minus" type="button" onClick={subtractWorker}><strong id="wood">−</strong></button><input type="text" inputmode="decimal" placeholder={workers.wood} /><button id="wood" className="btn btn-increment btn-outline-secondary btn-plus" type="button" onClick={addWorker}><strong id="wood">+</strong></button></div>
+                </p>
+
+                <div>
+                  <p>POPULATION: {user.village.population}</p>
+                  <p>UNASSIGNED: {user.village.population}</p>
+                </div>
+
+               
+              </div>
+>>>>>>> 5b01005 (staging)
             </div>
           </div>
 

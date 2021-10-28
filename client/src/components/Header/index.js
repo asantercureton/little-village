@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import Navbar from '../Navbar';
-import image from '../../img/icon.jpg';
+import image from '../../img/Itest.jpg';
 
 const Header = () => {
   return (

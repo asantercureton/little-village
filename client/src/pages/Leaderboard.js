@@ -54,7 +54,7 @@ const Leaderboard = () => {
     <main>
       <div className="box">
         <div className="card">
-          <section className="leaderboard overflow-auto">
+          <section className="otherboard overflow-auto">
             <table className="table table-hover">
               <thead>
                 <tr>

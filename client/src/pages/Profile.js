@@ -62,11 +62,7 @@ const Profile = () => {
   }, [currentLevel, user?.village?.level]);
 
   const level = levelData?.level || {};
-
-  if (loading || usersLoading) {
-    return <h4>Loading...</h4>;
-  }
-
+  
   if (error) console.log(error);
 
   const handleClose = () => {
@@ -74,17 +70,16 @@ const Profile = () => {
   }
 
   //const [gameLoopInit, setGameLoopInit] = useState(false); //have we set up the game loop? 
-  var gameLoopTimer;
-  useEffect(() => { //make this not async and create new function to fetch server data
-    if (!loading) {
-      if (user?.username && syncDataFlag) { //set resources to correct amount 
-        syncData();
-        console.log("USE EFFECT")
-        
-        //setGameLoopInit(true);
-      }
+useEffect(() => { //make this not async and create new function to fetch server data
+  if (!loading) {
+    if (user?.username && syncDataFlag) { //set resources to correct amount 
+      syncData();
+      console.log("USE EFFECT")
+      
+      //setGameLoopInit(true);
     }
-  }, [loading, syncDataFlag]);
+  }
+}, [loading, syncDataFlag]);
 
   
   useEffect(() => {
@@ -150,90 +145,6 @@ const Profile = () => {
       return true;
     }
   };
-
-
-
-  //const [gameLoopInit, setGameLoopInit] = useState(false); //have we set up the game loop? 
-  var gameLoopTimer;
-  useEffect(() => { //make this not async and create new function to fetch server data
-    if (!loading) {
-      if (user?.username && syncDataFlag) { //set resources to correct amount 
-        syncData();
-        console.log("USE EFFECT")
-        
-        //setGameLoopInit(true);
-      }
-    }
-  }, [loading, syncDataFlag]);
-
-  
-  useEffect(() => {
-    console.log(JSON.parse(JSON.stringify(user)));
-    if (user) {
-      clearInterval(intervalId);
-      //gameLoopTimer = null;
-      console.log("I work!", workers);
-      setIntervalId(setInterval(gameLoop, 500));
-    }
-  }, [workers]);
-
-  const gameLoop = () => { //TODO: Rework gameloop to render not based on time since last frame, but time since the information was refreshed
-    let now = new Date();
-    let deltaTime = Math.abs(now - lastUpdate) / 1000;
-    if (user.village) {
-     
-     let { abundanceOfResources } = user.village;
-      let temp = { ...resources };
-      for (let resource in temp) {
-
-        temp[resource] = (oResources[resource] + workers[resource] * abundanceOfResources[resource] * deltaTime);
-        //console.log(workers[resource])
-      }
-
-      setResources({
-        fruit: Math.round(temp.fruit * 10) / 10,
-        meat: Math.round(temp.meat * 10) / 10,
-        gold: Math.round(temp.gold * 10) / 10,
-        wood: Math.round(temp.wood * 10) / 10
-      })
-      console.log(oResources)
-      //setLastUpdate(new Date());
-    }
-  }
-
-  const syncData = async () => { //syncs client and server data
-    //await refetch()
-    if (!loading) {
-      setSyncDataFlag(false);
-      //var { amountOfResources: resourceCount, unitAllocation, abundanceOfResources } = user.village;
-      let update = await getUpdatedResources();
-      setLastUpdate(new Date());
-      let { amountOfResources: resourceCount, unitAllocation, abundanceOfResources } = update.data.getUpdatedResources
-      console.log(JSON.parse(JSON.stringify(unitAllocation)));
-      setResources({
-        fruit: resourceCount.fruit,
-        meat: resourceCount.meat,
-        gold: resourceCount.gold,
-        wood: resourceCount.wood
-      });
-      setoResources({
-        fruit: resourceCount.fruit,
-        meat: resourceCount.meat,
-        gold: resourceCount.gold,
-        wood: resourceCount.wood
-      });
-      setWorkers({
-        fruit: unitAllocation.fruit,
-        meat: unitAllocation.meat,
-        gold: unitAllocation.gold,
-        wood: unitAllocation.wood
-      });
-      console.log(JSON.parse(JSON.stringify(workers)));
-      return true;
-    }
-  };
-
-
 
   // redirect to personal profile page if username is yours
   if (Auth.loggedIn() && Auth.getProfile().data._id === id) {
@@ -280,7 +191,6 @@ const Profile = () => {
     if (totalWorkers + 1 <= user.village.population) {
       tempWorkers[e.target.id] += 1;
       await allocateUnit({ variables: { userId: user._id,  resource: e.target.id, amount: 1} });
-      clearInterval(gameLoopTimer)
       setSyncDataFlag(true);
     }
   }
@@ -290,7 +200,6 @@ const Profile = () => {
     if (tempWorkers[e.target.id] - 1 >= 0) {
       tempWorkers[e.target.id] -= 1;
       await allocateUnit({ variables: { userId: user._id,  resource: e.target.id, amount: -1} });
-      clearInterval(gameLoopTimer)
       setSyncDataFlag(true)
     }
   }

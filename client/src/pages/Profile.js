@@ -183,7 +183,7 @@ const Profile = () => {
     <div className="wrapper" style={{
       backgroundImage: `url(${process.env.PUBLIC_URL}/img/hamlet2.jpg)`
     }}>
-      <div className="jumbotron jumbotron-fluid screenWidth">
+      <div className="jumbotron jumbotron-fluid screenWidth" >
 
         <div className="profileTable">
           <section>
@@ -225,7 +225,7 @@ const Profile = () => {
           </div>
         </div>
 
-        <div className="manageBox">
+        <div className="manageBox " >
           <div className="cardManage" style={{
             backgroundImage: `url(${process.env.PUBLIC_URL}/img/backtest.jpg)`
           }}>
@@ -243,7 +243,7 @@ const Profile = () => {
               <button type="submit" className="btn manage-btn" id="manage-btn">REQUEST A TRADE!</button>
             </div>
           </div>
-          <div className="abCard">
+          <div className="abCard overflow-auto">
             <table className="table table-hover">
               <thead>
                 <th scope="col">Resource</th>

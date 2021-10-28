@@ -136,6 +136,7 @@ footer {
 
 .screenWidth {
   width: 100vw;
+  
 }
 
 .leaderboard {
@@ -203,13 +204,13 @@ footer {
 .imageCard {
   background-color: rgba(76, 0, 130, 0.473);
   color: whitesmoke;
-  width: 50%;
+  width: 25%;
   height: auto;
 }
 .abCard {
   background-color: rgba(141, 92, 0, 0.589);
   color: whitesmoke;
-  width: 50%;
+  display:flex;
   height: auto;
 }
 
@@ -296,6 +297,7 @@ footer {
 
 .wrapper {
   /* background-image: url(`${process.env.PUBLIC_URL}/img/hamlet2.jpg`); */
+  
   background-size: cover;
   height: 100%;
   display: flex;
@@ -328,6 +330,7 @@ footer {
   justify-content: space-evenly;
   margin-top: -70px;
   flex-wrap: wrap;
+  
 }
 
 .sidePanel {
@@ -364,6 +367,7 @@ footer {
   text-align: center;
   display: flex;
   justify-content: space-evenly;
+  flex-wrap: wrap;
 }
 
 .multiplier {

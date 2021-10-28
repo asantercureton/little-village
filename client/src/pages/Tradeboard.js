@@ -75,7 +75,7 @@ const Tradeboard = () => {
       <div>
         <section className="leaderboard overflow-auto"
         style={{
-          backgroundImage: `url(${process.env.PUBLIC_URL}/img/leaderboard.jpg)`
+          backgroundImage: `url(${process.env.PUBLIC_URL}/img/pape.jpg)`
         }}>
           <table className="table table-hover">
             <thead>

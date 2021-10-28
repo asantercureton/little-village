@@ -11,7 +11,8 @@
         "buyPopulation": {
             "fruit": 10,
             "meat": 10
-        }
+        },
+        "nextLevel": 2
     },
     {
         "level": 2,
@@ -25,7 +26,8 @@
         "buyPopulation": {
             "fruit": 25,
             "meat": 25
-        }
+        },
+        "nextLevel": 3
     },
     {
         "level": 3,
@@ -39,7 +41,8 @@
         "buyPopulation": {
             "fruit": 50,
             "meat": 50
-        }
+        },
+        "nextLevel": 4
     },
     {
         "level": 4,
@@ -53,7 +56,8 @@
         "buyPopulation": {
             "fruit": 100,
             "meat": 100
-        }
+        },
+        "nextLevel": 5
     },
     {
         "level": 5,
@@ -67,7 +71,8 @@
         "buyPopulation": {
             "fruit": 175,
             "meat": 175
-        }
+        },
+        "nextLevel": 6
     },
     {
         "level": 6,
@@ -81,6 +86,7 @@
         "buyPopulation": {
             "fruit": 250,
             "meat": 250
-        }
+        },
+        "nextLevel": 0
     }
 ]

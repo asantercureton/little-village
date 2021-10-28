@@ -1,7 +1,6 @@
 import React from 'react';
 import { useParams } from 'react-router-dom';
 import { useQuery, useMutation } from '@apollo/client';
-import Auth from '../utils/auth';
 
 import { QUERY_TRADES, QUERY_USER, QUERY_ME } from '../utils/queries';
 import { EXECUTE_TRADE } from '../utils/mutations';
@@ -9,7 +8,7 @@ import { EXECUTE_TRADE } from '../utils/mutations';
 
 // TODO: change emojis
 // executeTrade function DOES run, but the resolver doesn't update the villages
-// display something if the trade is successful or not (if they can't afford it)
+// display if the trade is successful or not (if they can't afford it); maybe use acceptData as true/false
 const Tradeboard = () => {
   const { loading, data } = useQuery(QUERY_TRADES);
   const trades = data?.trades || [];

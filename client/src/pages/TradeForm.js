@@ -65,12 +65,15 @@ const TradeForm = () => {
     const successMessage = () => {
         if (data) {
             return (
-              <h2>Trade Requested! Make Another Offer?</h2>
+                <h2>Trade Requested! Make Another Offer?</h2>
             )
         }
     };
 
     const renderForm = () => {
+        if (loading) {
+            return <h2>Loading...</h2>
+        } else {
         return (
             <form onSubmit={handleFormSubmit}>
                 <div className="form-group">
@@ -116,6 +119,7 @@ const TradeForm = () => {
                 <button type="submit" className="btn createTrade-btn">OFFER TRADE</button>
             </form>
         );
+    }
     };
 
     return (

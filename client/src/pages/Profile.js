@@ -14,7 +14,6 @@ import ManageState from '../components/ManageState';
 const Profile = () => {
   const { id } = useParams();
 
-  // const [showing, setShowing] = useState(true);
   const [type, setType] = useState(null);
 
   const gameLoop = () => { //TODO: Rework gameloop to render not based on time since last frame, but time since the information was refreshed
@@ -99,14 +98,13 @@ const Profile = () => {
 
   if (error) console.log(error);
 
-  // const { loading: levelLoading, data: levelData } = useQuery(QUERY_LEVELS);
-  // const levels = levelData?.levels || [];
-  // const level = levels.find(level => (level.level === user.village.level));
-  // const nextLevel = levels.find(level => (level.level === (user.village.level + 1)));
+  const { loading: levelLoading, data: levelData } = useQuery(QUERY_LEVELS);
+  const levels = levelData?.levels || [];
+  const level = levels.find(level => (level.level === user.village.level));
+  const nextLevel = levels.find(level => (level.level === (user.village.level + 1)));
 
   const handleClose = () => {
     setType(null);
-    // setShowing(false);
   }
 
   // redirect to personal profile page if username is yours
@@ -114,7 +112,7 @@ const Profile = () => {
     return <Redirect to="/me" />;
   }
 
-  if (loading || usersLoading) {
+  if (loading || usersLoading || levelLoading) {
     return <h4>Loading...</h4>;
   }
 
@@ -187,7 +185,7 @@ const Profile = () => {
 
         <div className="profileTable">
           <section>
-            {/* <h1 className="display-4 tableTitle">{user.username}'s {level.name}</h1> */}
+            <h1 className="display-4 tableTitle">{user.username}'s {level.name}</h1>
 
             <table className="table table-hover">
 
@@ -233,7 +231,6 @@ const Profile = () => {
             backgroundImage: `url(${process.env.PUBLIC_URL}/img/backtest.jpg)`
           }}>
             <ManageState 
-              showing={showing}
               type={type} 
               handleClose={handleClose}
             />

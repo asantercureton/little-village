@@ -14,7 +14,6 @@ const Leaderboard = () => {
 
   const { loading: levelLoading, data: levelData } = useQuery(QUERY_LEVELS);
   const levels = levelData?.levels || [];
-  console.log(levels);
   
   const levelName = (num) => {
     const level = levels.find(level => (level.level === num ));

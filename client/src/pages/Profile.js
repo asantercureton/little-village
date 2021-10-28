@@ -5,7 +5,7 @@ import { Redirect, useParams } from 'react-router-dom';
 import { useQuery } from '@apollo/client';
 // Utilities
 import Auth from '../utils/auth';
-import { QUERY_USERS, QUERY_USER, QUERY_ME } from '../utils/queries';
+import { QUERY_USERS, QUERY_USER, QUERY_ME, QUERY_LEVELS } from '../utils/queries';
 // Components
 import UserList from '../components/UserList';
 
@@ -96,12 +96,18 @@ const Profile = () => {
 
   if (error) console.log(error);
 
+  
+  const { loading: levelLoading, data: levelData } = useQuery(QUERY_LEVELS);
+  const levels = levelData?.levels || [];
+  const level = levels.find(level => (level.level === user.village.level));
+  const nextLevel = levels.find(level => (level.level === (user.village.level + 1)));
+
   // redirect to personal profile page if username is yours
   if (Auth.loggedIn() && Auth.getProfile().data._id === id) {
     return <Redirect to="/me" />;
   }
 
-  if (loading) {
+  if (loading || usersLoading || levelLoading) {
     return <h4>Loading...</h4>;
   }
 
@@ -165,13 +171,14 @@ const Profile = () => {
     }
   }
 
+
   return (
     <div className="wrapper">
       <div className="jumbotron jumbotron-fluid screenWidth">
 
         <div className="profileTable">
           <section>
-            <h1 className="display-4 tableTitle">{user.username}'s Village.</h1>
+            <h1 className="display-4 tableTitle">{user.username}'s {level.name}</h1>
 
             <table className="table table-hover">
 
@@ -185,12 +192,12 @@ const Profile = () => {
                   <td>{resources.fruit}</td>
                 </tr>
                 <tr className="cell">
-                  <th scope="row">💰 GOLD:</th>
-                  <td>{resources.gold}</td>
-                </tr>
-                <tr className="cell">
                   <th scope="row">🥩 MEAT:</th>
                   <td>{resources.meat}</td>
+                </tr>
+                <tr className="cell">
+                  <th scope="row">💰 GOLD:</th>
+                  <td>{resources.gold}</td>
                 </tr>
                 <tr className="cell">
                   <th scope="row">🌲 WOOD:</th>
@@ -204,7 +211,7 @@ const Profile = () => {
             </table>
           </section>
           <div className="imageCard">
-            <h1>Image</h1>
+            <img src={level.image} alt={level.name} />
           </div>
         </div>
 
@@ -220,25 +227,42 @@ const Profile = () => {
             </div>
           </div>
           <div className="abCard">
-            <h4>Abundance Of Resources</h4>
             <table className="table table-hover">
-
+              <thead>
+                <th scope="col">Resource</th>
+                <th scope="col">Abundance</th>
+                <th scope="col">Workers</th>
+                <th scope="col">Upgrades</th>
+                <th scope="col">Earnings</th>
+              </thead>
               <tbody className="rows2">
                 <tr className="cell">
                   <th scope="row">🍎 FRUITS:</th>
-                  <td>{resources.fruit} #/sec</td>
-                </tr>
-                <tr className="cell">
-                  <th scope="row">💰 GOLD:</th>
-                  <td>{resources.gold} #/sec</td>
+                  <td>{user.village.abundanceOfResources.fruit}</td>
+                  <td>{workers.fruit}</td>
+                  <td>{user.village.upgrades.fruit.length}</td>
+                  <td>*{resources.fruit} #/sec</td>
                 </tr>
                 <tr className="cell">
                   <th scope="row">🥩 MEAT:</th>
-                  <td>{resources.meat} #/sec</td>
+                  <td>{user.village.abundanceOfResources.meat}</td>
+                  <td>{workers.meat}</td>
+                  <td>{user.village.upgrades.meat.length}</td>
+                  <td>*{resources.meat} #/sec</td>
+                </tr>
+                <tr className="cell">
+                  <th scope="row">💰 GOLD:</th>
+                  <td>{user.village.abundanceOfResources.gold}</td>
+                  <td>{workers.gold}</td>
+                  <td>{user.village.upgrades.gold.length}</td>
+                  <td>*{resources.gold} #/sec</td>
                 </tr>
                 <tr className="cell">
                   <th scope="row">🌲 WOOD:</th>
-                  <td>{resources.wood} #/sec</td>
+                  <td>{user.village.abundanceOfResources.wood}</td>
+                  <td>{workers.wood}</td>
+                  <td>{user.village.upgrades.wood.length}</td>
+                  <td>*{resources.wood} #/sec</td>
                 </tr>
               </tbody>
             </table>

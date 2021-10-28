@@ -14,7 +14,7 @@ function Navbar() {
     return (
       <nav className ="header nav"> 
       <Link to="/me" >
-          {Auth.getProfile().data.username}'s profile
+          {Auth.getProfile().data.username}'s Village
         </Link>
      
       <Link to="/leaderboard" >

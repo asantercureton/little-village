@@ -181,7 +181,7 @@ const Profile = () => {
     <div className="wrapper" style={{
       backgroundImage: `url(${process.env.PUBLIC_URL}/img/hamlet2.jpg)`
     }}>
-      <div className="jumbotron jumbotron-fluid screenWidth">
+      <div className="jumbotron jumbotron-fluid screenWidth" >
 
         <div className="profileTable">
           <section>
@@ -236,7 +236,9 @@ const Profile = () => {
             <h1>Manage Village</h1>
           </div>
 
-          <div className="abCard">
+
+          <div className="abCard overflow-auto">
+          
             <table className="table table-hover">
               <thead>
                 <th scope="col">Resource</th>

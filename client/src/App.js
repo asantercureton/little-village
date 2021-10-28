@@ -43,43 +43,53 @@ const client = new ApolloClient({
   cache: new InMemoryCache(),
 });
 
+
+
+
+
 function App() {
   return (
     <ApolloProvider client={client}>
-      <Router>
-        <div >
-          <Header />
-          <div>
-            <Route exact path="/">
-              <Home />
-            </Route>
-            <Route exact path="/login">
-              <Login />
-            </Route>
-            <Route exact path="/signup">
-              <Signup />
-            </Route>
-            <Route exact path="/me">
-              <Profile />
-            </Route>
-            <Route exact path="/users/:id">
-              <Profile />
-            </Route>
-            <Route exact path="/leaderboard">
-              <Leaderboard />
-            </Route>
-            <Route exact path="/tradeboard">
-              <Tradeboard />
-            </Route>
-            <Route exact path="/tradeform">
-              <TradeForm />
-            </Route>
-            <Route exact path="/stats">
+
+      <Router >
+        <body style={{
+            backgroundImage: `url(${process.env.PUBLIC_URL}/img/gold.jpg)`
+          }}>
+          <div  >
+            <Header />
+            <div>
+              <Route exact path="/">
+                <Home />
+              </Route>
+              <Route exact path="/login">
+                <Login />
+              </Route>
+              <Route exact path="/signup">
+                <Signup />
+              </Route>
+              <Route exact path="/me">
+                <Profile />
+              </Route>
+              <Route exact path="/users/:id">
+                <Profile />
+              </Route>
+              <Route exact path="/leaderboard">
+                <Leaderboard />
+              </Route>
+              <Route exact path="/tradeboard">
+                <Tradeboard />
+              </Route>
+              <Route exact path="/tradeform">
+                <TradeForm />
+              </Route>
+              <Route exact path="/stats">
               <Stats />
             </Route>
+            </div>
+            <Footer />
+
           </div>
-          <Footer />
-        </div>
+        </body>
       </Router>
     </ApolloProvider>
   );

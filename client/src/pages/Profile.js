@@ -9,10 +9,13 @@ import { QUERY_USERS, QUERY_USER, QUERY_ME } from '../utils/queries';
 // Components
 import UserList from '../components/UserList';
 
-
+import ManageState from '../components/ManageState';
 
 const Profile = () => {
   const { id } = useParams();
+
+  const [showing, setShowing] = useState(true);
+  const [type, setType] = useState(null);
 
   const gameLoop = () => { //TODO: Rework gameloop to render not based on time since last frame, but time since the information was refreshed
     let loopResources = resources;
@@ -95,6 +98,11 @@ const Profile = () => {
   const users = usersData?.users || [];
 
   if (error) console.log(error);
+
+  const handleClose = () => {
+    setType('');
+    setShowing(false);
+  }
 
   // redirect to personal profile page if username is yours
   if (Auth.loggedIn() && Auth.getProfile().data._id === id) {
@@ -210,6 +218,11 @@ const Profile = () => {
 
         <div className="manageBox">
           <div className="cardManage">
+            <ManageState 
+              showing={showing}
+              type={type} 
+              handleClose={handleClose}
+            />
             <h1>Manage Village</h1>
             <div className="buttons">
               <button type="submit" className="btn manage-btn" id="manage-btn">INCREASE POPULATION</button>

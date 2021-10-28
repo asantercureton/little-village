@@ -244,7 +244,7 @@ useEffect(() => { //make this not async and create new function to fetch server 
         <div className="jumbotron jumbotron-fluid screenWidth">
 
           <div className="profileTable">
-            <section>
+            <section className="cardTable w-50">
               <h1 className="display-4 tableTitle">{user.username}'s {level.name}</h1>
 
               <table className="table table-hover">
@@ -300,7 +300,6 @@ useEffect(() => { //make this not async and create new function to fetch server 
                 user={user}
                 level={level}
               />
-              <h1>Manage Village</h1>
             </div>
 
             <div className="abCard overflow-auto">

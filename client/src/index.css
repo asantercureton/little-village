@@ -191,7 +191,7 @@ footer {
 
 .cardManage {
   /* background-image: url(`${process.env.PUBLIC_URL}/img/backtest.jpg`); */
-  color: whitesmoke;
+  color: rgba(0, 0, 0, 0.815);
   display: flex;
   align-items: center;
   flex-wrap: wrap;
@@ -199,6 +199,7 @@ footer {
   padding: 20px;
   position: relative;
 }
+
 
 img {
   max-width: 100%;
@@ -223,6 +224,7 @@ img {
   background-color: rgba(141, 92, 0, 0.589);
   color: whitesmoke;
   display:flex;
+  flex-wrap: wrap;
   height: auto;
   border-style: groove;
   border-width: 7px;
@@ -375,6 +377,8 @@ img {
   font-size: 150%;
 }
 
+
+
 .profileTable {
   text-align: center;
   display: flex;
@@ -382,7 +386,8 @@ img {
   justify-content: space-evenly;
   margin-top: -70px;
   flex-wrap: wrap;
-  
+  flex-direction: row;
+  align-content: center;
 }
 
 .sidePanel {
@@ -581,12 +586,12 @@ img {
 
 .request-btn {
   color: whitesmoke;
-  background-image: linear-gradient(rgb(238, 110, 255), rgb(22, 0, 29));
+  background-image: linear-gradient(rgb(2, 105, 2), rgb(36, 19, 0));
   /* background-color: rgb(56, 41, 0); */
   font-size: 75%;
   border-radius: 5px;
   margin: 3px;
-  width: auto;
+  width: 97%;
   padding: 15px;
 }
 

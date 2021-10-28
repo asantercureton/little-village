@@ -90,8 +90,6 @@ header a:hover {
   color: rgb(253, 172, 66);
   text-decoration: none;
   cursor: pointer;
-  transition: .5s ease;
-  font-size: larger;
 }
 #tag {
   border: 3px solid rgba(151, 124, 3, 0.5);
@@ -114,6 +112,7 @@ header h1:hover {
   max-height: 60px;
   border-radius: 60px;
   margin-bottom: 20px;
+  box-shadow: 0 0 15px #ffb657d7;
 }
 
 footer {
@@ -514,6 +513,27 @@ footer {
 }
 
 .manage-btn:hover {
+  color: rgb(235, 139, 13);
+  background-color: rgb(255, 255, 255);
+  cursor: pointer;
+  box-shadow: 0px 0px 8px 1px var(--yellow);
+  transition: .2s ease;
+  transform: scale(1.05);
+  text-decoration: none;
+}
+
+.request-btn {
+  color: whitesmoke;
+  background-image: linear-gradient(rgb(238, 110, 255), rgb(22, 0, 29));
+  /* background-color: rgb(56, 41, 0); */
+  font-size: 75%;
+  border-radius: 5px;
+  margin: 3px;
+  width: auto;
+  padding: 15px;
+}
+
+.request-btn:hover {
   color: rgb(235, 139, 13);
   background-color: rgb(255, 255, 255);
   cursor: pointer;

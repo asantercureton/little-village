@@ -106,10 +106,12 @@ const resolvers = {
       totalWorkers += village.unitAllocation.wood;
 
       if ((totalWorkers + args.amount <= village.population) && (village.unitAllocation[r] + args.amount >= 0)) {
+        await village.save();
         village.unitAllocation[r] += args.amount;
         await village.save();
         return user.populate('village');
       }else{
+        await village.save();
         return user.populate('village');
       }
     },
@@ -171,6 +173,21 @@ const resolvers = {
       );
       village.save();
       return village;
+    },
+    getUpdatedResources: async (_, args, context) => {
+      if (args.id) {
+        const user = await User.findById(args.id);
+        const village = await Village.findById(user.village);
+        await village.save();
+        return village.populate('trades').populate('user').populate('upgrades');
+      }else if (context.user) {
+        let user = await User.findOne({ _id: context.user._id });
+        let village = await Village.findById(user.village);
+        await village.save()
+        return village.populate('trades').populate('user').populate('upgrades');
+      } else {
+        throw new AuthenticationError('No user specified');
+      }
     }
   }
 };

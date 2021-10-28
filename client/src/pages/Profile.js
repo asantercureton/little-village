@@ -1,4 +1,3 @@
-
 // Node Modules
 import React, { useState, useEffect } from 'react';
 import { Redirect, useParams } from 'react-router-dom';
@@ -6,7 +5,7 @@ import { useQuery, useLazyQuery, useMutation} from '@apollo/client';
 // Utilities
 import Auth from '../utils/auth';
 import { QUERY_USERS, QUERY_USER, QUERY_ME, QUERY_LEVEL } from '../utils/queries';
-import { ALLOCATE_UNIT } from '../utils/mutations';
+import { ALLOCATE_UNIT, GET_UPDATED_RESOURCES } from '../utils/mutations';
 // Components
 import UserList from '../components/UserList';
 
@@ -14,87 +13,22 @@ import ManageState from '../components/ManageState';
 
 const Profile = () => {
   const { id } = useParams();
-
-  const [type, setType] = useState(null);
-
-  const gameLoop = () => { //TODO: Rework gameloop to render not based on time since last frame, but time since the information was refreshed
-    let loopResources = resources;
-
-    let now = new Date();
-    let deltaTime = Math.abs(now - lastUpdate) / 1000;
-    let { abundanceOfResources } = user.village;
-    for (let resource in loopResources) {
-      loopResources[resource] += workers[resource] * abundanceOfResources[resource] * deltaTime;
-      //console.log(workers[resource])
-    }
-
-
-    setResources({
-      fruit: Math.round(loopResources.fruit * 10) / 10,
-      meat: Math.round(loopResources.meat * 10) / 10,
-      gold: Math.round(loopResources.gold * 10) / 10,
-      wood: Math.round(loopResources.wood * 10) / 10
-    })
-    lastUpdate = new Date();
-  }
-
-  const syncData = async () => { //syncs client and server data
-    //await refetch()
-    if (!loading) {
-      console.log(user.village)
-      var { amountOfResources: resourceCount, unitAllocation, abundanceOfResources } = user.village;
-      await setResources({
-        fruit: resourceCount.fruit,
-        meat: resourceCount.meat,
-        gold: resourceCount.gold,
-        wood: resourceCount.wood
-      });
-      console.log(resourceCount.fruit)
-      await setWorkers({
-        fruit: unitAllocation.fruit,
-        meat: unitAllocation.meat,
-        gold: unitAllocation.gold,
-        wood: unitAllocation.wood
-      });
-    }
-  };
-
-  useEffect(async () => { //make this not async and create new function to fetch server data
-    if (!loading) {
-      if (!gameLoopInit && user?.username) { //set resources to correct amount 
-        var { amountOfResources: resourceCount, unitAllocation, abundanceOfResources } = user.village;
-        // console.log(user)
-        // await setResources({
-        //   fruit: resourceCount.fruit,
-        //   meat: resourceCount.meat,
-        //   gold: resourceCount.gold,
-        //   wood: resourceCount.wood
-        // });
-        // await setWorkers({
-        //   fruit: unitAllocation.fruit,
-        //   meat: unitAllocation.meat,
-        //   gold: unitAllocation.gold,
-        //   wood: unitAllocation.wood
-        // });
-        await syncData()
-        setGameLoopInit(true);
-        lastUpdate = new Date();
-        var gameLoopTimer = setInterval(gameLoop, 250);
-      }
-    }
-  });
-
-
-  //game variables and states
-  var lastUpdate;
-  const [allocateUnit, { data: unitData, loading: unitsLoading, error: unitError }] = useMutation(ALLOCATE_UNIT);
-
+  const [lastUpdate, setLastUpdate] = useState(null)
+  const [syncDataFlag, setSyncDataFlag] = useState(true);
+  const [intervalId, setIntervalId] = useState("intervalId");
   const [resources, setResources] = useState({
     fruit: 0,
     meat: 0,
     gold: 0,
     wood: 0
   }); //set up the resources state, which will be used to get the resources from the server and update them. will be an object with keys for each resource
+
+  const [oResources, setoResources] = useState({
+    fruit: 0,
+    meat: 0,
+    gold: 0,
+    wood: 0
+  });  //original resources
 
   const [workers, setWorkers] = useState({ //how many workers for each resource
     fruit: 0,
@@ -103,12 +37,12 @@ const Profile = () => {
     wood: 0
   });
 
-  const [gameLoopInit, setGameLoopInit] = useState(false); //have we set up the game loop? 
-
+  const [allocateUnit, { data: unitData, loading: unitsLoading, error: unitError }] = useMutation(ALLOCATE_UNIT);
+  const [getUpdatedResources, { data: updateData, loading: updateLoading, error: updateError}] = useMutation(GET_UPDATED_RESOURCES)
+  
   // Get current user
-  const { loading, data, error, refetch} = useQuery(id ? QUERY_USER : QUERY_ME, {
-    variables: { id },
-    pollInterval: 500
+  const { loading, data, error} = useQuery(id ? QUERY_USER : QUERY_ME, {
+    variables: { id }
   });
 
   // Get a list of all users
@@ -137,6 +71,86 @@ const Profile = () => {
   const handleClose = () => {
     setType(null);
   }
+
+  //const [gameLoopInit, setGameLoopInit] = useState(false); //have we set up the game loop? 
+  var gameLoopTimer;
+  useEffect(() => { //make this not async and create new function to fetch server data
+    if (!loading) {
+      if (user?.username && syncDataFlag) { //set resources to correct amount 
+        syncData();
+        console.log("USE EFFECT")
+        
+        //setGameLoopInit(true);
+      }
+    }
+  }, [loading, syncDataFlag]);
+
+  
+  useEffect(() => {
+    if (user) {
+      clearInterval(intervalId);
+      //gameLoopTimer = null;
+      setIntervalId(setInterval(gameLoop, 500));
+    }
+  }, [workers]);
+
+  const gameLoop = () => { //TODO: Rework gameloop to render not based on time since last frame, but time since the information was refreshed
+    let now = new Date();
+    let deltaTime = Math.abs(now - lastUpdate) / 1000;
+    if (user.village) {
+     
+     let { abundanceOfResources } = user.village;
+      let temp = { ...resources };
+      for (let resource in temp) {
+
+        temp[resource] = (oResources[resource] + workers[resource] * abundanceOfResources[resource] * deltaTime);
+        //console.log(workers[resource])
+      }
+
+      setResources({
+        fruit: Math.round(temp.fruit * 10) / 10,
+        meat: Math.round(temp.meat * 10) / 10,
+        gold: Math.round(temp.gold * 10) / 10,
+        wood: Math.round(temp.wood * 10) / 10
+      })
+      console.log(oResources)
+      //setLastUpdate(new Date());
+    }
+  }
+
+  const syncData = async () => { //syncs client and server data
+    //await refetch()
+    if (!loading) {
+      setSyncDataFlag(false);
+      //var { amountOfResources: resourceCount, unitAllocation, abundanceOfResources } = user.village;
+      let update = await getUpdatedResources();
+      setLastUpdate(new Date());
+      let { amountOfResources: resourceCount, unitAllocation, abundanceOfResources } = update.data.getUpdatedResources
+      console.log(JSON.parse(JSON.stringify(unitAllocation)));
+      setResources({
+        fruit: resourceCount.fruit,
+        meat: resourceCount.meat,
+        gold: resourceCount.gold,
+        wood: resourceCount.wood
+      });
+      setoResources({
+        fruit: resourceCount.fruit,
+        meat: resourceCount.meat,
+        gold: resourceCount.gold,
+        wood: resourceCount.wood
+      });
+      setWorkers({
+        fruit: unitAllocation.fruit,
+        meat: unitAllocation.meat,
+        gold: unitAllocation.gold,
+        wood: unitAllocation.wood
+      });
+      console.log(JSON.parse(JSON.stringify(workers)));
+      return true;
+    }
+  };
+
+
 
   // redirect to personal profile page if username is yours
   if (Auth.loggedIn() && Auth.getProfile().data._id === id) {
@@ -183,7 +197,8 @@ const Profile = () => {
     if (totalWorkers + 1 <= user.village.population) {
       tempWorkers[e.target.id] += 1;
       await allocateUnit({ variables: { userId: user._id,  resource: e.target.id, amount: 1} });
-      await syncData();
+      clearInterval(gameLoopTimer)
+      setSyncDataFlag(true);
     }
   }
 
@@ -192,12 +207,8 @@ const Profile = () => {
     if (tempWorkers[e.target.id] - 1 >= 0) {
       tempWorkers[e.target.id] -= 1;
       await allocateUnit({ variables: { userId: user._id,  resource: e.target.id, amount: -1} });
-      await setWorkers({
-        fruit: tempWorkers.fruit,
-        meat: tempWorkers.meat,
-        gold: tempWorkers.gold,
-        wood: tempWorkers.wood,
-      });
+      clearInterval(gameLoopTimer)
+      setSyncDataFlag(true)
     }
   }
 

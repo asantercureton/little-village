@@ -60,6 +60,33 @@ export const ALLOCATE_UNIT = gql`
   }
 `;
 
+
+export const GET_UPDATED_RESOURCES = gql`
+  mutation getUpdatedResources($id:ID) {
+    getUpdatedResources(id:$id) {
+      population
+        amountOfResources {
+          fruit
+          meat
+          gold
+          wood
+        }
+        unitAllocation {
+          fruit
+          meat
+          gold
+          wood
+        }
+        abundanceOfResources {
+          fruit
+          meat
+          gold
+          wood
+        }
+    }
+  }
+`;
+
 export const EXECUTE_TRADE = gql`
   mutation executeTrade($userId: ID!, $tradeId: ID!) {
     executeTrade(userId: $userId, tradeId: $tradeId) {

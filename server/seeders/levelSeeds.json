@@ -11,7 +11,8 @@
         "buyPopulation": {
             "fruit": 10,
             "meat": 10
-        }
+        },
+        "nextLevel": "Hamlet"
     },
     {
         "level": 2,
@@ -25,7 +26,8 @@
         "buyPopulation": {
             "fruit": 25,
             "meat": 25
-        }
+        },
+        "nextLevel": "Village"
     },
     {
         "level": 3,
@@ -39,7 +41,8 @@
         "buyPopulation": {
             "fruit": 50,
             "meat": 50
-        }
+        },
+        "nextLevel": "Town"
     },
     {
         "level": 4,
@@ -53,7 +56,8 @@
         "buyPopulation": {
             "fruit": 100,
             "meat": 100
-        }
+        },
+        "nextLevel": "Citystate"
     },
     {
         "level": 5,
@@ -67,7 +71,8 @@
         "buyPopulation": {
             "fruit": 175,
             "meat": 175
-        }
+        },
+        "nextLevel": "Kingdom"
     },
     {
         "level": 6,

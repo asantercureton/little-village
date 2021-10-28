@@ -20,6 +20,9 @@ const levelSchema = new Schema({
   buyPopulation: {
     fruit: Number,
     meat: Number
+  },
+  nextLevel: {
+    type: String
   }
 });
 

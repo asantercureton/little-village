@@ -2,10 +2,10 @@
 // Node Modules
 import React, { useState, useEffect } from 'react';
 import { Redirect, useParams } from 'react-router-dom';
-import { useQuery } from '@apollo/client';
+import { useQuery, useLazyQuery } from '@apollo/client';
 // Utilities
 import Auth from '../utils/auth';
-import { QUERY_USERS, QUERY_USER, QUERY_ME, QUERY_LEVELS } from '../utils/queries';
+import { QUERY_USERS, QUERY_USER, QUERY_ME, QUERY_LEVEL } from '../utils/queries';
 // Components
 import UserList from '../components/UserList';
 
@@ -37,34 +37,6 @@ const Profile = () => {
     lastUpdate = new Date();
   }
 
-  useEffect(async () => {
-
-    if (!loading) {
-      if (!gameLoopInit) { //set resources to correct amount 
-        var { amountOfResources: resourceCount, unitAllocation, abundanceOfResources } = user.village;
-
-        await setResources({
-          fruit: resourceCount.fruit,
-          meat: resourceCount.meat,
-          gold: resourceCount.gold,
-          wood: resourceCount.wood
-        });
-        await setWorkers({
-          fruit: unitAllocation.fruit,
-          meat: unitAllocation.meat,
-          gold: unitAllocation.gold,
-          wood: unitAllocation.wood
-        });
-        setGameLoopInit(true);
-        lastUpdate = new Date();
-        var gameLoopTimer = setInterval(gameLoop, 250);
-      }
-
-
-
-    }
-  });
-
 
   //game variables and states
   var lastUpdate;
@@ -92,16 +64,26 @@ const Profile = () => {
 
   // Get a list of all users
   const { usersLoading, data: usersData } = useQuery(QUERY_USERS);
-
   const user = data?.me || data?.user || {};
   const users = usersData?.users || [];
 
-  if (error) console.log(error);
+  const [currentLevel, { data: levelData }] = useLazyQuery(QUERY_LEVEL);
 
-  const { loading: levelLoading, data: levelData } = useQuery(QUERY_LEVELS);
-  const levels = levelData?.levels || [];
-  const level = levels.find(level => (level.level === user.village.level));
-  const nextLevel = levels.find(level => (level.level === (user.village.level + 1)));
+  useEffect(() => {
+    if (user?.village?.level) {
+      currentLevel({
+        variables: { level: user.village.level },
+      });
+    }
+  }, [currentLevel, user?.village?.level]);
+
+  const level = levelData?.level || {};
+
+  if (loading || usersLoading) {
+    return <h4>Loading...</h4>;
+  }
+
+  if (error) console.log(error);
 
   const handleClose = () => {
     setType(null);
@@ -112,9 +94,6 @@ const Profile = () => {
     return <Redirect to="/me" />;
   }
 
-  if (loading || usersLoading || levelLoading) {
-    return <h4>Loading...</h4>;
-  }
 
   if (!user?.username) {
     return (
@@ -177,113 +156,118 @@ const Profile = () => {
   }
 
 
-  return (
-    <div className="wrapper" style={{
-      backgroundImage: `url(${process.env.PUBLIC_URL}/img/hamlet2.jpg)`
-    }}>
-      <div className="jumbotron jumbotron-fluid screenWidth" >
+  if (loading || usersLoading) {
+    return <h4>Loading...</h4>;
+  } else {
+    return (
+      <div className="wrapper" style={{
+        backgroundImage: `url(${process.env.PUBLIC_URL}/img/hamlet2.jpg)`
+      }}>
+        <div className="jumbotron jumbotron-fluid screenWidth">
 
-        <div className="profileTable">
-          <section>
-            <h1 className="display-4 tableTitle">{user.username}'s {level.name}</h1>
+          <div className="profileTable">
+            <section>
+              <h1 className="display-4 tableTitle">{user.username}'s {level.name}</h1>
 
-            <table className="table table-hover">
+              <table className="table table-hover">
 
-              <tbody className="rows">
-                <tr className="cell">
-                  <th scope="row">🧍‍♂️ POPULATION:</th>
-                  <td>{user.village.population}</td>
-                </tr>
-                <tr className="cell">
-                  <th scope="row">🍎 FRUIT:</th>
-                  <td>{resources.fruit}</td>
-                </tr>
-                <tr className="cell">
-                  <th scope="row">🥩 MEAT:</th>
-                  <td>{resources.meat}</td>
-                </tr>
-                <tr className="cell">
-                  <th scope="row">💰 GOLD:</th>
-                  <td>{resources.gold}</td>
-                </tr>
-                <tr className="cell">
-                  <th scope="row">🌲 WOOD:</th>
-                  <td>{resources.wood}</td>
-                </tr>
-                <tr className="cell">
-                  <th scope="row"># of TRADES:</th>
-                  <td>3</td>
-                </tr>
-              </tbody>
-            </table>
-            <button type="submit" className="btn request-btn" id="request-btn">REQUEST A TRADE!</button>
+                <tbody className="rows">
+                  <tr className="cell">
+                    <th scope="row">🧍‍♂️ POPULATION:</th>
+                    <td>{user.village.population}</td>
+                  </tr>
+                  <tr className="cell">
+                    <th scope="row">🍎 FRUIT:</th>
+                    <td>{resources.fruit}</td>
+                  </tr>
+                  <tr className="cell">
+                    <th scope="row">🥩 MEAT:</th>
+                    <td>{resources.meat}</td>
+                  </tr>
+                  <tr className="cell">
+                    <th scope="row">💰 GOLD:</th>
+                    <td>{resources.gold}</td>
+                  </tr>
+                  <tr className="cell">
+                    <th scope="row">🌲 WOOD:</th>
+                    <td>{resources.wood}</td>
+                  </tr>
+                  <tr className="cell">
+                    <th scope="row"># of TRADES:</th>
+                    <td>3</td>
+                  </tr>
+                </tbody>
+              </table>
+              <button type="submit" className="btn request-btn" id="request-btn">REQUEST A TRADE!</button>
 
-          </section>
-          <div className="imageCard">
-            <img src={`${process.env.PUBLIC_URL}/img/levels/${level.image}`} alt={level.name} />
+            </section>
+            <div className="imageCard">
+              <img src={`${process.env.PUBLIC_URL}/img/levels/${level.image}`} alt={level.name} />
+            </div>
+          </div>
+
+
+          <div className="manageBox">
+            <div className="cardManage" style={{
+              backgroundImage: `url(${process.env.PUBLIC_URL}/img/backtest.jpg)`
+            }}>
+              <ManageState
+                type={type}
+                setType={setType}
+                handleClose={handleClose}
+                user={user}
+                level={level}
+              />
+              <h1>Manage Village</h1>
+            </div>
+
+            <div className="abCard overflow-auto">
+              <table className="table table-hover">
+                <thead>
+                  <th scope="col">Resource</th>
+                  <th scope="col">Abundance</th>
+                  <th scope="col">Workers</th>
+                  <th scope="col">Upgrades</th>
+                  <th scope="col">Earnings</th>
+                </thead>
+                <tbody className="rows2">
+                  <tr className="cell">
+                    <th scope="row">🍎 FRUIT:</th>
+                    <td>{user.village.abundanceOfResources.fruit}</td>
+                    <td>{workers.fruit}</td>
+                    <td>{user.village.upgrades.fruit.length}</td>
+                    <td>*{resources.fruit} #/sec</td>
+                  </tr>
+                  <tr className="cell">
+                    <th scope="row">🥩 MEAT:</th>
+                    <td>{user.village.abundanceOfResources.meat}</td>
+                    <td>{workers.meat}</td>
+                    <td>{user.village.upgrades.meat.length}</td>
+                    <td>*{resources.meat} #/sec</td>
+                  </tr>
+                  <tr className="cell">
+                    <th scope="row">💰 GOLD:</th>
+                    <td>{user.village.abundanceOfResources.gold}</td>
+                    <td>{workers.gold}</td>
+                    <td>{user.village.upgrades.gold.length}</td>
+                    <td>*{resources.gold} #/sec</td>
+                  </tr>
+                  <tr className="cell">
+                    <th scope="row">🌲 WOOD:</th>
+                    <td>{user.village.abundanceOfResources.wood}</td>
+                    <td>{workers.wood}</td>
+                    <td>{user.village.upgrades.wood.length}</td>
+                    <td>*{resources.wood} #/sec</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
           </div>
         </div>
 
-
-        <div className="manageBox">
-          <div className="cardManage" style={{
-            backgroundImage: `url(${process.env.PUBLIC_URL}/img/backtest.jpg)`
-          }}>
-            <ManageState 
-              type={type} 
-              handleClose={handleClose}
-            />
-            <h1>Manage Village</h1>
-          </div>
-
-
-          <div className="abCard overflow-auto">
-          
-            <table className="table table-hover">
-              <thead>
-                <th scope="col">Resource</th>
-                <th scope="col">Abundance</th>
-                <th scope="col">Workers</th>
-                <th scope="col">Upgrades</th>
-                <th scope="col">Earnings</th>
-              </thead>
-              <tbody className="rows2">
-                <tr className="cell">
-                  <th scope="row">🍎 FRUITS:</th>
-                  <td>{user.village.abundanceOfResources.fruit}</td>
-                  <td>{workers.fruit}</td>
-                  <td>{user.village.upgrades.fruit.length}</td>
-                  <td>*{resources.fruit} #/sec</td>
-                </tr>
-                <tr className="cell">
-                  <th scope="row">🥩 MEAT:</th>
-                  <td>{user.village.abundanceOfResources.meat}</td>
-                  <td>{workers.meat}</td>
-                  <td>{user.village.upgrades.meat.length}</td>
-                  <td>*{resources.meat} #/sec</td>
-                </tr>
-                <tr className="cell">
-                  <th scope="row">💰 GOLD:</th>
-                  <td>{user.village.abundanceOfResources.gold}</td>
-                  <td>{workers.gold}</td>
-                  <td>{user.village.upgrades.gold.length}</td>
-                  <td>*{resources.gold} #/sec</td>
-                </tr>
-                <tr className="cell">
-                  <th scope="row">🌲 WOOD:</th>
-                  <td>{user.village.abundanceOfResources.wood}</td>
-                  <td>{workers.wood}</td>
-                  <td>{user.village.upgrades.wood.length}</td>
-                  <td>*{resources.wood} #/sec</td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-        </div>
       </div>
-
-    </div>
-  );
+    );
+  }
 };
 
 export default Profile;

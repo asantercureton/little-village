@@ -17,6 +17,7 @@ const Profile = () => {
   const [intervalId, setIntervalId] = useState("intervalId");
   const [type, setType] = useState(null);
   const [chosen, setChosen] = useState(null);
+  const [population, setPopulation] = useState(2);
   const [resources, setResources] = useState({
     fruit: 0,
     meat: 0,
@@ -82,7 +83,7 @@ const Profile = () => {
           userId: user._id
         },
       });
-
+      setSyncDataFlag(true)
     } catch (e) {
       console.error(e);
     }
@@ -117,14 +118,12 @@ const Profile = () => {
           }
   };
 
-  //const [gameLoopInit, setGameLoopInit] = useState(false); //have we set up the game loop? 
 useEffect(() => { //make this not async and create new function to fetch server data
   if (!loading) {
     if (user?.username && syncDataFlag) { //set resources to correct amount 
       syncData();
       console.log("USE EFFECT")
       
-      //setGameLoopInit(true);
     }
   }
 }, [loading, syncDataFlag]);
@@ -169,8 +168,7 @@ useEffect(() => { //make this not async and create new function to fetch server 
       //var { amountOfResources: resourceCount, unitAllocation, abundanceOfResources } = user.village;
       let update = await getUpdatedResources();
       setLastUpdate(new Date());
-      let { amountOfResources: resourceCount, unitAllocation, abundanceOfResources } = update.data.getUpdatedResources
-      console.log(JSON.parse(JSON.stringify(unitAllocation)));
+      let { amountOfResources: resourceCount, unitAllocation, abundanceOfResources, population } = update.data.getUpdatedResources
       setResources({
         fruit: resourceCount.fruit,
         meat: resourceCount.meat,
@@ -189,7 +187,7 @@ useEffect(() => { //make this not async and create new function to fetch server 
         gold: unitAllocation.gold,
         wood: unitAllocation.wood
       });
-      console.log(JSON.parse(JSON.stringify(workers)));
+      setPopulation(population)
       return true;
     }
   };
@@ -216,8 +214,7 @@ useEffect(() => { //make this not async and create new function to fetch server 
     for (let r in workers) {
       totalWorkers += workers[r]
     }
-    console.log(totalWorkers, user.village.population)
-    if (totalWorkers + 1 <= user.village.population) {
+    if (totalWorkers + 1 <= population) {
       tempWorkers[e.target.id] += 1;
       await allocateUnit({ variables: { userId: user._id,  resource: e.target.id, amount: 1} });
       setSyncDataFlag(true);
@@ -252,7 +249,7 @@ useEffect(() => { //make this not async and create new function to fetch server 
                 <tbody className="rows">
                   <tr className="cell">
                     <th scope="row">🧍‍♂️ POPULATION:</th>
-                    <td>{user.village.population}</td>
+                    <td>{population}</td>
                   </tr>
                   <tr className="cell">
                     <th scope="row">🍎 FRUIT:</th>
@@ -272,7 +269,7 @@ useEffect(() => { //make this not async and create new function to fetch server 
                   </tr>
                   <tr className="cell">
                     <th scope="row"># of TRADES:</th>
-                    <td>3</td>
+                    <td>{user.village.trades ? user.village.trades.length: 0}</td>
                   </tr>
                 </tbody>
               </table>

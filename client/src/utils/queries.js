@@ -19,6 +19,9 @@ export const QUERY_USER = gql`
       village {
         population
         level
+        trades {
+          _id
+        }
         amountOfResources {
           fruit
           meat
@@ -57,6 +60,9 @@ export const QUERY_ME = gql`
       village {
         population
         level
+        trades {
+          _id
+        }
         amountOfResources {
           fruit
           meat

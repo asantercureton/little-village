@@ -9,7 +9,9 @@ import { EXECUTE_TRADE } from '../utils/mutations';
 // TODO: executeTrade function DOES run, but the resolver doesn't update the villages
 // display if the trade is successful or not (if they can't afford it); maybe use acceptData as true/false
 const Tradeboard = () => {
-  const { loading, data } = useQuery(QUERY_TRADES);
+  const { loading, data } = useQuery(QUERY_TRADES, {
+    fetchPolicy: "no-cache"
+  });
   const trades = data?.trades || [];
 
   const { id } = useParams();
@@ -45,6 +47,7 @@ const Tradeboard = () => {
           tradeId: event.target.value
         },
       });
+      window.location.reload();
     } catch (e) {
       console.error(e);
     }
@@ -56,15 +59,17 @@ const Tradeboard = () => {
     } else {
       return (
         <tbody >
-          {trades.map((trade) => (
-            <tr key={trade._id}>
-              <td>{trade.village.user.username}</td>
-              <td>{styleResource(trade.selling.resource)}{trade.selling.amount}</td>
-              <td>{styleResource(trade.buying.resource)}{trade.buying.amount}</td>
-              <td> {trade.amount} Trades Left</td>
-              <td><button onClick={handleAcceptTrade} value={trade._id} type="submit" className="btn login-btn" id="login-btn">Accept Trade</button></td>
-            </tr>
-          ))}
+          {trades.map((trade) => {
+            if (trade.village.user._id != userId) {
+              return (<tr key={trade._id}>
+                <td>{trade.village.user.username}</td>
+                <td>{styleResource(trade.selling.resource)}{trade.selling.amount}</td>
+                <td>{styleResource(trade.buying.resource)}{trade.buying.amount}</td>
+                <td> {trade.amount} Trades Left</td>
+                <td><button onClick={handleAcceptTrade} value={trade._id} type="submit" className="btn login-btn" id="login-btn">Accept Trade</button></td>
+              </tr>)
+            }
+          })}
         </tbody>
       );
     }

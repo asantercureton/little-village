@@ -86,15 +86,9 @@ export const GET_UPDATED_RESOURCES = gql`
   }
 `;
 
-<<<<<<< HEAD
 export const EXECUTE_TRADE = gql`
   mutation executeTrade($userId: ID!, $tradeId: ID!) {
     executeTrade(userId: $userId, tradeId: $tradeId) {
-=======
-export const ADD_COMMENT = gql`
-  mutation addComment($thoughtId: ID!, $commentText: String!) {
-    addComment(thoughtId: $thoughtId, commentText: $commentText) {
->>>>>>> 38409c8 (got client display)
       _id
     }
   }

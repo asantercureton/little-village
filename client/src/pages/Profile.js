@@ -9,10 +9,13 @@ import { QUERY_USERS, QUERY_USER, QUERY_ME, QUERY_LEVELS } from '../utils/querie
 // Components
 import UserList from '../components/UserList';
 
-
+import ManageState from '../components/ManageState';
 
 const Profile = () => {
   const { id } = useParams();
+
+  const [showing, setShowing] = useState(true);
+  const [type, setType] = useState(null);
 
   const gameLoop = () => { //TODO: Rework gameloop to render not based on time since last frame, but time since the information was refreshed
     let loopResources = resources;
@@ -96,11 +99,15 @@ const Profile = () => {
 
   if (error) console.log(error);
 
-  
   const { loading: levelLoading, data: levelData } = useQuery(QUERY_LEVELS);
   const levels = levelData?.levels || [];
   const level = levels.find(level => (level.level === user.village.level));
   const nextLevel = levels.find(level => (level.level === (user.village.level + 1)));
+
+  const handleClose = () => {
+    setType('');
+    setShowing(false);
+  }
 
   // redirect to personal profile page if username is yours
   if (Auth.loggedIn() && Auth.getProfile().data._id === id) {
@@ -211,12 +218,18 @@ const Profile = () => {
             </table>
           </section>
           <div className="imageCard">
+            {/* level img src = "../src/img/levels/tribe.jpg" */}
             <img src={level.image} alt={level.name} />
           </div>
         </div>
 
         <div className="manageBox">
           <div className="cardManage">
+            <ManageState 
+              showing={showing}
+              type={type} 
+              handleClose={handleClose}
+            />
             <h1>Manage Village</h1>
             <div className="buttons">
               <button type="submit" className="btn manage-btn" id="manage-btn">INCREASE POPULATION</button>
@@ -269,10 +282,6 @@ const Profile = () => {
           </div>
         </div>
       </div>
-
-
-
-      
 
     </div>
   );

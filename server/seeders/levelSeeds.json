@@ -3,7 +3,7 @@
         "level": 1,
         "name": "Tribe",
         "maxPopulation": 10,
-        "image": "../src/img/levels/tribe.jpg",
+        "image": "tribe.jpg",
         "levelUpCost": {
             "gold": 10,
             "wood": 10
@@ -17,7 +17,7 @@
         "level": 2,
         "name": "Hamlet",
         "maxPopulation": 25,
-        "image": "../src/img/levels/hamlet.jpg",
+        "image": "hamlet.jpg",
         "levelUpCost": {
             "gold": 50,
             "wood": 50
@@ -31,7 +31,7 @@
         "level": 3,
         "name": "Village",
         "maxPopulation": 50,
-        "image": "../src/img/levels/village.jpg",
+        "image": "village.jpg",
         "levelUpCost": {
             "gold": 100,
             "wood": 100
@@ -45,7 +45,7 @@
         "level": 4,
         "name": "Town",
         "maxPopulation": 100,
-        "image": "../src/img/levels/town.jpg",
+        "image": "town.jpg",
         "levelUpCost": {
             "gold": 250,
             "wood": 250
@@ -59,7 +59,7 @@
         "level": 5,
         "name": "Citystate",
         "maxPopulation": 175,
-        "image": "../src/img/levels/citystate.jpg",
+        "image": "citystate.jpg",
         "levelUpCost": {
             "gold": 500,
             "wood": 500
@@ -73,7 +73,7 @@
         "level": 6,
         "name": "Kingdom",
         "maxPopulation": 250,
-        "image": "../src/img/levels/kingdom.jpg",
+        "image": "kingdom.jpg",
         "levelUpCost": {
             "gold": 0,
             "wood": 0

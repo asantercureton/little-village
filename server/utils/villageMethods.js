@@ -88,7 +88,7 @@ const addPopulation = (village, level) => {
         }
     });
     const afford = getAfford(arr, village.amountOfResources, level.buyPopulation);
-    if(afford){
+    if(afford && village.population + 1 <= level.maxPopulation){
         village.amountofResources = getTransaction(arr, village.amountOfResources, level.buyPopulation);
         village.population += 1;
     }

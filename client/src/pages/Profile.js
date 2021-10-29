@@ -97,7 +97,7 @@ const Profile = () => {
           userId: user._id
         },
       });
-      window.location.refresh();
+      window.location.href = window.location.href;
     } catch (e) {
       console.error(e);
     }
@@ -135,7 +135,31 @@ const Profile = () => {
       if (amount >= cost) { afford++ };
     }
     
-    if (arr.length === afford) {
+    if (arr.length === afford && population + 1 <= level.maxPopulation) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
+  const canBuyLevel = () => {
+    let price = level.levelUpCost;
+    let owned = {...resources};
+    let arr = [];
+    let afford = 0;
+    Object.keys(price).forEach(key => {
+      if (price[key] > 0) {
+        arr.push(key);
+      }
+    });
+    for (let i = 0; i < arr.length; i++) {
+      let resource = arr[i];
+      let amount = owned[resource];
+      let cost = price[resource];
+      if (amount >= cost) { afford++ };
+    }
+    
+    if (arr.length === afford ) {
       return true;
     } else {
       return false;
@@ -318,6 +342,7 @@ const Profile = () => {
                 type={type}
                 setType={setType}
                 canBuyPop={canBuyPop}
+                canBuyLevel={canBuyLevel}
                 handleClose={handleClose}
                 handleAddPop={handleAddPop}
                 handleLevelUp={handleLevelUp}
@@ -327,6 +352,7 @@ const Profile = () => {
                 subtractWorker={subtractWorker}
                 user={user}
                 level={level}
+                population={population}
               />
             </div>
 

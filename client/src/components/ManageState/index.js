@@ -3,9 +3,6 @@ import { Link } from 'react-router-dom';
 
 const ManageState = (props) => {
   const styles = {
-    // width: "100%",
-    // height: "100%",
-    backgroundImage: `url(${process.env.PUBLIC_URL}/img/otherboard.jpg)`,
     top: 0,
     left: 0,
   }
@@ -22,16 +19,17 @@ const ManageState = (props) => {
 
   const checkCapacity = () => {
     if (props.user.village.population >= props.level.maxPopulation) {
-      return <div><h1>You're at Capacity!</h1>
-        <h4>Current Population: {props.user.village.population}</h4>
-        <h4>Max Population: {props.level.maxPopulation}</h4>
-        <h4>Level Up to Expand!</h4>
+      return <div><h2>You're at Capacity!</h2>
+        <h4>Current Pop: {props.user.village.population}</h4>
+        <h4>Max Pop: {props.level.maxPopulation}</h4>
+        <h4>Level Up to Increase Your Capacity!</h4>
       </div>
     } else {
-      return <div><h1>Increase Population</h1>
-        <h4>Current Population: {props.user.village.population}</h4>
-        <h4>Max Population: {props.level.maxPopulation}</h4>
-        <h5>Cost: {popCost(props.level.buyPopulation)}</h5>
+      return <div><h2>Increase Population</h2>
+        <h4>Current Pop: {props.user.village.population}</h4>
+        <h4>Max Pop: {props.level.maxPopulation}</h4>
+        <h4>Cost:</h4>
+        <h4>{popCost(props.level.buyPopulation)}</h4>
         {renderPopBtn()}
       </div>
     }
@@ -47,17 +45,17 @@ const ManageState = (props) => {
 
   const renderPopBtn = () => {
     if (props.canBuyPop()) {
-      return <button onClick={props.handleAddPop} type="submit" className="btn population-btn" id="population1-btn">BUY 1</button>
+      return <button onClick={props.handleAddPop} type="submit" className="btn manage-btn" id="population1-btn">BUY VILLAGER</button>
     } else {
-      return <button disabled type="submit" className="btn population-btn" id="population1-btn">CAN'T AFFORD</button>
+      return <button disabled type="submit" className="btn manage-btn" id="population1-btn">CAN'T AFFORD</button>
     }
   }
 
   const renderLevelBtn = () => {
     if (checkAfford(props.user.village.amountOfResources, props.level.levelUpCost)) {
-      return <button onClick={props.handleLevelUp} type="submit" className="btn levelup-btn" id="levelup-btn">BUY</button>
+      return <button onClick={props.handleLevelUp} type="submit" className="btn manage-btn" id="levelup-btn">LEVEL UP</button>
     } else {
-      return <button disabled type="submit" className="btn levelup-btn" id="levelup-btn">CAN'T AFFORD</button>
+      return <button disabled type="submit" className="btn manage-btn" id="levelup-btn">CAN'T AFFORD</button>
     }
   }
 
@@ -75,7 +73,7 @@ const ManageState = (props) => {
       let cost = price[resource];
       if (amount >= cost) { afford++ };
     }
-    
+
     if (arr.length === afford) {
       return true;
     } else {
@@ -89,20 +87,35 @@ const ManageState = (props) => {
         return checkCapacity()
       }
       case 'workers': {
-        return <div><h5 className="card-title"><strong>Assign Workers</strong></h5>
-          <p className="card-text">Allocate the Workload</p>
-          <p>FARMERS:
-            <div className="input-group"><button id="fruit" className="btn btn-decrement btn-outline-secondary btn-minus" onClick={props.subtractWorker} type="button"><strong id="fruit">−</strong></button><input type="text" disabled="true" inputmode="decimal" placeholder={props.workers.fruit}></input><button id="fruit" onClick={props.addWorker} className="btn btn-increment btn-outline-secondary btn-plus" type="button"><strong id="fruit">+</strong></button></div>
-          </p>
-          <p>HUNTERS:
-            <div className="input-group"><button id="meat" className="btn btn-decrement btn-outline-secondary btn-minus" onClick={props.subtractWorker} type="button"><strong id="meat">−</strong></button><input type="text" disabled="true" inputmode="decimal" placeholder={props.workers.meat} /><button id="meat" onClick={props.addWorker} className="btn btn-increment btn-outline-secondary btn-plus" type="button"><strong id="meat">+</strong></button></div>
-          </p>
-          <p>MINERS:
-            <div className="input-group"><button id="gold" onClick={props.subtractWorker} className="btn btn-decrement btn-outline-secondary btn-minus" type="button"><strong id="gold">−</strong></button><input type="text" inputmode="decimal" disabled="true" placeholder={props.workers.gold} /><button id="gold" onClick={props.addWorker} className="btn btn-increment btn-outline-secondary btn-plus" type="button"><strong id="gold">+</strong></button></div>
-          </p>
-          <p>LUMBERJACKS:
-            <div className="input-group"><button id="wood" onClick={props.subtractWorker} className="btn btn-decrement btn-outline-secondary btn-minus" type="button"><strong id="wood">−</strong></button><input type="text" disabled="true" inputmode="decimal" placeholder={props.workers.wood} /><button id="wood" onClick={props.addWorker} className="btn btn-increment btn-outline-secondary btn-plus" type="button"><strong id="wood">+</strong></button></div>
-          </p>
+        return <div><h3 className="card-title"><strong>Assign Workers</strong></h3>
+          <h4>FARMERS:
+            <div className="input-group">
+              <button id="fruit" className="btn manage-btn btn-decrement btn-outline-secondary btn-minus" onClick={props.subtractWorker} type="button"><strong id="fruit">−</strong></button>
+              <input type="text" disabled="true" inputmode="decimal" placeholder={props.workers.fruit}></input>
+              <button id="fruit" onClick={props.addWorker} className="btn manage-btn btn-increment btn-outline-secondary btn-plus" type="button"><strong id="fruit">+</strong></button>
+              </div>
+          </h4>
+          <h4>HUNTERS:
+            <div className="input-group">
+              <button id="meat" className="btn manage-btn btn-decrement btn-outline-secondary btn-minus" onClick={props.subtractWorker} type="button"><strong id="meat">−</strong></button>
+              <input type="text" disabled="true" inputmode="decimal" placeholder={props.workers.meat} />
+              <button id="meat" onClick={props.addWorker} className="btn manage-btn btn-increment btn-outline-secondary btn-plus" type="button"><strong id="meat">+</strong></button>
+              </div>
+          </h4>
+          <h4>MINERS:
+            <div className="input-group">
+              <button id="gold" onClick={props.subtractWorker} className="btn manage-btn btn-decrement btn-outline-secondary btn-minus" type="button"><strong id="gold">−</strong></button>
+              <input type="text" inputmode="decimal" disabled="true" placeholder={props.workers.gold} />
+              <button id="gold" onClick={props.addWorker} className="btn manage-btn btn-increment btn-outline-secondary btn-plus" type="button"><strong id="gold">+</strong></button>
+              </div>
+          </h4>
+          <h4>LUMBERJACKS:
+            <div className="input-group">
+              <button id="wood" onClick={props.subtractWorker} className="btn manage-btn btn-decrement btn-outline-secondary btn-minus" type="button"><strong id="wood">−</strong></button>
+              <input type="text" disabled="true" inputmode="decimal" placeholder={props.workers.wood} />
+              <button id="wood" onClick={props.addWorker} className="btn manage-btn btn-increment btn-outline-secondary btn-plus" type="button"><strong id="wood">+</strong></button>
+              </div>
+          </h4>
         </div>
       }
       case 'upgrades': {
@@ -133,27 +146,23 @@ const ManageState = (props) => {
       }
       case 'levelup': {
         return <div>
-          <h1>Level Up!</h1>
-          <p>Level Up to {props.level.nextLevel}</p>
+          <h2>Level Up to {props.level.nextLevel}!</h2>
           <div>
-            <h3>Cost: {popCost(props.level.levelUpCost)}</h3>
+            <h3>Cost:</h3>
+            <h3>{popCost(props.level.levelUpCost)}</h3>
             {renderLevelBtn()}
           </div></div>
       }
       default: {
-        return <div className="manageBox">
-          <div className="cardManage" style={{
-            backgroundImage: `url(${process.env.PUBLIC_URL}/img/backtest.jpg)`
-          }}>
-            <div className="buttons">
-              <h1>Manage Village</h1>
-              <button type="submit" className="btn manage-btn" id="manage-btn" onClick={() => props.setType('population')}>INCREASE POPULATION</button>
-              <button type="submit" className="btn manage-btn" id="manage-btn" onClick={() => props.setType('workers')}>ASSIGN WORKERS</button>
-              {checkMaxLevel()}
-              <Link to="/tradeform">
-                <p className="btn request-btn" id="request-btn">REQUEST A TRADE</p>
-              </Link>
-            </div>
+        return <div>
+          <div className="buttons">
+            <h2><strong>Manage {props.level.name}</strong></h2>
+            <button type="submit" className="btn manage-btn" id="manage-btn" onClick={() => props.setType('population')}>INCREASE POPULATION</button>
+            <button type="submit" className="btn manage-btn" id="manage-btn" onClick={() => props.setType('workers')}>ASSIGN WORKERS</button>
+            {checkMaxLevel()}
+            <Link to="/tradeform">
+              <p className="btn request-btn" id="request-btn">REQUEST A TRADE</p>
+            </Link>
           </div>
         </div>
       }
@@ -163,11 +172,11 @@ const ManageState = (props) => {
 
 
   return (
-    <div style={styles}>
-      {props.type === null ? [] : <button onClick={props.handleClose}>
-        Manage Village
-      </button>}
+    <div style={styles} width="100%">
       {renderItems()}
+      {props.type === null ? [] : <button className="btn manage-btn" onClick={props.handleClose}>
+      &#8592; Back to Manager
+      </button>}
     </div>
   );
 };

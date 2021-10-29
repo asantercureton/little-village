@@ -6,7 +6,6 @@ const Home = () => {
     <main>
       <div className="jumbotron align-items-center">
         <div className="justify-content-center">
-          <h1 className="headline">Welcome to Little Village!</h1>
           <hr id="tag" />
           <h1 className="display-1">HOW TO PLAY</h1>
           <hr id="tag" />

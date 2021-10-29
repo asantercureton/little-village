@@ -24,6 +24,7 @@ const executeTrade = async (village1, village2, trade) => {
         village2.amountOfResources[trade.selling.resource] += trade.selling.amount;
         village2.amountOfResources[trade.buying.resource] -= trade.buying.amount;
         trade.amount -= 1;
+        console.log("hi")
         if (trade.amount <= 0) {
             await village1.trades.pull({ _id: trade._id });
             await Trade.findByIdAndDelete(trade._id);

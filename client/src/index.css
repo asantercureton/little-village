@@ -36,7 +36,9 @@ body {
 }
 
 
-
+.nav {
+  font-size: 1.3rem;
+}
 
 .headline {
 
@@ -50,7 +52,7 @@ body {
 
 ol li {
   font-size: 125%;
-  color: #020146d5;
+  color: #050520d5;
   text-align: center;
   list-style-position: inside;
   margin: 10px 0;
@@ -62,7 +64,7 @@ ol li {
 
 .display-1 {
   text-align: center;
-  color: rgba(146, 88, 1, 0.897);
+  color: rgb(146, 88, 1);
   padding: 10px;
   margin-bottom: 20px;
   font-size:300%;
@@ -129,6 +131,15 @@ footer {
   width:100%;
 }
 
+input {
+  text-align: center;
+  width: 50%;
+}
+
+.input-group {
+  justify-content: center;
+}
+
 .form-label {
   margin-right: 15px;
 }
@@ -158,7 +169,7 @@ footer {
 
 .play-btn {
   color: var(--midGreen);
-  background: rgba(1, 35, 97, 0.897);
+  background: #050520d5;
   border-color: var(--purple) 2px solid;
   border-radius: 10px;
   font-size: 35px;
@@ -191,19 +202,20 @@ footer {
 }
 
 .card {
-  /* background-image: url(`${process.env.PUBLIC_URL}/img/backtest.jpg`); */
   color: whitesmoke;
 }
 
 .cardManage {
-  /* background-image: url(`${process.env.PUBLIC_URL}/img/backtest.jpg`); */
-  color: rgba(0, 0, 0, 0.815);
+  color: black;
   display: flex;
   align-items: center;
   flex-wrap: wrap;
   flex-direction: column;
   padding: 20px;
   position: relative;
+  border-style: groove;
+  border-width: 7px;
+  border-color: rgb(136, 72, 27);  
 }
 
 
@@ -214,27 +226,26 @@ img {
   object-fit: cover;
   border-style: groove;
   border-width: 5px;
-  border-color: coral;  
+  border-color: rgb(136, 72, 27);  
   
 }
 
 .imageCard {
-  
-  margin-top: 45px;
   color: whitesmoke;
-  max-width: 450px;
+  justify-content: center;
+  align-items: center;
   height: auto;
 }
 
 .abCard {
   background-color: rgba(141, 92, 0, 0.589);
-  color: whitesmoke;
+  font-Size: 1.3rem;
   display:flex;
   flex-wrap: wrap;
   height: auto;
   border-style: groove;
   border-width: 7px;
-  border-color: coral;  
+  border-color: rgb(136, 72, 27);
 }
 
 .statCard {
@@ -354,21 +365,21 @@ img {
 
 .tableTitle {
   text-align: center;
-  font-size: 200%;
-  color: #9b58009d;
+  font-size: 2.6rem;
+  color: black;
 }
 
 .tableTitle2 {
   text-align: center;
   font-size: 300%;
-  color: #9b58009d;
+  color: black;
   padding: 10px;
 }
 
 .rows {
-  color: #002b4ed3;
+  color: black;
   text-align: center;
-  font-size: 100%;
+  font-size: 1.3rem;
 }
 
 .rows2 {
@@ -388,7 +399,7 @@ img {
 .profileTable {
   text-align: center;
   display: flex;
-  padding: 50px;
+  padding-top: 50px;
   justify-content: space-evenly;
   margin-top: -70px;
   flex-wrap: wrap;
@@ -462,6 +473,12 @@ img {
   font-size: 100%;
 }
 
+#myTable {
+  border-style: groove;
+  border-width: 7px;
+  border-color: rgb(136, 72, 27);  
+}
+
 #signup-btn {
   color: whitesmoke;
   background-color: rgb(192, 192, 28);
@@ -511,7 +528,6 @@ img {
   background-color: rgb(28, 119, 0);
   font-size: 75%;
   border-radius: 30px;
-  /* padding: 10px; */
   margin: 10px;
   width: auto;
   padding: 15px;
@@ -532,7 +548,6 @@ img {
   background-image: linear-gradient(rgb(190, 146, 0), rgb(87, 47, 2));
   font-size: 75%;
   border-radius: 10px;
-  /* padding: 10px; */
   margin: 10px;
   width: 100px;
   padding: 15px;
@@ -553,7 +568,6 @@ img {
   background-image: linear-gradient(rgb(199, 0, 182), rgb(30, 0, 37));
   font-size: 75%;
   border-radius: 10px;
-  /* padding: 10px; */
   margin: 10px;
   width: 100px;
   padding: 15px;
@@ -572,8 +586,7 @@ img {
 .manage-btn {
   color: whitesmoke;
   background-image: linear-gradient(rgb(2, 105, 2), rgb(36, 19, 0));
-  /* background-color: rgb(56, 41, 0); */
-  font-size: 75%;
+  font-size: 1.3rem;
   border-radius: 5px;
   margin: 3px;
   width: auto;
@@ -593,8 +606,7 @@ img {
 .request-btn {
   color: whitesmoke;
   background-image: linear-gradient(rgb(2, 105, 2), rgb(36, 19, 0));
-  /* background-color: rgb(56, 41, 0); */
-  font-size: 75%;
+  font-size: 1.3rem;
   border-radius: 5px;
   margin: 3px;
   width: 97%;

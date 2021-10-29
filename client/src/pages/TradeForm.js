@@ -46,7 +46,7 @@ const TradeForm = () => {
                     amountSold: parseInt(formState.amountSold),
                     resourceBought: formState.resourceBought,
                     amountBought: parseInt(formState.amountBought),
-                    tradeAmount: parseInt(formState.tradeAmount)
+                    tradeAmount: (Number(formState.tradeAmount) >= 1) ? parseInt(formState.tradeAmount) : parseInt(1) 
                 },
             });
 
@@ -104,7 +104,7 @@ const TradeForm = () => {
                     <div className="multiplier">
                         <div>
                             <label className="labelTrade"># of Times Offered:</label>
-                            <input name="tradeAmount" value={formState.tradeAmount} onChange={handleChange} className="xbox" type="text" inputmode="decimal" placeholder="" />
+                            <input name="tradeAmount" value={formState.tradeAmount} onChange={handleChange} className="xbox" type="text" inputmode="decimal" placeholder="1" />
                         </div>
                     </div>
                     <button type="submit" className="btn createTrade-btn">OFFER TRADE</button>

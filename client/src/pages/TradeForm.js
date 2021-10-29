@@ -62,63 +62,55 @@ const TradeForm = () => {
         });
     };
 
-    const successMessage = () => {
-        if (data) {
-            return (
-                <h2>Trade Requested! Make Another Offer?</h2>
-            )
-        }
-    };
-
     const renderForm = () => {
         if (loading) {
             return <h2>Loading...</h2>
         } else {
-        return (
-            <form onSubmit={handleFormSubmit}>
-                <div className="form-group">
-                    <div>
-                        <label for="exampleInputEmail1">Resource Offered: </label>
+            return (
+                <form onSubmit={handleFormSubmit}>
+                    <div className="form-group">
+                        <div>
+                            <label for="exampleInputEmail1">Resource Offered: </label>
+                        </div>
+                        <select name="resourceSold" value={formState.resourceSold} onChange={handleChange} className="form-control-sm" id="exampleFormControlSelect1">
+                            <option value='fruit'>🍎 Fruit</option>
+                            <option value='meat'>🥩 Meat</option>
+                            <option value='gold'>💰 Gold</option>
+                            <option value='wood'>🌲 Wood</option>
+                        </select>
+
+                        <div>
+                            <label className="amount" for="exampleInputEmail1">Amount Offered:</label>
+                        </div>
+                        <input name="amountSold" value={formState.amountSold} onChange={handleChange} type="text" inputmode="decimal" placeholder="" />
+
                     </div>
-                    <select name="resourceSold" value={formState.resourceSold} onChange={handleChange} className="form-control-sm" id="exampleFormControlSelect1">
-                        <option value='fruit'>🍎 Fruit</option>
-                        <option value='meat'>🥩 Meat</option>
-                        <option value='gold'>💰 Gold</option>
-                        <option value='wood'>🌲 Wood</option>
+                    <hr />
+                    <div>
+                        <label for="exampleInputEmail1">Resource Requested: </label>
+                    </div>
+                    <select name="resourceBought" value={formState.resourceBought} onChange={handleChange} className="form-control-sm" id="exampleFormControlSelect1">
+                        <option value="fruit">🍎 Fruit</option>
+                        <option value="meat">🥩 Meat</option>
+                        <option value="gold">💰 Gold</option>
+                        <option value="wood">🌲 Wood</option>
                     </select>
 
                     <div>
-                        <label className="amount" for="exampleInputEmail1">Amount Offered:</label>
+                        <label className="amount" for="exampleInputEmail1">Amount Requested:</label>
                     </div>
-                    <input name="amountSold" value={formState.amountSold} onChange={handleChange} type="text" inputmode="decimal" placeholder="" />
-
-                </div>
-                <hr />
-                <div>
-                    <label for="exampleInputEmail1">Resource Requested: </label>
-                </div>
-                <select name="resourceBought" value={formState.resourceBought} onChange={handleChange} className="form-control-sm" id="exampleFormControlSelect1">
-                    <option value="fruit">🍎 Fruit</option>
-                    <option value="meat">🥩 Meat</option>
-                    <option value="gold">💰 Gold</option>
-                    <option value="wood">🌲 Wood</option>
-                </select>
-
-                <div>
-                    <label className="amount" for="exampleInputEmail1">Amount Requested:</label>
-                </div>
-                <input name="amountBought" value={formState.amountBought} onChange={handleChange} type="text" inputmode="decimal" placeholder="" />
-                <hr />
-                <div className="multiplier">
-                    <div>
-                        <label className="labelTrade">Trade Multiplier:</label>
-                        <input name="tradeAmount" value={formState.tradeAmount} onChange={handleChange} className="xbox" type="text" inputmode="decimal" placeholder="" />
+                    <input name="amountBought" value={formState.amountBought} onChange={handleChange} type="text" inputmode="decimal" placeholder="" />
+                    <hr />
+                    <div className="multiplier">
+                        <div>
+                            <label className="labelTrade"># of Times Offered:</label>
+                            <input name="tradeAmount" value={formState.tradeAmount} onChange={handleChange} className="xbox" type="text" inputmode="decimal" placeholder="" />
+                        </div>
                     </div>
-                </div>
-                <button type="submit" className="btn createTrade-btn">OFFER TRADE</button>
-            </form>
-        );
-    }
+                    <button type="submit" className="btn createTrade-btn">OFFER TRADE</button>
+                </form>
+            );
+        }
     };
 
     return (
@@ -126,9 +118,8 @@ const TradeForm = () => {
             <div className="trade">
                 <div className="row2">
                     <div className="villageCard" style={{
-            backgroundImage: `url(${process.env.PUBLIC_URL}/img/backtest.jpg)`
-          }}>
-                        {successMessage()}
+                        backgroundImage: `url(${process.env.PUBLIC_URL}/img/backtest.jpg)`
+                    }}>
                         <h1 className="tradeTitle">CREATE A TRADE!</h1>
                         {renderForm()}
                         {error && <div>{error.message}</div>}

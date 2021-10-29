@@ -149,12 +149,10 @@ const ManageState = (props) => {
               <h1>Manage Village</h1>
               <button type="submit" className="btn manage-btn" id="manage-btn" onClick={() => props.setType('population')}>INCREASE POPULATION</button>
               <button type="submit" className="btn manage-btn" id="manage-btn" onClick={() => props.setType('workers')}>ASSIGN WORKERS</button>
-              <Link to="/tradeform" className="btn manage-btn" id="manage-btn">
-                <button type="submit">
-                  REQUEST A TRADE
-                </button>
-              </Link>
               {checkMaxLevel()}
+              <Link to="/tradeform">
+                <p className="btn request-btn" id="request-btn">REQUEST A TRADE</p>
+              </Link>
             </div>
           </div>
         </div>

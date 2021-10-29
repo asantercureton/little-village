@@ -39,17 +39,21 @@ body {
 
 
 .headline {
+
   font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
   font-size: 141%;
   color: #020146d5;
   margin-bottom: 50px;
-
+  text-align: center;
 
 }
 
 ol li {
   font-size: 125%;
   color: #020146d5;
+  text-align: center;
+  list-style-position: inside;
+  margin: 10px 0;
 }
 
 .instructions {
@@ -97,9 +101,10 @@ header a:hover {
 }
 
 #newWorld {
-  font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
-  font-size: 120%;
-  color: #9b5800d7;
+
+  font-size: 200%;
+  color: #eb9321d7;
+  text-align: center;
 }
 
 header h1:hover {
@@ -159,7 +164,6 @@ footer {
   font-size: 35px;
   padding: 5px 8px;
   font-weight: normal;
-  margin: 3px 0;
   margin-right: 8px;
   display: flex;
   text-decoration: none;
@@ -167,6 +171,8 @@ footer {
   min-width: 150px;
   justify-content: center;
   width: 300px;
+  margin-inline: auto;
+
 }
 
 /* Active-Button */

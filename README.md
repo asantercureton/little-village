@@ -21,12 +21,16 @@ Little Village is an interactive idle game that fulfills our User's fantasy of r
 
 ### Links 
 
-- [Deployed Site]()
-- [Github Repo]()
+- [Deployed Site](https://little-village-10292021.herokuapp.com/)
+- [Github Repo](https://github.com/asantercureton/little-village)
 
 
 ## Screenshots
-![landing page] ()
+
+<img src="client/public/img/md1.jpg">
+<img src="client/public/img/md2.jpg">
+<img src="client/public/img/md3.jpg">
+<img src="client/public/img/md4.jpg">
 
 ## Usage
 When the user opens our website they are presented with a quick tutorial.

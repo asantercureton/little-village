@@ -52,7 +52,7 @@ const ManageState = (props) => {
 
   const renderLevelBtn = () => {
     if (props.canBuyLevel()) {
-      return <button onClick={props.handleLevelUp} type="submit" className="btn levelup-btn" id="levelup-btn">BUY</button>
+      return <button onClick={props.handleLevelUp} type="submit" className="btn manage-btn" id="levelup-btn">LEVEL UP</button>
     } else {
       return <button disabled type="submit" className="btn manage-btn" id="levelup-btn">CAN'T AFFORD</button>
     }

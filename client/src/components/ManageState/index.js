@@ -46,7 +46,7 @@ const ManageState = (props) => {
   }
 
   const renderPopBtn = () => {
-    if (checkAfford(props.user.village.amountOfResources, props.level.buyPopulation)) {
+    if (props.canBuyPop()) {
       return <button onClick={props.handleAddPop} type="submit" className="btn population-btn" id="population1-btn">BUY 1</button>
     } else {
       return <button disabled type="submit" className="btn population-btn" id="population1-btn">CAN'T AFFORD</button>

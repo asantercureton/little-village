@@ -103,7 +103,7 @@ header a:hover {
 #newWorld {
 
   font-size: 200%;
-  color: #eb9321d7;
+  color: #a56005d7;
   text-align: center;
 }
 
@@ -124,9 +124,9 @@ footer {
   color: aliceblue;
   margin-bottom: 20px;
   font-size: 120%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  text-align: center;
+  margin-top: 10px;
+  width:100%;
 }
 
 .form-label {
@@ -140,7 +140,7 @@ footer {
 
 .screenWidth {
   width: 100vw;
-  height: 100vh;
+  min-height: 100vh;
 }
 
 .leaderboard {

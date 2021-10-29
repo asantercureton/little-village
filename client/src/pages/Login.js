@@ -73,9 +73,6 @@ const Login = () => {
         <div className="card" style={{
             backgroundImage: `url(${process.env.PUBLIC_URL}/img/backtest.jpg)`
           }}>
-          <div className="card-header">
-            <h2 className="card-title" id="login" >Login</h2>
-          </div>
           {renderForm()}
           {error && <div>{error.message}</div>}
         </div>

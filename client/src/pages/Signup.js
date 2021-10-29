@@ -62,7 +62,7 @@ const Signup = () => {
         <div>
           <input name="password" value={formState.password} onChange={handleChange} type="password" id="password-input-login" />
         </div>
-        <button type="submit" className="btn" id="signup-btn">SignUp</button>
+        <button type="submit" className="btn" id="signup-btn">Sign Up</button>
       </form>
     );
   };
@@ -73,9 +73,6 @@ const Signup = () => {
         <div className="card" style={{
             backgroundImage: `url(${process.env.PUBLIC_URL}/img/backtest.jpg)`
           }}>
-          <div className="card-header">
-            <h2 className="card-title">SignUp!</h2>
-          </div>
           {renderForm()}
           {error && <div>{error.message}</div>}
         </div>

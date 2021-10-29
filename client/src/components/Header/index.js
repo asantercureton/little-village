@@ -7,7 +7,7 @@ const Header = () => {
     <header style={{
       background: `linear-gradient(to right, transparent, rgb(46, 31, 15)),url(${process.env.PUBLIC_URL}/img/banner.jpg)`,
     }}>
-      <div>
+      <div id="home-icon" className="col-12 col-lg-6">
         <Link to="/">
           <h1><img alt="iTest" className="img" src={`${process.env.PUBLIC_URL}/img/Itest.jpg`} />  LITTLE VILLAGE</h1>
         </Link>

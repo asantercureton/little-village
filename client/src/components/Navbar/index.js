@@ -13,7 +13,7 @@ function Navbar() {
     return (
       <nav className ="header nav"> 
       <Link to="/me" >
-          {Auth.getProfile().data.username}'s Village
+          My Village
         </Link>
      
       <Link to="/leaderboard" >
@@ -24,7 +24,7 @@ function Navbar() {
           Tradeboard
         </Link>
 
-      <button onClick={logout}>
+      <button className="btn manage-btn" onClick={logout}>
           Logout
         </button>   
       </nav>

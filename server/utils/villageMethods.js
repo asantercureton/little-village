@@ -13,7 +13,7 @@ const getAbundance = () => {
     // checks that numbers are correctly balanced, reruns function if not
     if (roundNum(r1 + r2 + r3 + r4) == limit && r4 < max) {
         const arr = shuffleArray([r1, r2, r3, r4]);
-        return { fruit: arr[0], meat: arr[1], gold: arr[2], wood: arr[3] };
+        return { fruit: roundNum(arr[0]/4), meat: roundNum(arr[1]/4), gold: roundNum(arr[2]/4), wood: roundNum(arr[3]/4) };
     } else {
         return getAbundance();
     }

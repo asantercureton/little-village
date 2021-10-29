@@ -92,7 +92,6 @@ const resolvers = {
       try {
         const user = await User.findById(args.userId);
         const trade = await Trade.findById(args.tradeId);
-        console.log(trade._id)
         if (trade && user) {
           const village1 = await Village.findById(trade.village);
           const village2 = await Village.findById(user.village);

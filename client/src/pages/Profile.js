@@ -294,27 +294,26 @@ const Profile = () => {
       }}>
         <div className="jumbotron jumbotron-fluid screenWidth">
 
-          <div className="profileTable">
-            <section className="cardTable w-50">
-              <h1 className="display-4 tableTitle">{user.username}'s {level.name}</h1>
+          <div className="row profileTable">
+            <section className="col-11 col-md-11 col-lg-5 cardTable">
+              <h2 className="display-4 tableTitle">{user.username}'s {level.name}</h2>
 
-              <table className="table table-hover">
-
+              <table id="myTable" className="table table-hover">
                 <tbody className="rows">
                   <tr className="cell">
-                    <th scope="row">🧍‍♂️ POPULATION:</th>
+                    <th scope="row" width="50%">🧍‍♂️ POPULATION:</th>
                     <td>{population}</td>
                   </tr>
                   <tr className="cell">
-                    <th scope="row">🍎 FRUIT:</th>
+                    <th scope="row" width="50%">🍎 FRUIT:</th>
                     <td>{resources.fruit}</td>
                   </tr>
                   <tr className="cell">
-                    <th scope="row">🥩 MEAT:</th>
+                    <th scope="row" width="50%">🥩 MEAT:</th>
                     <td>{resources.meat}</td>
                   </tr>
                   <tr className="cell">
-                    <th scope="row">💰 GOLD:</th>
+                    <th scope="row" width="50%">💰 GOLD:</th>
                     <td>{resources.gold}</td>
                   </tr>
                   <tr className="cell">
@@ -328,16 +327,15 @@ const Profile = () => {
                 </tbody>
               </table>
             </section>
-            <div className="imageCard">
+            <div className="col-11 col-md-11 col-lg-5 imageCard">
               <img src={`${process.env.PUBLIC_URL}/img/levels/${level.image}`} alt={level.name} />
             </div>
           </div>
 
-
-          <div className="manageBox">
-            <div className="cardManage" style={{
-              backgroundImage: `url(${process.env.PUBLIC_URL}/img/backtest.jpg)`
-            }}>
+          <div className="row manageBox">
+            <div className="col-11 col-md-11 col-lg-4 cardManage" height="800px" style={{
+          backgroundImage: `url(${process.env.PUBLIC_URL}/img/backtest.jpg)`,
+        }}>
               <ManageState
                 type={type}
                 setType={setType}
@@ -356,8 +354,8 @@ const Profile = () => {
               />
             </div>
 
-            <div className="abCard overflow-auto">
-              <table className="table table-hover">
+            <div className="col-11 col-md-11 col-lg-6 abCard overflow-auto">
+              <table id="abInfo" className="table table-hover">
                 <thead>
                   <th scope="col">Resource</th>
                   <th scope="col">Abundance</th>

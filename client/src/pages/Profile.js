@@ -118,6 +118,30 @@ const Profile = () => {
     }
   };
 
+  const canBuyPop = () => {
+    let price = level.buyPopulation;
+    let owned = {...resources};
+    let arr = [];
+    let afford = 0;
+    Object.keys(price).forEach(key => {
+      if (price[key] > 0) {
+        arr.push(key);
+      }
+    });
+    for (let i = 0; i < arr.length; i++) {
+      let resource = arr[i];
+      let amount = owned[resource];
+      let cost = price[resource];
+      if (amount >= cost) { afford++ };
+    }
+    
+    if (arr.length === afford) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
   useEffect(() => { //make this not async and create new function to fetch server data
     if (!loading) {
       if (user?.username && syncDataFlag) { //set resources to correct amount 
@@ -293,6 +317,7 @@ const Profile = () => {
               <ManageState
                 type={type}
                 setType={setType}
+                canBuyPop={canBuyPop}
                 handleClose={handleClose}
                 handleAddPop={handleAddPop}
                 handleLevelUp={handleLevelUp}

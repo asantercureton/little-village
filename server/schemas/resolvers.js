@@ -96,6 +96,8 @@ const resolvers = {
         if (trade && user) {
           const village1 = await Village.findById(trade.village);
           const village2 = await Village.findById(user.village);
+          await village1.save();
+          await village2.save();
           executeTrade(village1, village2, trade);
           return User;
         } else {

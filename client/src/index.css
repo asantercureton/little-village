@@ -105,7 +105,7 @@ header a:hover {
 #newWorld {
 
   font-size: 200%;
-  color: rgb(146, 88, 1);
+  color: #a56005d7;
   text-align: center;
 }
 
@@ -126,9 +126,9 @@ footer {
   color: aliceblue;
   margin-bottom: 20px;
   font-size: 120%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  text-align: center;
+  margin-top: 10px;
+  width:100%;
 }
 
 input {
@@ -151,7 +151,7 @@ input {
 
 .screenWidth {
   width: 100vw;
-  height: 100vh;
+  min-height: 100vh;
 }
 
 .leaderboard {

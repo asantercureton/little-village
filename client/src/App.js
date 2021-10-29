@@ -52,9 +52,7 @@ function App() {
     <ApolloProvider client={client}>
 
       <Router >
-        <body style={{
-          backgroundImage: `url(${process.env.PUBLIC_URL}/img/gold.jpg)`
-        }}>
+        
           <div  >
             <Header />
             <div>
@@ -86,8 +84,8 @@ function App() {
             </div>
 
           </div>
-            <Footer />
-        </body>
+          <Footer />
+        
       </Router>
     </ApolloProvider>
   );

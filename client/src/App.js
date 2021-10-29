@@ -53,8 +53,8 @@ function App() {
 
       <Router >
         <body style={{
-            backgroundImage: `url(${process.env.PUBLIC_URL}/img/gold.jpg)`
-          }}>
+          backgroundImage: `url(${process.env.PUBLIC_URL}/img/gold.jpg)`
+        }}>
           <div  >
             <Header />
             <div>
@@ -82,13 +82,11 @@ function App() {
               <Route exact path="/tradeform">
                 <TradeForm />
               </Route>
-              <Route exact path="/stats">
-              <Stats />
-            </Route>
+
             </div>
-            <Footer />
 
           </div>
+            <Footer />
         </body>
       </Router>
     </ApolloProvider>
